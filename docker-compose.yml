@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  web:
+    container_name: web
+    build: ./project
+    command: python3 manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DB_NAME=ft_transcandencedb
+      - DB_USER=othmane
+      - DB_PASSWORD=otitebah1234
+      - DB_HOST=db
+      - DB_PORT=5432
+    volumes:
+      - .:/trans
+    networks:
+      - my-net
+
+  db:
+    container_name: database
+    image: postgres:14
+    environment:
+      POSTGRES_DB: ft_transcandencedb
+      POSTGRES_USER: othmane
+      POSTGRES_PASSWORD: otitebah1234
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - my-net
+
+volumes:
+  postgres_data:
+
+networks:
+  my-net:

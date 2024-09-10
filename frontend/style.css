@@ -1,0 +1,306 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font: 'Luminari, fantasy';
+}
+
+body{
+    /* background-image: linear-gradient(to right, #b0e9f5 , #EDC0E6); */
+    background-image: url('../test/prestige-ocean-song-seraphine-league-of-legneds-4k-8y-1920x1080.jpg');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    min-width: 768px;
+    overflow: hidden;
+    font-family:'Luminari'; /* ---------------------*/
+}
+
+@font-face {
+    font-family: 'Luminari';
+    src: url('../luminari-cdnfonts/Luminari-Regular.ttf');
+}
+
+.container{
+    background-color: #EBE7D4;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px #5c8795;
+    position: relative;
+    overflow: hidden;
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
+}
+
+.container p{
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.3px;
+    margin: 20px 0;
+}
+
+.container span{
+    font-size: 12px;
+}
+
+.container a{
+    color: #333;
+    font-size: 13px;
+    text-decoration: none;
+    margin: 15px 0 10px;
+}
+
+.container button{
+    background-color: #5c8795;
+    color: #fff;
+    font-size: 12px;
+    padding: 10px 45px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #7AD4E1;
+}
+
+.container button.hidden{
+    background-color: transparent;
+    border-color: #DED7C2;
+}
+
+.container form{
+    background-color: #DED7C2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    height: 100%;
+    color: #5c8795;
+}
+
+.container .input-box {
+    background-color: #DED7C2;
+    border: 1px solid #5c8795;
+    margin: 8px 0;
+    padding: 10px 15px;
+    font-size: 13px;
+    border-radius: 8px;
+    width: 100%;
+    outline: none;
+}
+
+/* ------------------------------------------------------- */
+.input-container {
+    position: relative; /* Container is positioned relative */
+    width: 100%; /* Adjust as needed */
+}
+
+.input-box input {
+    background-color: #DED7C2;
+    border: none;
+    font-size: 13px;
+    width: 100%;
+    outline: none;
+}
+
+.passwordInput {
+    width: calc(100% - 40px); /* Adjust width to make space for the button */
+    padding-right: 40px; /* Space for the button inside the input field */
+    box-sizing: border-box; /* Include padding and border in width */
+}
+
+.passwordToggleBtn {
+    position: absolute; /* Absolute positioning within the container */
+    right: 50px; /* Adjust distance from the right edge */
+    transform: translateY(-50%); /* Center vertically */
+    cursor: pointer; /* Pointer cursor */
+}
+
+.passwordToggleBtn2 {
+    position: absolute; /* Absolute positioning within the container */
+    top: 70%; /* Center vertically */
+    right: 50px; /* Adjust distance from the right edge */
+    transform: translateY(-50%); /* Center vertically */
+    cursor: pointer; /* Pointer cursor */
+}
+
+.passwordToggleBtn i {
+    color: rgb(255, 255, 255); /* Icon color */
+}
+/* ------------------------------------------------------- */
+
+.form-container{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+.sign-in{
+    left: 0;
+    width: 50%;
+    z-index: 2;
+}
+
+.container.active .sign-in{
+    transform: translateX(100%);
+}
+
+.sign-up{
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+}
+
+.container.active .sign-up{
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: move 0.6s;
+}
+
+@keyframes move{
+    0%, 49.99%{
+        opacity: 0;
+        z-index: 1;
+    }
+    50%, 100%{
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+.social-icons{
+    margin: 20px 0;
+}
+
+.social-icons a {
+    border: 1px solid #5c8795;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 5px;
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 30px;
+}
+
+.toggle-container{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: all 0.6s ease-in-out;
+    border-radius: 20px;
+    z-index: 1000;
+}
+
+.container.active .toggle-container{
+    transform: translateX(-100%);
+    border-radius: 20px;
+}
+
+.toggle{
+    background-color: #5c8795;
+    height: 100%;
+    color: #EBE7D4;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+}
+
+.container.active .toggle{
+    transform: translateX(50%);
+}
+
+.toggle-panel{
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 30px;
+    text-align: center;
+    top: 0;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+}
+
+.toggle-left{
+    transform: translateX(-200%);
+}
+
+.container.active .toggle-left{
+    transform: translateX(0);
+}
+
+.toggle-right{
+    right: 0;
+    transform: translateX(0);
+}
+
+.bubble {
+    position: absolute;
+    bottom: -100px;
+    width: 20px;
+    height: 20px;
+    /* background: linear-gradient(
+        #cdd7f9,
+        #19f5e340,
+        #b5e3ff7d,
+        #2bd4eb17); */
+    /* background: rgba(0, 255, 255, 0.6); */
+    background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, rgba(173,216,230,0.3) 40%, rgba(173,216,230,0.2) 60%, rgba(255,255,255,0.1) 100%);
+    border-radius: 85% 75% 78% 73%;
+    opacity: 0;
+    animation: rise 10s infinite, size 10s infinite, rotate 10s linear infinite;
+}
+
+@keyframes rise {
+    0% {
+        bottom: -100px;
+        opacity: 1;
+    }
+    100% {
+        bottom: 100%;
+        opacity: 0;
+    }
+}
+
+@keyframes size {
+    0% {
+        width: 20px;
+        height: 20px;
+    }
+    100% {
+        width: 50px;
+        height: 50px;
+    }
+}
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
