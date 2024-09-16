@@ -7,7 +7,7 @@ import random
 
 class UserProfile(models.Model):
     user                    = models.OneToOneField(User, on_delete=models.CASCADE)
-    nickname                = models.CharField(max_length=30, blank=True, null=True)
+    nickname                = models.CharField(max_length=30, unique=True, blank=True, null=True)
     profile_picture         = models.ImageField(upload_to="images/", default=random.choice(profilePics), blank=True, null=True)
     email                   = models.EmailField(max_length=255, blank=True, null=True)
 

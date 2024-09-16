@@ -1,10 +1,23 @@
-from django.shortcuts import render
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from django.http import HttpResponse
+from django.shortcuts import render
 
 
 
 def home(request):
     return HttpResponse("welcome frome home")
+
+
+# this is the view that is shown when "0.0.0.0:8000/"
+class ProtectedView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        # The authenticated user can be accessed here
+        user = request.user
+        return Response({"message": f"Hello {user.username}, you are authenticated!"})
 
 
 profilePics = [

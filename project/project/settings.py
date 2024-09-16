@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta 
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -30,11 +31,17 @@ ALLOWED_HOSTS = ['*']
 
 
 REST_FRAMEWORK = {
+
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
 
+SIMPLE_JWT = {
+  # It will work instead of the default serializer(TokenObtainPairSerializer).
+  "TOKEN_OBTAIN_SERIALIZER": "my_app.serializers.MyTokenObtainPairSerializer",
+  # ...
+}
 # Application definition
 
 INSTALLED_APPS = [
@@ -48,6 +55,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'oauth2_provider',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [

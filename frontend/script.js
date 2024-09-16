@@ -64,23 +64,29 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     document.getElementById('signInForm').addEventListener('submit', async function(event) {
-        event.preventDefault(); // Prevent the default signIn submission
+        event.preventDefault(); // Prevent the default form submission
         const formData = new FormData(this);
-        console.log(formData.get('loginID'));
-        console.log(formData.get('password'));
+        
         try {
-            let response = await fetch('http://127.0.0.1:8000/signin/', { // Specify the server endpoint for sign-in
+            let response = await fetch('http://127.0.0.1:8000/signin/', {
                 headers: {
-                    'Content-Type': 'application/json', // Ensure the content type is set to JSON
-                    'Accept': 'application/json'        // Optionally, specify the format you want the response in
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
                 method: 'POST',
                 body: formDataToJson(formData)
-            })
+            });
+            
             let result = await response.json();
             console.log("Response : ", result);
+            
             if (response.ok) {
-                document.location.href = 'http://localhost:8000/'; // Redirect to the dashboard or another page
+                // Store JWT tokens in cookies
+                document.cookie = `access=${result.access}; path=/;`;
+                document.cookie = `refresh=${result.refresh}; path=/;`;
+                
+                // Redirect to home page or another page
+                window.location.href = 'http://127.0.0.1:8000/';
             }
         } catch (error) {
             console.error("Error : ", error);
@@ -122,6 +128,25 @@ window.onload = async function() {
         // document.getElementById('message').innerText = 'No authorization code found.';
     }
 };
+
+async function fetchHome() {
+    const accessToken = getCookie('access'); // Function to get the token from cookies
+    
+    try {
+        let response = await fetch('http://127.0.0.1:8000/', {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Accept': 'application/json'
+            }
+        });
+        
+        let result = await response.json();
+        console.log("Response : ", result);
+    } catch (error) {
+        console.error("Error : ", error);
+    }
+}
+
 
 function formDataToJson(formData) {
     const obj = {};
