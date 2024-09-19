@@ -1,0 +1,82 @@
+<div class="box">
+    <div class="group">
+      <div class="ellipse-wrapper">
+        <div class="ellipse"></div>
+      </div>
+    </div>
+    <div class="groupb">
+      <div class="ellipse-wrapperb">
+        <div class="ellipseb"></div>
+      </div>
+    </div>
+</div>
+
+<div class="container" id="container">
+  <div class="form-container sign-up">
+      <form id="signUpForm">
+          <h1>Create Account</h1>
+          <div class="social-icons">
+              <a href="#" class="icons"><i class='bx bxl-google'></i></a>
+              <a href="#" class="icons"><i class='bx bxl-facebook'></i></a>
+              <a href="#" class="icons"><i class='bx bxl-github'></i></a>
+              <a href="#" class="icons"><i class='bx bxl-linkedin'></i></a>
+          </div>
+          <div class="input-box">
+              <input type="email" name="email" placeholder="E-mail">
+          </div>
+          <div class="input-box">
+              <input type="text" name="loginID" placeholder="LoginID" autocomplete="username">
+          </div>
+          <div class="input-box">
+              <input type="password" name="password" id="passW1" class="passwordInput" placeholder="Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d{4,}).{6,}$" title="Password must contain at least 1 lowercase letter, 1 uppercase letter, and at least 4 digits. Minimum length: 6 characters." required autocomplete="new-password">
+              <button type="button" class="passwordToggleBtn" style="border: none; padding: 0; background: none;">
+                  <i class="bi bi-eye-slash"></i>
+              </button>
+          </div>
+          <div class="input-box">
+              <input type="password" name="passwordC" id="passW2" class="passwordInput" placeholder="Confirm Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d{4,}).{6,}$" title="Password must contain at least 1 lowercase letter, 1 uppercase letter, and at least 4 digits. Minimum length: 6 characters." required autocomplete="verify-password">
+              <button type="button" class="passwordToggleBtn" style="border: none; padding: 0; background: none;">
+                  <i class="bi bi-eye-slash"></i>
+              </button>
+          </div>
+          <button class="styled">Sign Up</button>
+      </form>
+  </div>
+
+
+  <div class="form-container sign-in">
+      <form id="loginForm">
+          <h1>Sign In</h1>
+          <div class="social-icons">
+              <a href="#" class="icons"><i class='bx bxl-google'></i></a>
+              <a href="#" class="icons"><i class='bx bxl-facebook'></i></a>
+              <a href="#" class="icons"><i class='bx bxl-github'></i></a>
+              <a href="#" class="icons"><i class='bx bxl-linkedin'></i></a>
+          </div>
+          <div class="input-box">
+              <input type="text" name="loginID" placeholder="LoginID" autocomplete="username">
+          </div>
+          <div class="input-box">
+              <input type="password" name="password" placeholder="Password" autocomplete="current-password">
+          </div>
+          <a href="#">Forget Password?</a>
+          <button type="submit" class="styled">Sign In</button>
+      </form>
+  </div>
+
+
+  <div class="toggle-container">
+      <div class="toggle">
+          <div class="toggle-panel toggle-left">
+              <h1>Welcome To <br>Ping Pong Pro</h1>
+              <p>Sign in With ID & Password</p>
+              <button class="hidden styled" id="login">Sign In</button>
+          </div>
+          <div class="toggle-panel toggle-right">
+              <h1>Welcome To <br>Ping Pong Pro</h1>
+              <p>Join the ultimate ping pong experience ! Let's play !</p>
+              <button class="hidden styled" id="register">Sign Up</button>
+          </div>
+      </div>
+  </div>
+</div>

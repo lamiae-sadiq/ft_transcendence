@@ -1,0 +1,184 @@
+.box {
+  position: absolute;
+  width: 35vw; /* Relative to the viewport width */
+  height: 35vh; /* Relative to the viewport height */
+}
+
+/* Pink Group */
+.box .group {
+  position: absolute;
+  width: 35vw; /* Same as .box width */
+  height: 35vh; /* Same as .box height */
+  top: -100%; /* Leave as percentage if based on the container */
+  left: -50%; /* Leave as percentage if based on the container */
+}
+
+.box .ellipse-wrapper {
+  position: absolute;
+  height: 35vh;
+  background-color: var(--colors-pinky);
+  border-width: 15vw 14vh; /* Adjusted to use vw and vh units */
+  box-shadow: 0 0 3vw var(--colors-pinky), 
+              0 0 6vw var(--colors-pinky), 
+              0 0 10vw var(--colors-pinky),
+              0 0 20vw var(--colors-pinky), 
+              0 0 35vw var(--colors-pinky), 
+              0 0 60vw var(--colors-pinky);
+}
+
+.box .ellipse {
+  position: absolute;
+  width: 35vw;
+  height: 35vh;
+  background-color: var(--colors-pinky);
+  border-width: 15vw 14vh;
+  box-shadow: 0 0 3vw var(--colors-pinky), 
+              0 0 6vw var(--colors-pinky), 
+              0 0 10vw var(--colors-pinky),
+              0 0 20vw var(--colors-pinky), 
+              0 0 35vw var(--colors-pinky), 
+              0 0 60vw var(--colors-pinky);
+}
+
+/* Blue Group */
+.box .groupb {
+  position: absolute;
+  width: 35vw;
+  height: 35vh;
+  top: 300%;
+  left: 0%;
+}
+
+.box .ellipse-wrapperb {
+  position: absolute;
+  height: 35vh;
+  background-color: var(--colors-cyan);
+  border-width: 15vw 14vh;
+  box-shadow: 0 0 3vw var(--colors-cyan), 
+              0 0 6vw var(--colors-cyan), 
+              0 0 10vw var(--colors-cyan),
+              0 0 20vw var(--colors-cyan), 
+              0 0 35vw var(--colors-cyan), 
+              0 0 60vw var(--colors-cyan);
+}
+
+.box .ellipseb {
+  position: absolute;
+  width: 35vw;
+  height: 35vh;
+  background-color: var(--colors-cyan);
+  border-width: 15vw 14vh;
+  box-shadow: 0 0 3vw var(--colors-cyan), 
+              0 0 6vw var(--colors-cyan), 
+              0 0 10vw var(--colors-cyan),
+              0 0 20vw var(--colors-cyan), 
+              0 0 35vw var(--colors-cyan), 
+              0 0 60vw var(--colors-cyan);
+}
+
+/* General Navbar Styling */
+.navbar-custom {
+  padding-top: 1.5vh; /* Adjusted for viewport height */
+}
+
+/* Left Logo Styling */
+.left-logo {
+  margin-right: 2vh;
+  margin-top: 1.5vh;
+}
+
+/* Right Logo Styling */
+.right-logo {
+  margin-left: 2vh;
+  margin-top: 1.5vh;
+}
+
+body {
+  background-color: #1b0236 !important;
+  overflow: hidden;
+  font-family: "Abril Fatface-Regular", Helvetica;
+  font-size: 1.5rem; /* Base font size for scaling */
+}
+
+h1 {
+  font-size: 2vw; /* Adjusted to scale with viewport width */
+}
+
+p {
+  font-family: "Abel-Regular", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 2vw; /* Adjusted to scale with viewport width */
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.play-button {
+  width: auto;
+  height: auto;
+  background: transparent;
+  padding: 0;
+  position: relative;
+}
+
+.play-button img {
+  display: block;
+  width: 20vw; /* Adjust the size to be responsive to viewport width */
+  height: auto; /* Keep aspect ratio */
+}
+
+
+.play-button span {
+  font-size: 2vw; /* Adjusted to scale with viewport width */
+  color: black;
+  letter-spacing: 0;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.relative-container {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+.main-image {
+  display: block;
+  width: 60%;
+  height: auto;
+  z-index: 1 !important;
+  transform: translateX(50%);
+}
+
+.overlay-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+}
+
+.top {
+  top: -10%;
+  left: 31%;
+  transform: scale(1.4);
+  z-index: 2;
+  transform: translateX(-50%) scale(1.4);
+}
+
+.middle {
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.bottom {
+  left: 51%;
+  transform: translateX(-50%);
+  top: 83%;
+}
+
+#startButton {
+  z-index: 5;
+}

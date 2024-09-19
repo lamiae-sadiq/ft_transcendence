@@ -1,0 +1,182 @@
+body {
+  background-color: #f8f9fa;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.container {
+  max-height: 100vh;
+}
+
+.left-container, .right-container {
+  background-color: transparent;
+  height: 100%;
+}
+
+.profile-picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.username {
+  font-size: 1.8em;
+}
+
+.last-played {
+  color: #6c757d;
+  font-size: 0.9em;
+}
+
+.about-me {
+  font-size: 1.2em;
+  margin-bottom: 0;
+}
+
+.section-title {
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.achievements-section, .friends-section {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.achievements-container, .friends-container {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.achievement-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.achievement-icon {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.scoreboard-section {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.stat {
+  font-size: 2em;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.level-pentagon {
+  width: 80px;
+  height: 80px;
+  background-color: #007bff;
+  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.level-number {
+  color: white;
+  font-size: 1.8em;
+  font-weight: bold;
+}
+
+.level-label {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1px solid #007bff;
+  border-radius: 12px;
+  font-size: 0.9em;
+  color: #007bff;
+}
+
+.friend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.friend-picture {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.friend-name {
+  margin-bottom: 0;
+}
+
+.friend-status {
+  font-size: 0.8em;
+  display: flex;
+  align-items: center;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.online .status-indicator {
+  background-color: #28a745;
+}
+
+.offline .status-indicator {
+  background-color: #dc3545;
+}
+
+/* Custom scrollbar for achievements and friends list */
+.achievements-container::-webkit-scrollbar,
+.friends-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.achievements-container::-webkit-scrollbar-track,
+.friends-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.achievements-container::-webkit-scrollbar-thumb,
+.friends-container::-webkit-scrollbar-thumb {
+  background: #00ffff;
+  border-radius: 10px;
+}
+
+.achievements-container::-webkit-scrollbar-thumb:hover,
+.friends-container::-webkit-scrollbar-thumb:hover {
+  background: #00cccc;
+}
+
+@media (min-width: 992px) {
+  .row {
+      position: relative;
+  }
+
+  .row::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      background-color: white;
+  }
+}

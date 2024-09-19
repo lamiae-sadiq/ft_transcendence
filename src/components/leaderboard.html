@@ -1,0 +1,73 @@
+<div class="box">
+    <div class="group">
+      <div class="ellipse-wrapper">
+        <div class="ellipse"></div>
+      </div>
+    </div>
+    <div class="groupb">
+      <div class="ellipse-wrapperb">
+        <div class="ellipseb"></div>
+      </div>
+    </div>
+  </div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+    <!-- fluid to be added later on -->
+    <div class="container-fluid">
+      <!-- Logo -->
+      <a href="#home"><img class="image" src="src/assets/home/logo.svg" alt="logopng"></a>
+      <!-- SideBar -->
+      <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+        aria-labelledby="offcanvasNavbarLabel">
+        <!-- SideBar Header -->
+        <div class="offcanvas-header text-white border-bottom shadow-none">
+          <a href="#home"><img class="image" src="src/assets/home/logo.svg" alt="logopng"></a>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <!-- SideBar Body -->
+        <div class="offcanvas-body justify-content-center">
+          <ul class="navbar-nav"> <!-- justify-content-center fs-6 flex-grow-1 pe-3 gap-2 -->
+            <li class="nav-item">
+              <a class="nav-link fonts" href="#home"><strong>Home</strong></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fonts" href="#leaderboard"><strong>Leaderboard</strong></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fonts" href="#about"><strong>About Us</strong></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Toggle Button -->
+      <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- USER PROFILE -->
+      <button class="user">
+        <div class="d-flex flex-column justify-content-center align-items-center gap-2 flex-lg-row bot">
+          <div class="ProfileImage">
+  
+          </div>
+          <div class="UserProfile">
+            <a href="#profil" class="text-white text-decoration-one px-3 py-1 rounded-4 btn customBack"><strong>USER
+                HERE</strong></a>
+          </div>
+        </div>
+      </button>
+    </div>
+  </nav>
+
+<div class="container mt-5">    
+    <div class="podium-container">
+        <div class="wheat"></div>
+        <div class="podium" id="podium"></div>
+        <div class="wheatR"></div>
+    </div>
+    
+    <div class="card">
+        <ul class="list-group list-group-flush" id="leaderboard-list"></ul>
+    </div>
+</div>
