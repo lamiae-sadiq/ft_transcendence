@@ -136,38 +136,38 @@ USE_I18N = True
 
 USE_TZ = True
 
-# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://10.14.53.155:5174",
-#     "http://10.14.53.155:5173",
-#     "http://10.14.53.155:5501",
-#     "http://10.13.247.145:5501",
-#     "http://localhost:5501",
-#     "http://0.0.0.0:5501",
-#     "http://127.0.0.1:5501"
-# ]
+CORS_ALLOWED_ORIGINS = [
+    "http://10.14.53.155:5174",
+    "http://10.14.53.155:5173",
+    "http://10.14.53.155:5501",
+    "http://10.13.247.145:5501",
+    "http://localhost:5501",
+    "http://0.0.0.0:5501",
+    "http://127.0.0.1:5501"
+]
 
-# CORS_ALLOW_METHODS = [
-#     "POST",
-#     "DELETE",
-#     "GET",
-#     "OPTIONS",
-#     "PATCH",
-#     "PUT",
-# ]
+CORS_ALLOW_METHODS = [
+    "POST",
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "PUT",
+]
 
-# CORS_ALLOW_HEADERS = [
-#     "accept",
-#     "accept-encoding",
-#     "authorization",
-#     "content-type",
-#     "dnt",
-#     "origin",
-#     "user-agent",
-#     "x-csrftoken",
-#     "x-requested-with",
-# ]
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/

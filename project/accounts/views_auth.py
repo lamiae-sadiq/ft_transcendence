@@ -23,7 +23,7 @@ def tokenFunc(code):
         "grant_type": "authorization_code",
         "client_id": "u-s4t2ud-9e8cb1d6b2b0bb181505b29a9397b6d8e3079ab0fe7be47c059b43e8f4603fcf",
         "client_secret": "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",
-        "redirect_uri": "http://127.0.0.1:5500/frontend/sign_in.html",
+        "redirect_uri": "http://0.0.0.0:8080/login",
         "code": code
     }
     #Sending a post request to the Token endPoint
@@ -71,7 +71,7 @@ def oauth_callback(request):
     UserProfile.objects.update_or_create(
         user=user,
         defaults={
-            'nickname': login,
+            'loginID': login,
             'profile_picture': picture
         }
     )

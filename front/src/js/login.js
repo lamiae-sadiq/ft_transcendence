@@ -42,19 +42,23 @@ export function initLoginPage() {
                 return; // Stop further execution
             }
             const formData = new FormData(this);
-            console.log(formData.get('loginID'));
+            console.log(formData.get('nickname'));
             console.log(formData.get('password'));
             console.log(formData.get('email'));
             console.log(formData);
             try {
                 let response = await fetch('http://0.0.0.0:8000/signup/', { // Specify the server endpoint directly
+                    headers: {
+                        'Content-Type': 'application/json', // Ensure the content type is set to JSON
+                        'Accept': 'application/json'        // Optionally, specify the format you want the response in
+                    },
                     method: 'POST',
                     body: formDataToJson(formData)
                 })
                 let rewind = await response.json();
                 console.log("Response : ", rewind);
                 if (response.ok) {
-                    document.location.href = 'http://localhost:5500';
+                    document.location.href = 'http://localhost:8080';
                 }
             } catch (error) {
                 console.error("Error : ", error);
@@ -74,13 +78,13 @@ export function initLoginPage() {
             // Do something with the authorization code
             console.log('Authorization Code:', authCode);
             try {
-                const response = await fetch('http://10.14.53.154:8000/login/42?code=' + authCode);
+                const response = await fetch('http://0.0.0.0:8000/oauthcallback?code=' + authCode);
                 if (response.ok) {
                     console.log('Authentication initiated successfully');
                     console.log(response);
                     let r = await response.json();
                     // console.log(r);
-                    document.location.href = 'http://localhost:5500'; // to be changed later on
+                    document.location.href = 'http://localhost:8080/home'; // to be changed later on
 
                 } else {
                     console.error('Failed to initiate 42 authentication');
