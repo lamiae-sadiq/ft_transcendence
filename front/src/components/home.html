@@ -1,0 +1,110 @@
+<div class="box">
+  <div class="group">
+    <div class="ellipse-wrapper">
+      <div class="ellipse"></div>
+    </div>
+  </div>
+  <div class="groupb">
+    <div class="ellipse-wrapperb">
+      <div class="ellipseb"></div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="background"></div> -->
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+  <!-- fluid to be added later on -->
+  <div class="container-fluid">
+    <!-- Logo -->
+    <a href="#home"><img class="image" src="src/assets/home/logo.svg" alt="logopng"></a>
+    <!-- SideBar -->
+    <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+      aria-labelledby="offcanvasNavbarLabel">
+      <!-- SideBar Header -->
+      <div class="offcanvas-header text-white border-bottom shadow-none">
+        <a href="#home"><img class="image" src="src/assets/home/logo.svg" alt="logopng"></a>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <!-- SideBar Body -->
+      <div class="offcanvas-body justify-content-center">
+        <ul class="navbar-nav"> <!-- justify-content-center fs-6 flex-grow-1 pe-3 gap-2 -->
+          <li class="nav-item">
+            <a class="nav-link fonts" href="#home"><strong>Home</strong></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fonts" href="#leaderboard"><strong>Leaderboard</strong></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fonts" href="#about"><strong>About Us</strong></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Toggle Button -->
+    <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- USER PROFILE -->
+    <button class="user">
+      <div class="d-flex flex-column justify-content-center align-items-center gap-2 flex-lg-row bot">
+        <div class="ProfileImage">
+
+        </div>
+        <div class="UserProfile">
+          <a href="#profil" class="text-white text-decoration-one px-3 py-1 rounded-4 btn customBack"><strong>USER
+              HERE</strong></a>
+        </div>
+      </div>
+    </button>
+  </div>
+</nav>
+
+<div class="contain">
+  <div class="row">
+    <div class="friend-list col-md-4">
+      <div class="friend-list-header">
+        <span>Friends</span>
+        <div class="actions">
+          <button class="btn btn-light" id="search-btn">
+            <i class="fas fa-search"></i>
+          </button>
+          <button class="btn btn-light" id="add-btn">
+            <i class="bi bi-person-plus-fill"></i>
+          </button>
+        </div>
+      </div>
+      <input type="text" class="form-control search-bar" id="search-bar" placeholder="Search friends...">
+      <input type="text" class="form-control add-friend-bar" id="add-friend-bar" placeholder="Add friends...">
+      <div class="friend" data-friend="Friend 1">Friend 1</div>
+      <div class="friend" data-friend="Friend 2">Friend 2</div>
+      <div class="friend" data-friend="Friend 3">Friend 3</div>
+    </div>
+
+    <div class="conversation">
+      <h2>Conversation with <span id="friend-name"></span></h2>
+      <div id="conversation-content">
+        <!-- Conversation content will be dynamically loaded here -->
+      </div>
+      <button id="back-button">Back to Friends List</button>
+    </div>
+    <button class="btn btn-light toggle-btn" id="toggle-btn">Friend List</button>
+    <div class="Text col-md-4">
+      <p class="Title">Welcome, Summoners,</p>
+      <p class="fonts">
+        to the ultimate Ping Pong experience! Immerse yourself in a world where skill meets precision, and every game is
+        a battle for glory. Whether you're here to challenge the leaderboard, engage with fellow enthusiasts, or simply
+        enjoy a match.
+      </p>
+      <button id="playButton" class="btn play-button position-relative p-0 border-0">
+        <img src="src/assets/home/button.png" alt="Play Btn" class="play">
+        <span class="position-absolute top-50 start-50 translate-middle test">Play</span>
+      </button>      
+    </div>
+    <div class="avatar col-md-4">
+      <img src="src/assets/home/avatar.png" alt="avatar" class="avatar">
+    </div>
+  </div>
+</div>
+<!-- <a href=""><img class="play" src="" alt="playbtn"></a> -->

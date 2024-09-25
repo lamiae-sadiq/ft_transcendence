@@ -1,0 +1,448 @@
+.no-scroll {
+    overflow: hidden;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: radial-gradient(circle at top left, rgb(213, 5, 255) 1%, transparent 30%),
+    radial-gradient(circle at bottom left, rgb(15, 195, 231) 1%, transparent 30%);
+    font-family:'Luminari';
+    background-color: var(--colors-body);
+}
+
+/* body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  box-shadow: 
+    inset 0 0 15px rgba(255, 20, 147, 0.7),
+    inset 0 0 30px rgba(255, 20, 147, 0.7),
+    inset 0 0 60px rgba(255, 20, 147, 0.7),
+    inset 0 0 120px rgba(255, 20, 147, 0.7);
+  z-index: 0;
+} */
+
+/*------------------------------*/
+
+/* LOGO */
+.image { 
+    display: block;
+    width: 40px;
+    height: auto;
+    margin: 0 0 0 20px;
+}
+
+/* .play-button {
+  position: relative;
+  display: inline-block;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+} */
+
+.play-button {
+  position: relative;
+  display: inline-block; /* Ensure button only takes up as much space as needed */
+  border: none; /* Remove default button border */
+  padding: 0; /* Remove default button padding */
+  background: none; /* Remove default button background */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transition for transform and shadow */
+}
+
+.play-button img {
+  display: block;
+  width: 15vw;
+  height: auto;
+}
+
+/* Button Text */
+.play-button .test {
+  position: absolute;
+  top: 50%;
+  left: 50%; /* Center horizontally within the button */
+  transform: translate(-50%, -50%); /* Center vertically and horizontally */
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Play Button Scaling Effect */
+.play-button:active {
+  transform: scale(0.95); /* Scale down the button */
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); */
+}
+
+/*------------------------------*/
+/*FRIEND LIST, Paragraph and avatar*/
+/*------------------------------*/
+.friend-list, .Text, .avatar {
+  padding: 20px;
+  height: 100%;
+}
+
+.avatar img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/*------------------------------*/
+/*FRIEND LIST AND CONVO*/
+/*------------------------------*/
+
+/* .show-conversation .conversation {
+    display: block;
+} */
+
+.contain {
+    display: flex;
+    align-items: flex-start;
+    position: relative; /* Make contain relative for positioning conversation */
+}
+  
+.friend-list, .conversation {
+    width: 29vw;
+    height: 70vh;
+    margin: 50px 0px 0px 33px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+    padding: 30px 40px;
+    z-index: 1;
+}
+  
+  .friend-list {
+    margin-right: -10px; /* Space between friend list and conversation */
+  }
+  
+  .friend {
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.01);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: white;
+  }
+  
+  .friend:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  
+  .conversation {
+    display: none;
+    position: absolute;
+    /* top: 0%;
+    left: 0%; */
+    z-index: 2;
+  }
+  
+  .friend-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: white;
+  }
+  
+  .friend-list-header .actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .friend-list-header .btn {
+    background-color: rgba(0, 0, 0, 0.1);
+    border: none;
+    color: white;
+    font-size: 14px;
+    padding: 5px 10px;
+  }
+  
+  .friend-list-header .btn:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  
+  .search-bar, .add-friend-bar {
+    display: none;
+    margin-bottom: 20px;
+  }
+  
+  /* Custom scrollbar */
+  .friend-list {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.4) rgba(0, 0, 0, 0.1);
+  }
+  
+  .friend-list::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .friend-list::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+  }
+  
+  .friend-list::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .toggle-btn {
+    display: none; /* Hide the toggle button by default */
+  }
+  
+/* ------------------------------------------------------------------------------*/
+
+
+.Text {
+    /* display: block; */
+    /* position: absolute; */
+    margin: 10vw 10px 10px 10px;
+    top: 50%;
+    left: 50%;
+    width: auto; /* Allow width to adjust automatically */
+    max-width: 33vw; /* Set a maximum width */
+    color: white;
+    z-index: 0;
+    font-size: 14vw; /* Adjust font size relative to viewport width */
+}
+
+.Title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--colors-cyan);
+}
+
+.fonts {
+    font-size: 1.2rem;
+    /* font-weight: bold; */
+    color: #ffffff;
+    /* text-shadow: 
+        -1px -1px 0 #5c8795,  
+         1px -1px 0 #5c8795,
+        -1px  1px 0 #5c8795,
+         1px  1px 0 #5c8795; */
+}
+
+/* NAVBAR */
+.navbar {
+    height: 120px !important;
+    border-bottom: 1px solid #f2bddf !important; /* Bottom border color */
+    /* background-color: transparent; */
+}
+
+.navbar .image {
+    height: 3rem !important;
+    margin-right: 1rem !important;
+}
+
+.user {
+    margin-left: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+.container-fluid {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    height: 100% !important;
+}
+
+.navbar-nav {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 3rem;
+}
+
+.nav-item a {
+  font-size: 1rem; /* Adjust font size */
+  text-align: center; /* katcentri f togglebar*/
+}
+
+.navbar .navbar-toggler {
+    order: 0 !important;
+    margin-right: 20px !important;
+}
+
+.navbar .sidebar .offcanvas-header .image {
+    height: 40px !important;
+}
+
+.navbar .sidebar .offcanvas-body .nav-link {
+    /* color: #ff0000 !important; */
+    padding: 10px !important;
+    margin: 10px;
+}
+
+.navbar .sidebar .offcanvas-body .nav-link:hover {
+    color: var(--colors-cyan) !important;
+    border-radius: 5px !important;
+}
+
+.navbar .user {
+    background: none !important;
+    border: none !important;
+}
+
+.navbar .user .customBack {
+    /* background-color: #007bff !important; */
+    color: #a6009e !important; /*user !!!!*/
+    font-weight: bold !important;
+    border: none !important;
+}
+
+@media (max-width: 991px) {
+    .offcanvas-body, .offcanvas-header  {
+        background-color: var(--colors-body);
+    }
+}
+
+@media (max-width: 989px) {
+    .contain {
+      flex-direction: column;
+    }
+    
+    .friend-list, .conversation {
+      width: calc(100% - 66px);
+      margin: 20px 0;
+    }
+
+    .toggle-btn {
+      width: 10rem;
+      display: block;
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      z-index: 3;
+    }
+
+    .Text {
+        display: none;
+    }
+/* 
+    .play {
+        position: fixed;
+        left: 20%;
+        top: 20%;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+      } later on !!!!! */ 
+  }
+  
+  @media (min-width: 990px) {
+    .contain {
+      flex-direction: row;
+    }
+
+    .friend-list {
+        display: block;
+    }
+    
+    .conversation {
+      /* display: block; */
+      position: static; /* Reset positioning */
+    }
+    
+    .toggle-btn {
+      display: none;
+    }
+
+    .Text {
+        font-size: 3vw;
+        left: 30%;
+      }
+}
+
+
+/* @media (max-width: 1585px) {
+    .Text {
+      display: none;
+    }
+} */
+
+/* .box {
+    position: absolute;
+    width: 35vw;
+    height: 35vh;
+  }
+  .box .group {
+    position: absolute;
+    width: 35vw;
+    height: 35vh;
+    top: -100%;
+    left: -50%;
+  }
+  
+  .box .ellipse-wrapper {
+    position: absolute;
+    height: 35vh;
+    background-color: var(--colors-pinky);
+    border-width: 15vw 14vh;
+    box-shadow: 0 0 3vw var(--colors-pinky), 
+                0 0 6vw var(--colors-pinky), 
+                0 0 10vw var(--colors-pinky),
+                0 0 20vw var(--colors-pinky), 
+                0 0 35vw var(--colors-pinky), 
+                0 0 60vw var(--colors-pinky);
+  }
+  
+  .box .ellipse {
+    position: absolute;
+    width: 35vw;
+    height: 35vh;
+    background-color: var(--colors-pinky);
+    border-width: 15vw 14vh;
+    box-shadow: 0 0 3vw var(--colors-pinky), 
+                0 0 6vw var(--colors-pinky), 
+                0 0 10vw var(--colors-pinky),
+                0 0 20vw var(--colors-pinky), 
+                0 0 35vw var(--colors-pinky), 
+                0 0 60vw var(--colors-pinky);
+  }
+  
+  .box .groupb {
+    position: absolute;
+    width: 35vw;
+    height: 35vh;
+    top: 300%;
+    left: 0%;
+  }
+  
+  .box .ellipse-wrapperb {
+    position: absolute;
+    height: 35vh;
+    background-color: var(--colors-cyan);
+    border-width: 15vw 14vh;
+    box-shadow: 0 0 3vw var(--colors-cyan), 
+                0 0 6vw var(--colors-cyan), 
+                0 0 10vw var(--colors-cyan),
+                0 0 20vw var(--colors-cyan), 
+                0 0 35vw var(--colors-cyan), 
+                0 0 60vw var(--colors-cyan);
+  }
+  
+  .box .ellipseb {
+    position: absolute;
+    width: 35vw;
+    height: 35vh;
+    background-color: var(--colors-cyan);
+    border-width: 15vw 14vh;
+    box-shadow: 0 0 3vw var(--colors-cyan), 
+                0 0 6vw var(--colors-cyan), 
+                0 0 10vw var(--colors-cyan),
+                0 0 20vw var(--colors-cyan), 
+                0 0 35vw var(--colors-cyan), 
+                0 0 60vw var(--colors-cyan);
+  } */

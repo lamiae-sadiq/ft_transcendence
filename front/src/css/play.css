@@ -1,0 +1,260 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  /*problem for smaller screens !!!!!!*/
+  /* background-color: var(--colors-body); */
+  background: linear-gradient(to right, var(--colors-cutePink), var(--colors-cuteBlue));
+  /* font-family: 'Luminari'; */
+  overflow-x: hidden;
+  /* position: relative; */
+}
+
+.image {
+  display: block;
+  width: 40px;
+  height: auto;
+  margin: 0 0 0 20px;
+}
+
+.fonts {
+  font-size: 1.1rem;
+  /* font-weight: bold; */
+  color: #ffffff;
+}
+
+.navbar {
+  height: 120px !important;
+  border-bottom: 1px solid #f2bddf !important;
+  /* Bottom border color */
+  /* background-color: transparent; */
+}
+
+.navbar .image {
+  height: 3rem !important;
+  margin-right: 1rem !important;
+}
+
+.user {
+  margin-left: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+/* .container-fluid {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  height: 100% !important;
+} */
+
+.navbar-nav {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 3rem;
+}
+
+.nav-item a {
+  font-size: 1rem;
+  /* Adjust font size */
+  text-align: center;
+  /* katcentri f togglebar*/
+}
+
+.navbar .navbar-toggler {
+  order: 0 !important;
+  margin-right: 20px !important;
+}
+
+.navbar .sidebar .offcanvas-header .image {
+  height: 40px !important;
+}
+
+.navbar .sidebar .offcanvas-body .nav-link {
+  /* color: #ff0000 !important; */
+  padding: 10px !important;
+  margin: 10px;
+}
+
+.navbar .sidebar .offcanvas-body .nav-link:hover {
+  color: var(--colors-cyan) !important;
+  border-radius: 5px !important;
+}
+
+.navbar .user {
+  background: none !important;
+  border: none !important;
+}
+
+.navbar .user .customBack {
+  /* background-color: #007bff !important; */
+  color: #a6009e !important;
+  /*user !!!!*/
+  font-weight: bold !important;
+  border: none !important;
+}
+
+@media (max-width: 991px) {
+
+  .offcanvas-body,
+  .offcanvas-header {
+    background-color: var(--colors-body);
+  }
+}
+
+/*------------------------------------*/
+
+.card-img-top {
+  width: 100% !important;
+  height: 31vh !important;
+  /* Set a fixed height for consistency */
+  object-fit: cover !important;
+  /* Scale images to cover the area */
+}
+
+.card {
+  border: none !important;
+  height: 100% !important;
+  background-color: transparent !important;
+  color: white !important;
+  transition: background-color 0.3s ease !important;
+}
+
+#main-container {
+  padding-top: 3vh !important;
+  min-height: calc(100vh - 25vh) !important;
+  /*120 + 10 + 50*/
+}
+
+#confirm-button {
+  /* position: fixed !important; fixed or no need ? */
+  border: none;
+  bottom: 10px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 200px !important;
+  z-index: 999 !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+/* Scale and shadow effect on click */
+#confirm-button:active {
+  transform: translateX(-50%) scale(0.95) !important;
+  /* Adjust scaling without affecting position */
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important; */
+}
+
+#confirm-button span {
+  position: absolute !important;
+  top: 50% !important;
+  left: 55% !important;
+  transform: translate(-50%, -50%) !important;
+  font-size: 1rem !important;
+  font-weight: bold !important;
+  color: #fff !important;
+}
+
+/* Hide paragraphs initially */
+.card-text {
+  display: none !important;
+  /* Hide paragraphs by default */
+  transition: opacity 0.3s ease !important;
+}
+
+.card.active .card-text {
+  display: block !important;
+  /* Show text when the card is active */
+}
+
+.card.active {
+  background: rgba(255, 255, 255, 0.3);
+  /* Slightly less transparent */
+  box-shadow: 0 0 100px rgba(255, 255, 255, 0.3);
+  /* Add shadow to highlight */
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  /* Slightly more pronounced border */
+}
+
+/*------------------------------------*/
+
+.box {
+  position: absolute !important;
+  width: 35vw !important;
+  height: 35vh;
+}
+
+.box .group {
+  position: absolute;
+  width: 35vw;
+  height: 35vh;
+  top: -100%;
+  left: -50%;
+}
+
+.box .ellipse-wrapper {
+  position: absolute;
+  height: 35vh;
+  background-color: var(--colors-pinky);
+  border-width: 15vw 14vh;
+  box-shadow: 0 0 3vw var(--colors-pinky),
+    0 0 6vw var(--colors-pinky),
+    0 0 10vw var(--colors-pinky),
+    0 0 20vw var(--colors-pinky),
+    0 0 35vw var(--colors-pinky),
+    0 0 60vw var(--colors-pinky);
+}
+
+.box .ellipse {
+  position: absolute;
+  width: 35vw;
+  height: 35vh;
+  background-color: var(--colors-pinky);
+  border-width: 15vw 14vh;
+  box-shadow: 0 0 3vw var(--colors-pinky),
+    0 0 6vw var(--colors-pinky),
+    0 0 10vw var(--colors-pinky),
+    0 0 20vw var(--colors-pinky),
+    0 0 35vw var(--colors-pinky),
+    0 0 60vw var(--colors-pinky);
+}
+
+/* Blue Group */
+/* .box .groupb {
+    position: absolute;
+    width: 35vw;
+    height: 35vh;
+    top: 180%;
+    left: 290%;
+  }
+  
+  .box .ellipse-wrapperb {
+    position: absolute;
+    height: 35vh;
+    background-color: var(--colors-cyan);
+    border-width: 15vw 14vh;
+    box-shadow: 0 0 3vw var(--colors-cyan), 
+                0 0 6vw var(--colors-cyan), 
+                0 0 10vw var(--colors-cyan),
+                0 0 20vw var(--colors-cyan), 
+                0 0 35vw var(--colors-cyan), 
+                0 0 60vw var(--colors-cyan);
+  }
+  
+  .box .ellipseb {
+    position: absolute;
+    width: 35vw;
+    height: 35vh;
+    background-color: var(--colors-cyan);
+    border-width: 15vw 14vh;
+    box-shadow: 0 0 3vw var(--colors-cyan), 
+                0 0 6vw var(--colors-cyan), 
+                0 0 10vw var(--colors-cyan),
+                0 0 20vw var(--colors-cyan), 
+                0 0 35vw var(--colors-cyan), 
+                0 0 60vw var(--colors-cyan);
+  } */
+
+/*------------------------------*/
