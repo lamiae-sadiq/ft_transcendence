@@ -18,7 +18,7 @@ services:
     command: python3 manage.py runserver 0.0.0.0:8000
     ports:
       - "8000:8000"
-    depends_on:
+    depends_on: 
       - db
     environment:
       - DB_NAME=ft_transcandencedb
