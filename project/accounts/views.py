@@ -17,7 +17,7 @@ class ProtectedView(APIView):
     def get(self, request):
         # The authenticated user can be accessed here
         user = request.user
-        return Response({"message": f"Hello {user.username}, you are authenticated!"})
+        return Response({"message": f"Hello {user.username} with the id {user.id}, you are authenticated!"})
 
 
 profilePics = [

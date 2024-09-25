@@ -1,6 +1,17 @@
 # version: '3'
 
 services:
+  frontend:
+      container_name: front
+      build: ./front  # Assuming the frontend Dockerfile is in a folder named 'frontend'
+      ports:
+        - "8080:80"
+      # volumes:
+      #   - ./frontend:/usr/share/nginx/html
+      networks:
+        - my-net
+      depends_on:
+        - web  # Make sure the backend is running
   web:
     container_name: web
     build: ./project
