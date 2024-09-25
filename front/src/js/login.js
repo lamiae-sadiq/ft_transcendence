@@ -1,3 +1,4 @@
+import { navigateTo } from './main.js';
 // Get the password input and toggle button
 export function initLoginPage() {
     const passwordInput = document.getElementsByClassName('passwordInput');
@@ -58,7 +59,7 @@ export function initLoginPage() {
                 let rewind = await response.json();
                 console.log("Response : ", rewind);
                 if (response.ok) {
-                    document.location.href = 'http://localhost:8080';
+                    navigateTo('login'); // to be changed later on
                 }
             } catch (error) {
                 console.error("Error : ", error);
