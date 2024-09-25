@@ -171,6 +171,90 @@ html {
 
 .card.active {
   background: rgba(255, 255, 255, 0.3);
+  /* Slightly less transparent */
   box-shadow: 0 0 100px rgba(255, 255, 255, 0.3);
+  /* Add shadow to highlight */
   border: 1px solid rgba(255, 255, 255, 0.4);
+  /* Slightly more pronounced border */
 }
+
+/*------------------------------------*/
+
+.box {
+  position: absolute !important;
+  width: 35vw !important;
+  height: 35vh;
+}
+
+.box .group {
+  position: absolute;
+  width: 35vw;
+  height: 35vh;
+  top: -100%;
+  left: -50%;
+}
+
+.box .ellipse-wrapper {
+  position: absolute;
+  height: 35vh;
+  background-color: var(--colors-pinky);
+  border-width: 15vw 14vh;
+  box-shadow: 0 0 3vw var(--colors-pinky),
+    0 0 6vw var(--colors-pinky),
+    0 0 10vw var(--colors-pinky),
+    0 0 20vw var(--colors-pinky),
+    0 0 35vw var(--colors-pinky),
+    0 0 60vw var(--colors-pinky);
+}
+
+.box .ellipse {
+  position: absolute;
+  width: 35vw;
+  height: 35vh;
+  background-color: var(--colors-pinky);
+  border-width: 15vw 14vh;
+  box-shadow: 0 0 3vw var(--colors-pinky),
+    0 0 6vw var(--colors-pinky),
+    0 0 10vw var(--colors-pinky),
+    0 0 20vw var(--colors-pinky),
+    0 0 35vw var(--colors-pinky),
+    0 0 60vw var(--colors-pinky);
+}
+
+/* Blue Group */
+/* .box .groupb {
+    position: absolute;
+    width: 35vw;
+    height: 35vh;
+    top: 180%;
+    left: 290%;
+  }
+  
+  .box .ellipse-wrapperb {
+    position: absolute;
+    height: 35vh;
+    background-color: var(--colors-cyan);
+    border-width: 15vw 14vh;
+    box-shadow: 0 0 3vw var(--colors-cyan), 
+                0 0 6vw var(--colors-cyan), 
+                0 0 10vw var(--colors-cyan),
+                0 0 20vw var(--colors-cyan), 
+                0 0 35vw var(--colors-cyan), 
+                0 0 60vw var(--colors-cyan);
+  }
+  
+  .box .ellipseb {
+    position: absolute;
+    width: 35vw;
+    height: 35vh;
+    background-color: var(--colors-cyan);
+    border-width: 15vw 14vh;
+    box-shadow: 0 0 3vw var(--colors-cyan), 
+                0 0 6vw var(--colors-cyan), 
+                0 0 10vw var(--colors-cyan),
+                0 0 20vw var(--colors-cyan), 
+                0 0 35vw var(--colors-cyan), 
+                0 0 60vw var(--colors-cyan);
+  } */
+
+/*------------------------------*/

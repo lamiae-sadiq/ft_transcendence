@@ -39,9 +39,6 @@
 * {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
-  margin: 0 !important;
-  padding: 0 !important;
-  /* font: 'Luminari, fantasy' !important; */
 }
 
 html, body {
@@ -49,6 +46,20 @@ html, body {
   margin: 0px;
   height: 100vh;
 }
+
+@media only screen and (min-width: 1024px) {
+  body {
+      overflow: hidden; /* Prevent zooming effects via scrolling */
+  }
+}
+
+/* #app {
+  z-index: 1;
+} */
+/* button:focus-visible {
+  outline: 2px solid #4a90e2 !important;
+  outline: -webkit-focus-ring-color auto 5px !important;
+} */
 
 a {
   text-decoration: none;
