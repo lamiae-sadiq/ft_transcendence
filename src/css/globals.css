@@ -24,9 +24,9 @@
   --colors-blue-violet-800: rgba(58, 46, 165, 1);
   --colors-blue-violet-900: rgba(52, 44, 131, 1);
   --colors-blue-violet-950: rgba(31, 26, 76, 1);
-  --colors-cyan: #00dff8;
-  --colors-pinky: #d505ff;
-  --colors-body: rgb(27, 2, 54);
+  --colors-cyan: rgb(0, 223, 248);
+  --colors-pinky: rgb(213, 5, 255);
+  --colors-body: #1b0236;
   --colors-input: #202056;
 
   --colors-cuteBlue: #4169e1;
@@ -39,6 +39,9 @@
 * {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+  margin: 0 !important;
+  padding: 0 !important;
+  /* font: 'Luminari, fantasy' !important; */
 }
 
 html, body {
@@ -46,15 +49,6 @@ html, body {
   margin: 0px;
   height: 100vh;
 }
-
-
-/* #app {
-  z-index: 1;
-} */
-/* button:focus-visible {
-  outline: 2px solid #4a90e2 !important;
-  outline: -webkit-focus-ring-color auto 5px !important;
-} */
 
 a {
   text-decoration: none;

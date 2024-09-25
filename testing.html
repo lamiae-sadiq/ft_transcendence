@@ -36,116 +36,27 @@
                   </svg>
               </a> -->
 
-              <!DOCTYPE html>
-              <html lang="en">
-              <head>
-                  <meta charset="UTF-8">
-                  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                  <title>Gaming Match History</title>
-                  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-                  <style>
-                      body {
-                          background-color: #f0f0f0;
-                      }
-                      .match-history {
-                          max-width: 800px;
-                          margin: 0 auto;
-                          background-color: #1a1a1a;
-                          border: 2px solid #333;
-                          border-radius: 15px;
-                          padding: 20px;
-                      }
-                      .match-card {
-                          background-color: #2a2a2a;
-                          border-radius: 10px;
-                          overflow: hidden;
-                          transition: transform 0.2s;
-                          margin-bottom: 15px;
-                      }
-                      .match-card:hover {
-                          transform: translateY(-5px);
-                          background-color: #3a3a3a;
-                      }
-                      .player-icon, .enemy-icon {
-                          width: 50px;
-                          height: 50px;
-                          object-fit: cover;
-                          border-radius: 50%;
-                      }
-                      .score {
-                          font-size: 1.5rem;
-                          font-weight: bold;
-                          color: #fff;
-                          white-space: nowrap;
-                      }
-                      .winner {
-                          color: #28a745;
-                      }
-                      .loser {
-                          color: #dc3545;
-                      }
-                      .player-name, .enemy-name {
-                          color: #fff;
-                          font-size: 1rem;
-                          margin: 0;
-                      }
-                  </style>
-              </head>
-              <body>
-                  <div class="container mt-5">
-                      <h1 class="text-center mb-4 text-white">Match History</h1>
-                      <div id="matchHistory" class="match-history"></div>
-                  </div>
-              
-                  <script>
-                      const matchData = [
-                          { player: { name: "Player1", icon: "https://picsum.photos/50?random=1", score: 10 }, enemy: { name: "Enemy1", icon: "https://picsum.photos/50?random=2", score: 8 } },
-                          { player: { name: "Player1", icon: "https://picsum.photos/50?random=1", score: 7 }, enemy: { name: "Enemy2", icon: "https://picsum.photos/50?random=3", score: 9 } },
-                          { player: { name: "Player1", icon: "https://picsum.photos/50?random=1", score: 12 }, enemy: { name: "Enemy3", icon: "https://picsum.photos/50?random=4", score: 6 } },
-                          { player: { name: "Player1", icon: "https://picsum.photos/50?random=1", score: 8 }, enemy: { name: "Enemy4", icon: "https://picsum.photos/50?random=5", score: 8 } },
-                          { player: { name: "Player1", icon: "https://picsum.photos/50?random=1", score: 15 }, enemy: { name: "Enemy5", icon: "https://picsum.photos/50?random=6", score: 13 } },
-                          { player: { name: "Player1", icon: "https://picsum.photos/50?random=1", score: 9 }, enemy: { name: "Enemy6", icon: "https://picsum.photos/50?random=7", score: 11 } },
-                          { player: { name: "Player1", icon: "https://picsum.photos/50?random=1", score: 14 }, enemy: { name: "Enemy7", icon: "https://picsum.photos/50?random=8", score: 10 } },
-                          { player: { name: "Player1", icon: "https://picsum.photos/50?random=1", score: 6 }, enemy: { name: "Enemy8", icon: "https://picsum.photos/50?random=9", score: 7 } },
-                          { player: { name: "Player1", icon: "https://picsum.photos/50?random=1", score: 11 }, enemy: { name: "Enemy9", icon: "https://picsum.photos/50?random=10", score: 9 } },
-                          { player: { name: "Player1", icon: "https://picsum.photos/50?random=1", score: 13 }, enemy: { name: "Enemy10", icon: "https://picsum.photos/50?random=11", score: 12 } },
-                      ];
-              
-                      function createMatchCard(match) {
-                          const playerWon = match.player.score > match.enemy.score;
-                          const card = document.createElement('div');
-                          card.className = 'match-card';
-                          card.innerHTML = `
-                              <div class="card-body">
-                                  <div class="row align-items-center">
-                                      <div class="col-12 col-sm-5 d-flex flex-column flex-sm-row align-items-center justify-content-start mb-3 mb-sm-0">
-                                          <img src="${match.player.icon}" alt="" class="player-icon mb-2 mb-sm-0 me-sm-2">
-                                          <h5 class="player-name ${playerWon ? 'winner' : 'loser'}">${match.player.name}</h5>
-                                      </div>
-                                      <div class="col-12 col-sm-2 text-center mb-3 mb-sm-0">
-                                          <div class="score">${match.player.score} - ${match.enemy.score}</div>
-                                      </div>
-                                      <div class="col-12 col-sm-5 d-flex flex-column flex-sm-row align-items-center justify-content-end">
-                                          <h5 class="enemy-name ${playerWon ? 'loser' : 'winner'} mb-2 mb-sm-0 me-sm-2">${match.enemy.name}</h5>
-                                          <img src="${match.enemy.icon}" alt="" class="enemy-icon">
-                                      </div>
-                                  </div>
-                              </div>
-                          `;
-                          return card;
-                      }
-              
-                      function displayMatchHistory() {
-                          const matchHistoryContainer = document.getElementById('matchHistory');
-                          matchHistoryContainer.innerHTML = '';
-              
-                          matchData.forEach(match => {
-                              const matchCard = createMatchCard(match);
-                              matchHistoryContainer.appendChild(matchCard);
-                          });
-                      }
-              
-                      displayMatchHistory();
-                  </script>
-              </body>
-              </html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Match History</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            background: radial-gradient(circle at top left, rgba(213, 5, 255, 1), transparent),
+                radial-gradient(circle at bottom left, rgba(0, 223, 248, 1), transparent);
+            background-color: #1b0236;
+            /* Fallback color */
+        }
+    </style>
+</head>
+
+<body>
+</body>
+
+</html>

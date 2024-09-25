@@ -6,26 +6,11 @@ body, html {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: var(--colors-body);
-    /* background: linear-gradient(to right, var(--colors-cutePink), var(--colors-cuteBlue)); */
+    background: radial-gradient(circle at top left, rgb(213, 5, 255) 1%, transparent 30%),
+    radial-gradient(circle at bottom left, rgb(15, 195, 231) 1%, transparent 30%);
     font-family:'Luminari';
+    background-color: var(--colors-body);
 }
-
-/* body::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  box-shadow: 
-    inset 0 0 15px rgba(255, 20, 147, 0.7),
-    inset 0 0 30px rgba(255, 20, 147, 0.7),
-    inset 0 0 60px rgba(255, 20, 147, 0.7),
-    inset 0 0 120px rgba(255, 20, 147, 0.7);
-  z-index: 0;
-} */
 
 /*------------------------------*/
 
@@ -37,20 +22,11 @@ body, html {
     margin: 0 0 0 20px;
 }
 
-/* .play-button {
-  position: relative;
-  display: inline-block;
-  border: none;
-  padding: 0;
-  background-color: transparent;
-  cursor: pointer;
-} */
-
 .play-button {
   position: relative;
   display: inline-block; /* Ensure button only takes up as much space as needed */
-  border: none; /* Remove default button border */
-  padding: 0; /* Remove default button padding */
+  border: none;
+  padding: 0;
   background: none; /* Remove default button background */
   transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transition for transform and shadow */
 }
@@ -74,13 +50,13 @@ body, html {
 
 /* Play Button Scaling Effect */
 .play-button:active {
-  transform: scale(0.95); /* Scale down the button */
-  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); */
+  transform: scale(0.95);
 }
 
 /*------------------------------*/
 /*FRIEND LIST, Paragraph and avatar*/
 /*------------------------------*/
+
 .friend-list, .Text, .avatar {
   padding: 20px;
   height: 100%;
@@ -95,10 +71,6 @@ body, html {
 /*------------------------------*/
 /*FRIEND LIST AND CONVO*/
 /*------------------------------*/
-
-/* .show-conversation .conversation {
-    display: block;
-} */
 
 .contain {
     display: flex;
@@ -140,8 +112,6 @@ body, html {
   .conversation {
     display: none;
     position: absolute;
-    /* top: 0%;
-    left: 0%; */
     z-index: 2;
   }
   
@@ -204,8 +174,6 @@ body, html {
 
 
 .Text {
-    /* display: block; */
-    /* position: absolute; */
     margin: 10vw 10px 10px 10px;
     top: 50%;
     left: 50%;
@@ -224,20 +192,13 @@ body, html {
 
 .fonts {
     font-size: 1.2rem;
-    /* font-weight: bold; */
     color: #ffffff;
-    /* text-shadow: 
-        -1px -1px 0 #5c8795,  
-         1px -1px 0 #5c8795,
-        -1px  1px 0 #5c8795,
-         1px  1px 0 #5c8795; */
 }
 
 /* NAVBAR */
 .navbar {
     height: 120px !important;
     border-bottom: 1px solid #f2bddf !important; /* Bottom border color */
-    /* background-color: transparent; */
 }
 
 .navbar .image {
@@ -363,88 +324,3 @@ body, html {
         left: 30%;
       }
 }
-
-
-/* @media (max-width: 1585px) {
-    .Text {
-      display: none;
-    }
-} */
-
-  .box {
-    position: absolute;
-    width: 35vw; /* Relative to the viewport width */
-    height: 35vh; /* Relative to the viewport height */
-  }
-  
-  /* Pink Group */
-  .box .group {
-    position: absolute;
-    width: 35vw; /* Same as .box width */
-    height: 35vh; /* Same as .box height */
-    top: -100%; /* Leave as percentage if based on the container */
-    left: -50%; /* Leave as percentage if based on the container */
-  }
-  
-  .box .ellipse-wrapper {
-    position: absolute;
-    height: 35vh;
-    background-color: var(--colors-pinky);
-    border-width: 15vw 14vh; /* Adjusted to use vw and vh units */
-    box-shadow: 0 0 3vw var(--colors-pinky), 
-                0 0 6vw var(--colors-pinky), 
-                0 0 10vw var(--colors-pinky),
-                0 0 20vw var(--colors-pinky), 
-                0 0 35vw var(--colors-pinky), 
-                0 0 60vw var(--colors-pinky);
-  }
-  
-  .box .ellipse {
-    position: absolute;
-    width: 35vw;
-    height: 35vh;
-    background-color: var(--colors-pinky);
-    border-width: 15vw 14vh;
-    box-shadow: 0 0 3vw var(--colors-pinky), 
-                0 0 6vw var(--colors-pinky), 
-                0 0 10vw var(--colors-pinky),
-                0 0 20vw var(--colors-pinky), 
-                0 0 35vw var(--colors-pinky), 
-                0 0 60vw var(--colors-pinky);
-  }
-  
-  /* Blue Group */
-  .box .groupb {
-    position: absolute;
-    width: 35vw;
-    height: 35vh;
-    top: 300%;
-    left: 0%;
-  }
-  
-  .box .ellipse-wrapperb {
-    position: absolute;
-    height: 35vh;
-    background-color: var(--colors-cyan);
-    border-width: 15vw 14vh;
-    box-shadow: 0 0 3vw var(--colors-cyan), 
-                0 0 6vw var(--colors-cyan), 
-                0 0 10vw var(--colors-cyan),
-                0 0 20vw var(--colors-cyan), 
-                0 0 35vw var(--colors-cyan), 
-                0 0 60vw var(--colors-cyan);
-  }
-  
-  .box .ellipseb {
-    position: absolute;
-    width: 35vw;
-    height: 35vh;
-    background-color: var(--colors-cyan);
-    border-width: 15vw 14vh;
-    box-shadow: 0 0 3vw var(--colors-cyan), 
-                0 0 6vw var(--colors-cyan), 
-                0 0 10vw var(--colors-cyan),
-                0 0 20vw var(--colors-cyan), 
-                0 0 35vw var(--colors-cyan), 
-                0 0 60vw var(--colors-cyan);
-  }
