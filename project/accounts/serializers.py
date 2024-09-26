@@ -34,17 +34,17 @@ class RegistreSerializer(serializers.ModelSerializer):
 
 # Serializer for login
 class LoginSerializer(serializers.Serializer):
-    loginID    = serializers.CharField(required=True)
+    nickname    = serializers.CharField(required=True)
     password    = serializers.CharField(write_only=True, required=True)
 
 
     def validate(self, data):
-        # Extract the loginID and password from the input data
-        loginID = data['loginID']
+        # Extract the nickname and password from the input data
+        nickname = data['nickname']
         password = data['password']
 
         # Authenticate the user using Django's authenticate function
-        user = authenticate(username=loginID, password=password)
+        user = authenticate(username=nickname, password=password)
 
         # Check if user is authenticated and active
         if user is None:

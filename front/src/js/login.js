@@ -125,7 +125,7 @@ export function initLoginPage() {
         let rewind = await response.json();
         console.log("Response : ", rewind, "||", response);
         if (response.ok) {
-          const token = rewind.data.token;
+          const token = rewind.access;
           sessionStorage.setItem("jwtToken", token);
           navigateTo("home");
         }
