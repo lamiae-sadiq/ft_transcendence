@@ -60,9 +60,9 @@ export function initLoginPage() {
           method: "POST",
           body: formDataToJson(formData),
         });
-        let rewind = await response.json();
         console.log("Response : ", rewind);
         if (response.ok) {
+          // let rewind = await response.json();
           navigateTo("login"); // to be changed later on
         }
       } catch (error) {
@@ -88,7 +88,7 @@ export function initLoginPage() {
           console.log("Authentication initiated successfully");
           console.log(response);
           let rewind = await response.json();
-          const token = rewind.data.token; // Replace with actual token retrieval
+          const token = rewind.access; // Replace with actual token retrieval
           sessionStorage.setItem("jwtToken", token);
           navigateTo("home"); // to be changed later on
         } else {
@@ -122,9 +122,9 @@ export function initLoginPage() {
           method: "POST",
           body: formDataToJson(formData),
         });
-        let rewind = await response.json();
         console.log("Response : ", rewind, "||", response);
         if (response.ok) {
+          let rewind = await response.json();
           const token = rewind.access;
           sessionStorage.setItem("jwtToken", token);
           navigateTo("home");

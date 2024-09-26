@@ -1,63 +1,51 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const editProfileBtn = document.getElementById('editProfileBtn');
-    const achievementsContainer = document.getElementById('achievementsContainer');
-    const friendsContainer = document.getElementById('friendsContainer');
+/*------------------------------------- NEW CODE ADDED -------------- */
+async function fetchUserData() {
+    let token = sessionStorage.getItem('accessToken');
+    try {
+      let response = await fetch("http://0.0.0.0:8000/user/", {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+      });
+      if (response.ok) {
+        let rewind = await response.json();
+        /* user data to be rendered here*/
+        user(rewind);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  // const dummydata =
+  //   { id: 1, name: "Alex", level: 42, wins: 150, img: "https://i.pravatar.cc/160?img=1" };
 
-    // Edit Profile Button Click Event
-    editProfileBtn.addEventListener('click', function() {
-        alert('Edit profile functionality to be implemented');
-    });
-
-    // Mock achievements data
-    const achievements = [
-        { name: 'Master Strategist', icon: '/placeholder.svg?height=50&width=50' },
-        { name: 'Level 50 Warrior', icon: '/placeholder.svg?height=50&width=50' },
-        { name: '1000 Games Played', icon: '/placeholder.svg?height=50&width=50' },
-        { name: 'Tournament Winner', icon: '/placeholder.svg?height=50&width=50' },
-        { name: 'Legendary Player', icon: '/placeholder.svg?height=50&width=50' },
-        { name: 'Social Butterfly', icon: '/placeholder.svg?height=50&width=50' }
-    ];
-
-    // Populate Achievements
-    achievements.forEach(achievement => {
-        const div = document.createElement('div');
-        div.className = 'achievement-item';
-        div.innerHTML = `
-            <img src="${achievement.icon}" alt="${achievement.name}" class="achievement-icon">
-            <div>
-                <p class="achievement-name">${achievement.name}</p>
-            </div>
-        `;
-        achievementsContainer.appendChild(div);
-    });
-
-    // Mock friends data
-    const friends = [
-        { name: 'Alice', status: 'online', picture: '/placeholder.svg?height=50&width=50' },
-        { name: 'Bob', status: 'offline', picture: '/placeholder.svg?height=50&width=50' },
-        { name: 'Charlie', status: 'online', picture: '/placeholder.svg?height=50&width=50' },
-        { name: 'David', status: 'offline', picture: '/placeholder.svg?height=50&width=50' },
-        { name: 'Eve', status: 'online', picture: '/placeholder.svg?height=50&width=50' },
-        { name: 'Frank', status: 'offline', picture: '/placeholder.svg?height=50&width=50' }
-    ];
-
-    // Sort friends by status (online first)
-    friends.sort((a, b) => (a.status === 'offline') - (b.status === 'offline'));
-
-    // Populate Friends List
-    friends.forEach(friend => {
-        const div = document.createElement('div');
-        div.className = 'friend-item';
-        div.innerHTML = `
-            <img src="${friend.picture}" alt="${friend.name}" class="friend-picture">
-            <div>
-                <p class="friend-name">${friend.name}</p>
-                <span class="friend-status ${friend.status}">
-                    <span class="status-indicator"></span>
-                    ${friend.status.charAt(0).toUpperCase() + friend.status.slice(1)}
-                </span>
-            </div>
-        `;
-        friendsContainer.appendChild(div);
-    });
-});
+  function renderUser(data) {
+    return `
+    <button class="user btn p-2">
+      <div class="d-flex align-items-center gap-3">
+        <!-- Profile Image -->
+        <div class="ProfileImage">
+          <img src="${data.img}" alt="Profile Image" class="rounded-circle" style="width: 40px; height: 40px;">
+        </div>
+        
+        <!-- User Name -->
+        <div class="UserProfile">
+          <a href="#profil" class="text-white text-decoration-none"><strong>${data.name}</strong></a>
+        </div>
+        
+        <!-- Notification Icon -->
+        <div class="Notifications">
+          <i class="bi bi-bell-fill text-white"></i>
+        </div>
+      </div>
+    </button>
+    `;
+  }
+  console.log(dummydata.id, dummydata.name, dummydata.level, dummydata);
+  function user(data) {
+    let user = document.getElementById("user-container");
+    user.innerHTML = `${renderUser(data)}`;
+  }
+  fetchUserData(); // how will be done !!!

@@ -1,4 +1,27 @@
 export function initLeaderboardPage() {
+
+    /*------------------------------------- NEW CODE ADDED -------------- */
+  async function fetchUserData() {
+    let token = sessionStorage.getItem('accessToken');
+    try {
+      let response = await fetch("http://0.0.0.0:8000/user/", {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+      });
+      if (response.ok) {
+        let rewind = await response.json();
+        /* user data to be rendered here*/
+        
+      }
+    } catch (err) {
+        console.err(err);
+    }
+  }
+  fetchUserData();
+    /*------------------------------------- NEW CODE ADDED -------------- */
     const leaderboardData = [
         { id: 1, name: "Alex", level: 42, wins: 150, avatar: "https://i.pravatar.cc/160?img=1", border: "src/assets/leaderboard/rank1.png" },
         { id: 2, name: "Sam", level: 39, wins: 130, avatar: "https://i.pravatar.cc/160?img=2", border: "src/assets/leaderboard/rank2.png" },
@@ -89,4 +112,35 @@ export function initLeaderboardPage() {
 
     // Re-render on window resize to handle responsive behavior
     window.addEventListener('resize', renderLeaderboard);
+/**------------------------------------------------------------- */
+    const dummydata =
+    { id: 1, name: "Alex", level: 42, wins: 150, img: "https://i.pravatar.cc/160?img=1" };
+
+  function renderUser() {
+    return `
+    <button class="user btn p-2">
+      <div class="d-flex align-items-center gap-5">
+        <!-- Profile Image -->
+        <div class="ProfileImage">
+          <img src="${dummydata.img}" alt="Profile Image" class="rounded-circle" style="width: 40px; height: 40px;">
+        </div>
+        
+        <!-- User Name -->
+        <div class="UserProfile">
+          <a href="#profil" class="text-white text-decoration-none"><strong>${dummydata.name}</strong></a>
+        </div>
+        
+        <!-- Notification Icon -->
+        <div class="Notifications">
+          <i class="bi bi-bell-fill text-white"></i>
+        </div>
+      </div>
+    </button>
+    `;
+  }
+  function user() {
+    let user = document.getElementById("user-container");
+    user.innerHTML = `${renderUser()}`;
+  }
+  user();
 }
