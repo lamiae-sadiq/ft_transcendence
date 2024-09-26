@@ -15,11 +15,11 @@ export function navigateTo(page) {
 
 // Function to load page content dynamically
 function loadPage(page) {
-  const token = sessionStorage.getItem('accessToken');
-  if (!token && page !== 'landing')
-    page = 'login';
-  else if (token && (page === 'login' || page === 'landing'))
-    page = 'home';
+  // const token = sessionStorage.getItem('accessToken');
+  // if (!token && page !== 'landing')
+  //   page = 'login';
+  // else if (token && (page === 'login' || page === 'landing'))
+  //   page = 'home';
   // Remove any previously added CSS files for pages
   const existingLink = document.getElementById('page-style');
   if (existingLink) {

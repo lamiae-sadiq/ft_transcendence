@@ -100,15 +100,17 @@ export function initHomePage() {
   // }
   // fetchUserData();
   const dummydata =
-    { id: 1, name: "Alex", level: 42, wins: 150, img: "https://i.pravatar.cc/160?img=1" };
+    { id: 1, name: "Alex", level: 999, wins: 150, img: "https://i.pravatar.cc/160?img=1" };
 
   function renderUser() {
     return `
     <button class="user btn p-2">
       <div class="d-flex align-items-center gap-5">
         <!-- Profile Image -->
-        <div class="ProfileImage">
-          <img src="${dummydata.img}" alt="Profile Image" class="rounded-circle" style="width: 40px; height: 40px;">
+        <div class="users-container">
+          <img src="./src/assets/home/border.png" alt="" class="users-border">
+          <img src="${dummydata.img}" alt="Profile Image" class="rounded-circle users">
+          <p class="level">${dummydata.level}</p>
         </div>
         
         <!-- User Name -->
