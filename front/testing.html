@@ -59,43 +59,29 @@
         function encryptImage() {
             const imageInput = document.getElementById('imageInput');
             const file = imageInput.files[0];
+            console.log(file);
             const reader = new FileReader();
 
             reader.onload = function (event) {
-                const arrayBuffer = event.target.result;
-                // Convert ArrayBuffer to WordArray
-                const wordArray = CryptoJS.lib.WordArray.create(arrayBuffer);
-                const secretKey = 'qwertyuiop12369';
-                // Encrypt the image
-                const encrypted = CryptoJS.AES.encrypt(wordArray, secretKey).toString();
-                console.log(encrypted);
-                encryptedImageBase64 = encrypted;
-                console.log(encryptedImageBase64); // Log the encrypted image
+                const arrayBuffer = event.target.result.split(',')[1];
+                encryptedImageBase64 = arrayBuffer;
+                console.log(encryptedImageBase64);
             };
-
-            reader.readAsArrayBuffer(file);
+            reader.readAsDataURL(file);
         }
 
         function decryptImage() {
-            const secretKey = 'qwertyuiop12369';
-            // decrypt the image
-            const decryptedData = CryptoJS.AES.decrypt(encryptedImageBase64, secretKey);
-            const arrayBuffer = new Uint8Array(decryptedData.words.length * 4);
-            // Convert decrypted data to ArrayBuffer
-            for (let i = 0; i < decryptedData.words.length; i++) {
-                arrayBuffer[i * 4] = (decryptedData.words[i] >> 24) & 0xff;
-                arrayBuffer[i * 4 + 1] = (decryptedData.words[i] >> 16) & 0xff;
-                arrayBuffer[i * 4 + 2] = (decryptedData.words[i] >> 8) & 0xff;
-                arrayBuffer[i * 4 + 3] = decryptedData.words[i] & 0xff;
-            }
-            // Create a Blob and set the image source
-            const blob = new Blob([arrayBuffer], { type: 'image/png' }); //mimeType to be changed
-            const imgURL = URL.createObjectURL(blob);
+            // You already have the base64-encoded string in encryptedImageBase64
+        
+            // Recreate the data URL for the image
+            const imageDataURL = `data:image/png;base64,` + encryptedImageBase64;
+            console.log(imageDataURL);
+            // Find the image element and set its src to the data URL
             const imgElement = document.getElementById('displayImage');
-
-            imgElement.src = imgURL;
+            imgElement.src = imageDataURL;
             imgElement.style.display = 'block'; // Display the image
         }
+        
     </script>
 </body>
 

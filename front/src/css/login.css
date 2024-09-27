@@ -5,85 +5,6 @@
     font: 'Luminari, fantasy' !important;
 }
 
-/* .box {
-    position: absolute;
-    width: 35vw;
-    height: 35vh;
-    min-width: 250px;
-    min-height: 250px;
-  }
-  
-  .box .group {
-    position: absolute;
-    width: 35vw;
-    height: 35vh;
-    top: -180%;
-    left: -100%;
-  }
-  
-  .box .ellipse-wrapper {
-    position: absolute;
-    height: 35vh;
-    background-color: var(--colors-pinky);
-    border-width: 15vw 14vh;
-    box-shadow: 1px 1px 100vw var(--colors-pinky), 
-                1px 1px 100vw var(--colors-pinky), 
-                1px 1px 100vw var(--colors-pinky),
-                1px 1px 100vw var(--colors-pinky), 
-                1px 1px 100vw var(--colors-pinky), 
-                1px 1px 100vw var(--colors-pinky);
-  }
-  
-  .box .ellipse {
-    position: absolute;
-    width: 35vw;
-    height: 35vh;
-    background-color: var(--colors-pinky);
-    border-width: 15vw 14vh;
-    box-shadow: 1px  1px  100vw var(--colors-pinky), 
-                1px  1px  100vw var(--colors-pinky), 
-                1px  1px  100vw var(--colors-pinky),
-                1px  1px  100vw var(--colors-pinky), 
-                1px  1px  100vw var(--colors-pinky), 
-                1px  1px  100vw var(--colors-pinky);
-  } */
-  
-  /* Blue Group */
-  /* .box .groupb {
-    position: absolute;
-    width: 35vw;
-    height: 35vh;
-    top: 240%;
-    left: -100%;
-  }
-  
-  .box .ellipse-wrapperb {
-    position: absolute;
-    height: 35vh;
-    background-color: var(--colors-cyan);
-    border-width: 15vw 14vh;
-    box-shadow: 1px  1px  100vw var(--colors-cyan), 
-                1px  1px  100vw var(--colors-cyan), 
-                1px  1px  100vw var(--colors-cyan),
-                1px  1px  100vw var(--colors-cyan), 
-                1px  1px  100vw var(--colors-cyan), 
-                1px  1px  100vw var(--colors-cyan);
-  }
-  
-  .box .ellipseb {
-    position: absolute;
-    width: 35vw;
-    height: 35vh;
-    background-color: var(--colors-cyan);
-    border-width: 15vw 14vh;
-    box-shadow: 1px  1px  100vw var(--colors-cyan), 
-                1px  1px  100vw var(--colors-cyan), 
-                1px  1px  100vw var(--colors-cyan),
-                1px  1px  100vw var(--colors-cyan), 
-                1px  1px  100vw var(--colors-cyan), 
-                1px  1px  100vw var(--colors-cyan);
-  } */
-
 body{
     background-color:  var(--colors-body) !important;
     display: flex !important;
@@ -94,8 +15,8 @@ body{
     min-width: 60vw !important;
     overflow: hidden !important;
     font-family:'Luminari' !important; /* ---------------------*/
-    background: radial-gradient(circle at top left, rgba(213, 5, 255, 1), transparent),
-              radial-gradient(circle at bottom left, rgba(0, 223, 248, 1), transparent);
+    background: radial-gradient(circle at top left, rgb(213, 5, 255) 1%, transparent 30%),
+    radial-gradient(circle at bottom left, rgb(15, 195, 231) 1%, transparent 30%);
 }
 
 .container {
