@@ -1,38 +1,39 @@
-/*------------------------------------- NEW CODE ADDED -------------- */
+// /*------------------------------------- NEW CODE ADDED -------------- */
 async function fetchUserData() {
-    let token = sessionStorage.getItem('accessToken');
-    try {
-      let response = await fetch("http://0.0.0.0:8000/user/", {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        method: "POST",
-      });
-      if (response.ok) {
-        let rewind = await response.json();
-        /* user data to be rendered here*/
-        user(rewind);
-      }
-    } catch (err) {
-      console.error(err);
+  let token = sessionStorage.getItem('accessToken');
+  try {
+    let response = await fetch("http://0.0.0.0:8000/userinfo/", {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+    });
+    if (response.ok) {
+      let userData = await response.json();
+      updateUserDisplay(userData);
+    } else {
+      console.error('Failed to fetch user data:', response.statusText); // Error handling
     }
+  } catch (err) {
+    console.error('Error fetching user data:', err);
   }
-  // const dummydata =
-  //   { id: 1, name: "Alex", level: 42, wins: 150, img: "https://i.pravatar.cc/160?img=1" };
+}
 
-  function renderUser(data) {
-    return `
+function renderUser(userData) {
+  return `
     <button class="user btn p-2">
-      <div class="d-flex align-items-center gap-3">
+      <div class="d-flex align-items-center gap-5">
         <!-- Profile Image -->
-        <div class="ProfileImage">
-          <img src="${data.img}" alt="Profile Image" class="rounded-circle" style="width: 40px; height: 40px;">
+        <div class="users-container">
+          <img src="./src/assets/home/border.png" alt="" class="users-border">
+          <img src="${userData.img}" alt="Profile Image" class="rounded-circle users">
+          <p class="level">${userData.level}</p>
         </div>
         
         <!-- User Name -->
         <div class="UserProfile">
-          <a href="#profil" class="text-white text-decoration-none"><strong>${data.name}</strong></a>
+          <a href="#profil" class="text-white text-decoration-none"><strong>${userData.name}</strong></a>
         </div>
         
         <!-- Notification Icon -->
@@ -41,11 +42,14 @@ async function fetchUserData() {
         </div>
       </div>
     </button>
-    `;
-  }
-  console.log(dummydata.id, dummydata.name, dummydata.level, dummydata);
-  function user(data) {
-    let user = document.getElementById("user-container");
-    user.innerHTML = `${renderUser(data)}`;
-  }
-  fetchUserData(); // how will be done !!!
+  `;
+}
+
+function updateUserDisplay(userData) {
+  let userContainer = document.getElementById("user-container");
+  userContainer.innerHTML = renderUser(userData);
+}
+
+fetchUserData();
+
+
