@@ -11,6 +11,10 @@ import mimetypes
 key = Fernet.generate_key()
 cipher_suite = Fernet(key)
 
+def xor_encrypt(data, key):
+    return bytearray([b ^ key for b in data])
+
+
 class UserProfileSerializer(serializers.ModelSerializer):
     profile_picture = serializers.SerializerMethodField()
 
@@ -19,20 +23,48 @@ class UserProfileSerializer(serializers.ModelSerializer):
         fields = ['id', 'nickname', 'profile_picture', 'mimeType', 'email']
 
 
+    # class UploadImageView(View):
     def get_profile_picture(self, obj):
-    # Convert the image to Base64 if it exists
+        # Get the uploaded file from the request
+
         if obj.profile_picture:
             with open(f'/accounts{obj.profile_picture.path}', "rb") as image_file:
-                # Convert the image to Base64
+                     # Convert the image to Base64
                 image_data = image_file.read()
+                # Convert the image to Base64
                 image_base64 = base64.b64encode(image_data).decode('utf-8')
-
-                # Encrypt the Base64 string
-                encrypted_image = cipher_suite.encrypt(image_base64.encode('utf-8'))
-                
-                # Return the encrypted image as a string
-                return encrypted_image.decode('utf-8')
+                image_return = image_base64
+                # Return the Base64 string as a response
+                return image_return
         return None
+
+    # def get_profile_picture(self, obj):
+    # # Convert the image to Base64 if it exists
+    #     if obj.profile_picture:
+    #         with open(f'/accounts{obj.profile_picture.path}', "rb") as image_file:
+    #             # Convert the image to Base64
+    #             # image_data = image_file.read()
+    #             # image_base64 = base64.b64encode(image_data).decode('utf-8')
+
+    #             # # Encrypt the Base64 string
+    #             # encrypted_image = cipher_suite.encrypt(image_base64.encode('utf-8'))
+                
+    #             # # Return the encrypted image as a string
+    #             # return encrypted_image.decode('utf-8')
+    #             image_data = image_file.read()
+                
+    #             # Key for XOR encryption (simple single-byte key, e.g., 123)
+    #             key = 123  # You can use any single-byte key value (0-255)
+                
+    #             # Encrypt the image using XOR
+    #             encrypted_data = xor_encrypt(image_data, key)
+                
+    #             # Convert encrypted data to Base64 for sending over the network
+    #             encrypted_base64 = base64.b64encode(encrypted_data).decode('utf-8')
+                
+    #             return encrypted_base64
+    #     return None
+    
     
     def get_image_mime_type(self, obj):
         if obj.profile_picture:

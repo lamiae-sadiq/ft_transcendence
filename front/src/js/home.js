@@ -146,7 +146,8 @@ export function initHomePage() {
         let userData = await response.json();
         console.log(userData);
         // Decrypt the profile picture and update the user display
-        profilePicture = decryptImage(userData.profile_picture, userData);
+        let profilePicture = decryptImage(userData.profile_picture, userData);
+        console.log(profilePicture, userData);
         updateUserDisplay(userData, profilePicture);
       } else {
         console.error("Failed to fetch user data:", response.statusText); // Error handling
@@ -188,8 +189,9 @@ export function initHomePage() {
 
   function decryptImage(encryptedImageBase64, userData) {
     // Recreate the data URL for the image
-    return `data:${userData.mimeType};base64,` + encryptedImageBase64;
+    return `data:${userData.mimeType};base64,${encryptedImageBase64}`;
 }
 
   fetchUserData();
 }
+
