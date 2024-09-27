@@ -122,9 +122,9 @@ export function initLoginPage() {
           method: "POST",
           body: formDataToJson(formData),
         });
-        console.log("Response : ", rewind, "||", response);
         if (response.ok) {
           let rewind = await response.json();
+          console.log("Response : ", rewind, "||", response);
           const token = rewind.access;
           sessionStorage.setItem("jwtToken", token);
           navigateTo("home");

@@ -132,17 +132,19 @@ export function initHomePage() {
   // }
   // user();
   async function fetchUserData() {
-    let token = sessionStorage.getItem("accessToken");
+    let token = sessionStorage.getItem("jwtToken");
+    console.log(token);
     try {
       let response = await fetch("http://0.0.0.0:8000/userinfo/", {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        method: "POST",
+        method: "GET",
       });
       if (response.ok) {
         let userData = await response.json();
+        console.log(userData);
         updateUserDisplay(userData);
       } else {
         console.error("Failed to fetch user data:", response.statusText); // Error handling
@@ -159,13 +161,13 @@ export function initHomePage() {
           <!-- Profile Image -->
           <div class="users-container">
             <img src="./src/assets/home/border.png" alt="" class="users-border">
-            <img src="${userData.img}" alt="Profile Image" class="rounded-circle users">
-            <p class="level">${userData.level}</p>
+            <img src="${userData.profile_picture}" alt="Profile Image" class="rounded-circle users">
+            <!-- <p class="level">${userData.level}</p> -->
           </div>
           
           <!-- User Name -->
           <div class="UserProfile">
-            <a href="#profil" class="text-white text-decoration-none"><strong>${userData.name}</strong></a>
+            <a href="#profil" class="text-white text-decoration-none"><strong>${userData.nickname}</strong></a>
           </div>
           
           <!-- Notification Icon -->

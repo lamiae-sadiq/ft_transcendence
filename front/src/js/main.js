@@ -19,7 +19,7 @@ function loadPage(page) {
   // if (!token && page !== 'landing')
   //   page = 'login';
   // else if (token && (page === 'login' || page === 'landing'))
-  //   page = 'home';
+  // page = 'home';
   // Remove any previously added CSS files for pages
   const existingLink = document.getElementById('page-style');
   if (existingLink) {

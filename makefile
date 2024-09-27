@@ -3,8 +3,10 @@ DOCKER_COMPOSE_FILE=docker-compose.yml
 # PROJECT_NAME=my_project  # Replace with your Docker Compose project name
 
 # Build and start services
+up:
+	docker compose up
 build:
-	docker compose -f $(DOCKER_COMPOSE_FILE) up --build -d
+	docker compose up --build 
 
 clean:
 	docker system prune
