@@ -28,34 +28,58 @@ export function initPlayPage() {
     /**
  * ------------------------------------------------------------------
  */
-    const dummydata =
-    { id: 1, name: "Alex", level: 42, wins: 150, img: "https://i.pravatar.cc/160?img=1" };
-
-  function renderUser() {
-    return `
-    <button class="user btn p-2">
-      <div class="d-flex align-items-center gap-5">
-        <!-- Profile Image -->
-        <div class="ProfileImage">
-          <img src="${dummydata.img}" alt="Profile Image" class="rounded-circle" style="width: 40px; height: 40px;">
-        </div>
-        
-        <!-- User Name -->
-        <div class="UserProfile">
-          <a href="#profil" class="text-white text-decoration-none"><strong>${dummydata.name}</strong></a>
-        </div>
-        
-        <!-- Notification Icon -->
-        <div class="Notifications">
-          <i class="bi bi-bell-fill text-white"></i>
-        </div>
-      </div>
-    </button>
-    `;
-  }
-  function user() {
-    let user = document.getElementById("user-container");
-    user.innerHTML = `${renderUser()}`;
-  }
-  user();
+    async function fetchUserData() {
+      let token = sessionStorage.getItem("jwtToken");
+      console.log(token);
+      try {
+        let response = await fetch("http://0.0.0.0:8000/userinfo/", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          method: "GET",
+        });
+        if (response.ok) {
+          let userData = await response.json();
+          console.log(userData);
+          updateUserDisplay(userData);
+        } else {
+          console.error("Failed to fetch user data:", response.statusText); // Error handling
+        }
+      } catch (err) {
+        console.error("Error fetching user data:", err);
+      }
+    }
+  
+    function renderUser(userData) {
+      return `
+        <button class="user btn p-2">
+          <div class="d-flex align-items-center gap-5">
+            <!-- Profile Image -->
+            <div class="users-container">
+              <img src="./src/assets/home/border.png" alt="" class="users-border">
+              <img src="${userData.profile_picture}" alt="Profile Image" class="rounded-circle users">
+              <!-- <p class="level">${userData.level}</p> -->
+            </div>
+            
+            <!-- User Name -->
+            <div class="UserProfile">
+              <a href="#profil" class="text-white text-decoration-none"><strong>${userData.nickname}</strong></a>
+            </div>
+            
+            <!-- Notification Icon -->
+            <div class="Notifications">
+              <i class="bi bi-bell-fill text-white"></i>
+            </div>
+          </div>
+        </button>
+      `;
+    }
+  
+    function updateUserDisplay(userData) {
+      let userContainer = document.getElementById("user-container");
+      userContainer.innerHTML = renderUser(userData);
+    }
+  
+    fetchUserData();
 }

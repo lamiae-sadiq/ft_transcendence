@@ -42,45 +42,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gaming Match History</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <input type="file" id="imageInput" accept="image/png, image/jpeg">
-    <button onclick="encryptBinaryImage()">Upload and Encrypt</button>
-
+    <title>Image Encrypt/Decrypt</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <script>
-        function encryptBinaryImage(imageFile, secretKey, callback) {
-            const reader = new FileReader();
-          
-            reader.onload = function (event) {
-              const arrayBuffer = event.target.result;  // Get the raw binary data
-              const encryptedImage = encryptArrayBuffer(arrayBuffer, secretKey);  // Use WebCrypto API or other encryption for binary data
-              callback(encryptedImage);  // Call the callback with the encrypted image
-            };
-          
-            reader.readAsArrayBuffer(imageFile);  // Read as binary ArrayBuffer
-          }
-          
-          // Sending encrypted binary data to the backend
-          encryptBinaryImage(imageFile, secretKey, (encryptedImage) => {
-            const formData = new FormData();
-            formData.append('image', new Blob([encryptedImage]), 'encrypted-image');
-            console.log(formData);
-            fetch('http://0.0.0.0:8080/', {
-              method: 'POST',
-              body: formData,
-            })
-            .then(response => response.json())
-            .then(data => console.log('Success:', data))
-            .catch(error => console.error('Error:', error));
-          });
-          
-    </script>
-
 </head>
 
 <body>
+
+    <input type="file" id="imageInput" accept="image/png, image/jpeg">
+    <button onclick="encryptImage()">Encrypt</button>
+    <button onclick="decryptImage()">Decrypt</button>
+    <img id="displayImage" alt="Decrypted Image" style="display: none;" />
+    <div id="output"></div>
+    <script>
+        let encryptedImageBase64 = '';
+
+        function encryptImage() {
+            const imageInput = document.getElementById('imageInput');
+            const file = imageInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (event) {
+                const arrayBuffer = event.target.result;
+                // Convert ArrayBuffer to WordArray
+                const wordArray = CryptoJS.lib.WordArray.create(arrayBuffer);
+                const secretKey = 'qwertyuiop12369';
+                // Encrypt the image
+                const encrypted = CryptoJS.AES.encrypt(wordArray, secretKey).toString();
+                console.log(encrypted);
+                encryptedImageBase64 = encrypted;
+                console.log(encryptedImageBase64); // Log the encrypted image
+            };
+
+            reader.readAsArrayBuffer(file);
+        }
+
+        function decryptImage() {
+            const secretKey = 'qwertyuiop12369';
+            // decrypt the image
+            const decryptedData = CryptoJS.AES.decrypt(encryptedImageBase64, secretKey);
+            const arrayBuffer = new Uint8Array(decryptedData.words.length * 4);
+            // Convert decrypted data to ArrayBuffer
+            for (let i = 0; i < decryptedData.words.length; i++) {
+                arrayBuffer[i * 4] = (decryptedData.words[i] >> 24) & 0xff;
+                arrayBuffer[i * 4 + 1] = (decryptedData.words[i] >> 16) & 0xff;
+                arrayBuffer[i * 4 + 2] = (decryptedData.words[i] >> 8) & 0xff;
+                arrayBuffer[i * 4 + 3] = decryptedData.words[i] & 0xff;
+            }
+            // Create a Blob and set the image source
+            const blob = new Blob([arrayBuffer], { type: 'image/png' }); //mimeType to be changed
+            const imgURL = URL.createObjectURL(blob);
+            const imgElement = document.getElementById('displayImage');
+
+            imgElement.src = imgURL;
+            imgElement.style.display = 'block'; // Display the image
+        }
+    </script>
 </body>
 
 </html>

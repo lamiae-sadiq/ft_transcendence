@@ -145,6 +145,8 @@ export function initHomePage() {
       if (response.ok) {
         let userData = await response.json();
         console.log(userData);
+        // Decrypt the profile picture and update the user display
+        userData.decryptedProfilePicture = await decryptImage(userData.profile_picture, userData.mimeType);
         updateUserDisplay(userData);
       } else {
         console.error("Failed to fetch user data:", response.statusText); // Error handling
@@ -161,7 +163,7 @@ export function initHomePage() {
           <!-- Profile Image -->
           <div class="users-container">
             <img src="./src/assets/home/border.png" alt="" class="users-border">
-            <img src="${userData.profile_picture}" alt="Profile Image" class="rounded-circle users">
+            <img src="${userData.decryptedProfilePicture}" alt="Profile Image" class="rounded-circle users">
             <!-- <p class="level">${userData.level}</p> -->
           </div>
           
@@ -183,6 +185,27 @@ export function initHomePage() {
     let userContainer = document.getElementById("user-container");
     userContainer.innerHTML = renderUser(userData);
   }
+
+  function decryptImage(encryptedImageBase64, mimeType) {
+    const secretKey = 'qwertyuiop12369';
+    // decrypt the image
+    const decryptedData = CryptoJS.AES.decrypt(encryptedImageBase64, secretKey);
+    const arrayBuffer = new Uint8Array(decryptedData.words.length * 4);
+    // Convert decrypted data to ArrayBuffer
+    for (let i = 0; i < decryptedData.words.length; i++) {
+        arrayBuffer[i * 4] = (decryptedData.words[i] >> 24) & 0xff;
+        arrayBuffer[i * 4 + 1] = (decryptedData.words[i] >> 16) & 0xff;
+        arrayBuffer[i * 4 + 2] = (decryptedData.words[i] >> 8) & 0xff;
+        arrayBuffer[i * 4 + 3] = decryptedData.words[i] & 0xff;
+    }
+    // Create a Blob and set the image source
+    const blob = new Blob([arrayBuffer], { type: mimeType }); //mimeType to be changed
+    const imgURL = URL.createObjectURL(blob);
+    const imgElement = document.getElementById('displayImage');
+
+    imgElement.src = imgURL;
+    imgElement.style.display = 'block'; // Display the image
+}
 
   fetchUserData();
 }
