@@ -5,6 +5,11 @@ from rest_framework import serializers
 from .models import UserProfile
 
 
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ['id', 'nickname', 'profile_picture', 'email'] 
+
 # Serializer for registration
 class RegistreSerializer(serializers.ModelSerializer):
     class Meta:
