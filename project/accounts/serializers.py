@@ -3,12 +3,42 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import UserProfile
+from cryptography.fernet import Fernet
+import base64
+import mimetypes
 
+
+key = Fernet.generate_key()
+cipher_suite = Fernet(key)
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    profile_picture = serializers.SerializerMethodField()
+
     class Meta:
         model = UserProfile
-        fields = ['id', 'nickname', 'profile_picture', 'email'] 
+        fields = ['id', 'nickname', 'profile_picture', 'mimeType', 'email']
+
+
+    def get_profile_picture(self, obj):
+    # Convert the image to Base64 if it exists
+        if obj.profile_picture:
+            with open(f'/accounts{obj.profile_picture.path}', "rb") as image_file:
+                # Convert the image to Base64
+                image_data = image_file.read()
+                image_base64 = base64.b64encode(image_data).decode('utf-8')
+
+                # Encrypt the Base64 string
+                encrypted_image = cipher_suite.encrypt(image_base64.encode('utf-8'))
+                
+                # Return the encrypted image as a string
+                return encrypted_image.decode('utf-8')
+        return None
+    
+    def get_image_mime_type(self, obj):
+        if obj.profile_picture:
+            mime_type, _ = mimetypes.guess_type(obj.profile_picture.name)
+            return mime_type
+        return "image/jpg"
 
 # Serializer for registration
 class RegistreSerializer(serializers.ModelSerializer):

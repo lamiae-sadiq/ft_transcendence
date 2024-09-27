@@ -10,6 +10,7 @@ class UserProfile(models.Model):
     id                      = models.AutoField(primary_key=True)
     nickname                = models.CharField(max_length=30, unique=True, blank=True, null=True)
     profile_picture         = models.ImageField(upload_to="images/", default=random.choice(profilePics), blank=True, null=True)
+    mimeType                = models.CharField(max_length=50, default="image/jpg")
     email                   = models.EmailField(max_length=255, blank=True, null=True)
     # bio                     = models.CharField(max_length=100, blank=True)
     friends                 = models.ManyToManyField(User, blank=True, related_name='friends')

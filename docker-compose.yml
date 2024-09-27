@@ -26,8 +26,8 @@ services:
       - DB_PASSWORD=otitebah1234
       - DB_HOST=db
       - DB_PORT=5432
-    volumes:
-      - .:/trans
+    # volumes:
+    #   - .:/trans
     networks:
       - my-net
 

@@ -22,4 +22,4 @@ class ProtectedView(APIView):
         serializer = UserProfileSerializer(user_profile)
 
         # Return the serialized data
-        return Response(serializer.data)
+        return Response(serializer.data, )
