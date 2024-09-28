@@ -3,16 +3,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import UserProfile
-from cryptography.fernet import Fernet
 import base64
-import mimetypes
-
-
-key = Fernet.generate_key()
-cipher_suite = Fernet(key)
-
-def xor_encrypt(data, key):
-    return bytearray([b ^ key for b in data])
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
@@ -23,27 +14,17 @@ class UserProfileSerializer(serializers.ModelSerializer):
         fields = ['id', 'nickname', 'profile_picture', 'mimeType', 'email', 'bio']
 
 
-    # class UploadImageView(View):
+    # encrypt image and send it to the front
     def get_profile_picture(self, obj):
-        # Get the uploaded file from the request
 
         if obj.profile_picture:
             with open(f'/accounts{obj.profile_picture.path}', "rb") as image_file:
-                     # Convert the image to Base64
                 image_data = image_file.read()
                 # Convert the image to Base64
                 image_base64 = base64.b64encode(image_data).decode('utf-8')
-                image_return = image_base64
-                # Return the Base64 string as a response
-                return image_return
+                return image_base64
         return None
-    
-    
-    def get_image_mime_type(self, obj):
-        if obj.profile_picture:
-            mime_type, _ = mimetypes.guess_type(obj.profile_picture.name)
-            return mime_type
-        return "image/jpg"
+
 
 # Serializer for registration
 class RegistreSerializer(serializers.ModelSerializer):
