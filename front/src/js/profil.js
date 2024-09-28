@@ -299,13 +299,13 @@ export function initProfilPage() {
         <!-- Profile Image -->
         <div class="users-container">
           <img src="./src/assets/home/border.png" alt="" class="users-border">
-          <img src="${profilePicture}" alt="Profile Image" class="rounded-circle users">
+          <img src="${profilePicture}" alt="Profile Image" class="rounded-circle users" id="profilPicture">
           <!-- <p class="level">${userData.level}</p> -->
         </div>
         
         <!-- User Name -->
         <div class="UserProfile">
-          <a href="#profil" class="text-white text-decoration-none"><strong>${userData.nickname}</strong></a>
+          <a href="#profil" class="text-white text-decoration-none" id="nickName"><strong>${userData.nickname}</strong></a>
         </div>
         
         <!-- Notification Icon -->
@@ -362,8 +362,9 @@ export function initProfilPage() {
           body: JSON.stringify({ nickname: updatedName, bio: updatedBio }),
         })
           .then((response) => response.json())
-          .then((data) => {
-            console.log("Profile updated successfully:", data);
+          .then((userData) => {
+            document.getElementById("nickName").textContent = userData.nickname;
+            console.log("Profile updated successfully:", userData);
           })
           .catch((error) => console.error("Error updating profile:", error));
 
@@ -414,6 +415,7 @@ export function initProfilPage() {
                 userData.profile_picture,
                 userData
               );
+              document.getElementById("profilPicture").src = profilePicture;
               document.getElementById("profileImage").src = profilePicture;
             })
             .catch((error) => console.error("Error uploading image:", error));
