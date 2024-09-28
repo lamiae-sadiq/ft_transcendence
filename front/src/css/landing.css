@@ -16,12 +16,13 @@
 }
 
 body {
-  background-color: #1b0236 !important;
   overflow: hidden;
   font-family: "Abril Fatface-Regular", Helvetica;
   font-size: 1.5rem; /* Base font size for scaling */
   background: radial-gradient(circle at top left, rgb(213, 5, 255) 1%, transparent 30%),
     radial-gradient(circle at bottom left, rgb(15, 195, 231) 1%, transparent 30%);
+    font-family:'Luminari';
+    background-color: var(--colors-body);
 }
 
 h1 {

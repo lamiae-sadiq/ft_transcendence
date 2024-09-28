@@ -5,8 +5,10 @@ html {
   padding: 0 !important;
   overflow: visible !important;
   /*problem for smaller screens !!!!!!*/
-  background-color: var(--colors-body) !important;
-  /* background: linear-gradient(to right, var(--colors-cutePink), var(--colors-cuteBlue)) !important; */
+  background: radial-gradient(circle at top left, rgb(213, 5, 255) 1%, transparent 30%),
+    radial-gradient(circle at bottom left, rgb(15, 195, 231) 1%, transparent 30%);
+    font-family:'Luminari';
+    background-color: var(--colors-body);
   /* font-family: 'Luminari' !important; */
   overflow-x: hidden !important;
   /* position: relative !important; */

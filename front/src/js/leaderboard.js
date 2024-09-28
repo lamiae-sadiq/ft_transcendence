@@ -127,7 +127,10 @@ async function fetchUserData() {
     if (response.ok) {
       let userData = await response.json();
       console.log(userData);
-      updateUserDisplay(userData);
+      // Decrypt the profile picture and update the user display
+      let profilePicture = decryptImage(userData.profile_picture, userData);
+      console.log(profilePicture, userData);
+      updateUserDisplay(userData, profilePicture);
     } else {
       console.error("Failed to fetch user data:", response.statusText); // Error handling
     }
@@ -136,14 +139,14 @@ async function fetchUserData() {
   }
 }
 
-function renderUser(userData) {
+function renderUser(userData, profilePicture) {
   return `
     <button class="user btn p-2">
       <div class="d-flex align-items-center gap-5">
         <!-- Profile Image -->
         <div class="users-container">
           <img src="./src/assets/home/border.png" alt="" class="users-border">
-          <img src="${userData.profile_picture}" alt="Profile Image" class="rounded-circle users">
+          <img src="${profilePicture}" alt="Profile Image" class="rounded-circle users">
           <!-- <p class="level">${userData.level}</p> -->
         </div>
         
@@ -161,9 +164,14 @@ function renderUser(userData) {
   `;
 }
 
-function updateUserDisplay(userData) {
+function updateUserDisplay(userData, profilePicture) {
   let userContainer = document.getElementById("user-container");
-  userContainer.innerHTML = renderUser(userData);
+  userContainer.innerHTML = renderUser(userData, profilePicture);
+}
+
+function decryptImage(encryptedImageBase64, userData) {
+  // Recreate the data URL for the image
+  return `data:${userData.mimeType};base64,${encryptedImageBase64}`;
 }
 
 fetchUserData();

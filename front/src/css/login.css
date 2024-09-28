@@ -6,7 +6,6 @@
 }
 
 body{
-    background-color:  var(--colors-body) !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -17,6 +16,8 @@ body{
     font-family:'Luminari' !important; /* ---------------------*/
     background: radial-gradient(circle at top left, rgb(213, 5, 255) 1%, transparent 30%),
     radial-gradient(circle at bottom left, rgb(15, 195, 231) 1%, transparent 30%);
+    font-family:'Luminari';
+    background-color: var(--colors-body);
 }
 
 .container {
