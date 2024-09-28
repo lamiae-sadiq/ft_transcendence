@@ -20,7 +20,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserProfile
-        fields = ['id', 'nickname', 'profile_picture', 'mimeType', 'email']
+        fields = ['id', 'nickname', 'profile_picture', 'mimeType', 'email', 'bio']
 
 
     # class UploadImageView(View):
@@ -37,33 +37,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
                 # Return the Base64 string as a response
                 return image_return
         return None
-
-    # def get_profile_picture(self, obj):
-    # # Convert the image to Base64 if it exists
-    #     if obj.profile_picture:
-    #         with open(f'/accounts{obj.profile_picture.path}', "rb") as image_file:
-    #             # Convert the image to Base64
-    #             # image_data = image_file.read()
-    #             # image_base64 = base64.b64encode(image_data).decode('utf-8')
-
-    #             # # Encrypt the Base64 string
-    #             # encrypted_image = cipher_suite.encrypt(image_base64.encode('utf-8'))
-                
-    #             # # Return the encrypted image as a string
-    #             # return encrypted_image.decode('utf-8')
-    #             image_data = image_file.read()
-                
-    #             # Key for XOR encryption (simple single-byte key, e.g., 123)
-    #             key = 123  # You can use any single-byte key value (0-255)
-                
-    #             # Encrypt the image using XOR
-    #             encrypted_data = xor_encrypt(image_data, key)
-                
-    #             # Convert encrypted data to Base64 for sending over the network
-    #             encrypted_base64 = base64.b64encode(encrypted_data).decode('utf-8')
-                
-    #             return encrypted_base64
-    #     return None
     
     
     def get_image_mime_type(self, obj):
@@ -130,12 +103,13 @@ class LoginSerializer(serializers.Serializer):
 class UpdateProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ['nickname', 'email', 'profile_picture']
+        fields = ['nickname', 'email', 'profile_picture', 'bio']
     
     def update(self, instance, validated_data):
-        instance.nickname = validated_data.get('nickname', instance.nickname)
-        instance.email = validated_data.get('email', instance.email)
-        instance.profile_picture = validated_data.get('profile_picture', instance.profile_picture)
+        instance.nickname           = validated_data.get('nickname', instance.nickname)
+        instance.email              = validated_data.get('email', instance.email)
+        instance.profile_picture    = validated_data.get('profile_picture', instance.profile_picture)
+        instance.bio                = validated_data.get('bio', instance.bio)
         instance.save()
         
         # Update the User's username to match the new nickname, if it changed
@@ -148,6 +122,9 @@ class UpdateProfileSerializer(serializers.ModelSerializer):
         if 'email' in validated_data and validated_data['email']:
             user.email = validated_data['email']
         
+        if 'bio' in validated_data and validated_data['bio']:
+            user.bio = validated_data['bio']
+
         user.save()  # Save the User model to apply the username and email changes
 
         return instance

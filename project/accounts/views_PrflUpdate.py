@@ -10,7 +10,7 @@ class UserProfileUpdateView(APIView):
 
 
     def get_object(self):
-        return self.request.user.userprofile
+        return self.request.user.user_profile
 
     def put(self, request):
         user_profile = self.get_object()

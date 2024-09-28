@@ -1,5 +1,7 @@
 export function initProfilPage() {
   let token = sessionStorage.getItem("jwtToken");
+  let isEditing = false;
+
   const achievementsContainer = document.getElementById(
     "achievementsContainer"
   );
@@ -279,7 +281,7 @@ export function initProfilPage() {
         // Decrypt the profile picture and update the user display
         let profilePicture = decryptImage(userData.profile_picture, userData);
         updateUserDisplay(userData, profilePicture);
-        document.getElementById("profileName").textContent = userData.name;
+        document.getElementById("profileName").textContent = userData.nickname;
         document.getElementById("profileBio").textContent = userData.bio;
         document.getElementById("profileImage").src = profilePicture;
       } else {
@@ -324,9 +326,8 @@ export function initProfilPage() {
     // Recreate the data URL for the image
     return `data:${userData.mimeType};base64,${encryptedImageBase64}`;
   }
-
+  
   fetchUserData();
-
   // Edit profile logic
   document
     .getElementById("editProfileBtn")
@@ -352,13 +353,13 @@ export function initProfilPage() {
         const updatedName = document.getElementById("profileName").textContent;
         const updatedBio = document.getElementById("profileBio").textContent;
 
-        fetch("http://0.0.0.0:8000/profil/update", {
-          method: "POST",
+        fetch("http://0.0.0.0:8000/profile/update/", {
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ name: updatedName, bio: updatedBio }),
+          body: JSON.stringify({ nickname: updatedName, bio: updatedBio }),
         })
           .then((response) => response.json())
           .then((data) => {
@@ -400,8 +401,8 @@ export function initProfilPage() {
 
           const formData = new FormData();
           formData.append("profileImage", base64Data);
-          fetch("http://0.0.0.0:8000/profil/update", {
-            method: "POST",
+          fetch("http://0.0.0.0:8000/profile/update/", {
+            method: "PUT",
             headers: {
               Authorization: `Bearer ${token}`,
             },

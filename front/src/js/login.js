@@ -60,7 +60,7 @@ export function initLoginPage() {
           method: "POST",
           body: formDataToJson(formData),
         });
-        console.log("Response : ", rewind);
+        // console.log("Response : ", rewind);
         if (response.ok) {
           // let rewind = await response.json();
           navigateTo("login"); // to be changed later on

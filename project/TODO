@@ -1,12 +1,4 @@
 -add the bio in the database
--encrypted picture and put them in a string in database
-
-
-
-
-
-
-
 
 
 
@@ -15,5 +7,6 @@
 
            {DONE}
 
+-encrypted picture and put them in a string in database
 -script to run the containers
 -endpoint to return the user info 
