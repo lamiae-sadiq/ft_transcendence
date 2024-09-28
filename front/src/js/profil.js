@@ -342,12 +342,7 @@ export function initProfilPage() {
           .getElementById("profileBio")
           .setAttribute("contenteditable", "true");
         document.getElementById("profileImage").style.cursor = "pointer";
-        document
-          .getElementById("profileImage")
-          .classList.add("highlight");
-        // document.getElementById('profileImage').classList.add('highlight');
-        document.getElementById("profileName").classList.add("highlight");
-        document.getElementById("profileBio").classList.add("highlight");
+        document.getElementById("profileImage").classList.add("editable");
         document.getElementById("editImageIcon").style.display = "block";
         this.innerHTML = '<i class="fas fa-save me-2"></i>Save Profile';
 
@@ -378,11 +373,7 @@ export function initProfilPage() {
           .getElementById("profileBio")
           .setAttribute("contenteditable", "false");
         document.getElementById("profileImage").style.cursor = "not-allowed";
-        document
-          .getElementById("profileImage")
-          .classList.remove("highlight");
-        document.getElementById("profileName").classList.remove("highlight");
-        document.getElementById("profileBio").classList.remove("highlight");
+        document.getElementById("profileImage").classList.remove("editable");
         document.getElementById("editImageIcon").style.display = "none";
         this.innerHTML = '<i class="fas fa-pencil-alt me-2"></i>Edit Profile';
       }
@@ -390,29 +381,30 @@ export function initProfilPage() {
 
   // Image upload logic
   document
-    .getElementById("editImageIcon")
+    .getElementById("profileImage")
     .addEventListener("click", function () {
-      document.getElementById("fileInput").click();
+      if (isEditing) {
+        document.getElementById("fileInput").click();
+      }
     });
 
   document
     .getElementById("fileInput")
     .addEventListener("change", function (event) {
       const file = event.target.files[0];
-      const reader = new FileReader();
 
       if (file) {
+        const reader = new FileReader();
         reader.onload = function (event) {
-          const base64Data = event.target.result.split(",")[1];
-
-          const formData = new FormData();
-          formData.append("profileImage", base64Data);
-          fetch("http://0.0.0.0:8000/profile/update/", {
+          const base64Data = event.target.result;
+          // const formData = new FormData();
+          // formData.append("profileImage", base64Data);
+          fetch("http://0.0.0.0:8000/profile/update/picture", {
             method: "PUT",
             headers: {
               Authorization: `Bearer ${token}`,
             },
-            body: formData,
+            body: base64Data,
           })
             .then((response) => response.json())
             .then((userData) => {

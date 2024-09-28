@@ -45,12 +45,16 @@
                 <!-- Profile Section -->
                 <div class="profile-section p-4">
                   <div class="d-flex align-items-center mb-4 position-relative">
-                      <img src="" alt="Profile Picture" class="profile-picture me-3"
-                          id="profileImage" style="cursor: not-allowed;">
-                      <input type="file" id="fileInput" style="display:none;" accept="image/*">
-                      <div id="editImageIcon" class="edit-icon" style="display: none;">
-                          <i class="fas fa-camera"></i>
+                      <div class="position-relative">
+                          <img src="" alt="Profile Picture" class="profile-picture me-3" id="profileImage" style="cursor: not-allowed;">
+                          <input type="file" id="fileInput" style="display:none;" accept="image/*">
+          
+                          <!-- Camera icon for image edit -->
+                          <div id="editImageIcon" class="edit-icon">
+                              <i class="fas fa-camera"></i>
+                          </div>
                       </div>
+          
                       <div>
                           <h2 class="username mb-0" id="profileName"></h2>
                           <p class="last-played mb-0">Last played: 2 hours ago</p>

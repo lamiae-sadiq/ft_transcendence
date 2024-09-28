@@ -3,11 +3,19 @@ html {
   margin: 0;
   padding: 0;
   overflow: visible;
-  background: radial-gradient(circle at top left, rgb(213, 5, 255) 1%, transparent 30%),
-    radial-gradient(circle at bottom left, rgb(15, 195, 231) 1%, transparent 30%);
-    font-family:'Luminari';
-    background-color: var(--colors-body);
-  font-family: 'Luminari';
+  background: radial-gradient(
+      circle at top left,
+      rgb(213, 5, 255) 1%,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      rgb(15, 195, 231) 1%,
+      transparent 30%
+    );
+  font-family: "Luminari";
+  background-color: var(--colors-body);
+  font-family: "Luminari";
   min-height: 100vh;
   color: white !important;
 }
@@ -101,7 +109,6 @@ html {
 }
 
 @media (max-width: 991px) {
-
   .offcanvas-body,
   .offcanvas-header {
     background-color: var(--colors-body);
@@ -185,8 +192,8 @@ html {
 }
 
 .profile-picture {
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   object-fit: cover;
   cursor: not-allowed; /* Cursor style when not editing */
@@ -214,7 +221,7 @@ html {
 }
 
 .achievements-section {
-  background: linear-gradient(to right, #08D7F9, #2D75CD, #4044B6, #5A3EBB);
+  background: linear-gradient(to right, #08d7f9, #2d75cd, #4044b6, #5a3ebb);
   border-radius: 1%;
 }
 
@@ -254,7 +261,7 @@ html {
 } */
 
 .scoreboard-section {
-  background-color: #331D4C;
+  background-color: #331d4c;
   border-radius: 10px;
   padding: 20px;
 }
@@ -272,7 +279,7 @@ html {
 .level-pentagon {
   width: 80px;
   height: 80px;
-  background: linear-gradient(to bottom, #6D5DDD, #220C3F) !important;
+  background: linear-gradient(to bottom, #6d5ddd, #220c3f) !important;
   clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
   display: flex;
   justify-content: center;
@@ -304,7 +311,7 @@ html {
 }
 
 .friends-section {
-  background-color: #331D4C;
+  background-color: #331d4c;
   border-radius: 5%;
 }
 
@@ -382,8 +389,9 @@ html {
     position: relative !important;
   }
 
-  .container > .row::after{ /*4 hours looking for the answer :) .container > */
-    content: '';
+  .container > .row::after {
+    /*4 hours looking for the answer :) .container > */
+    content: "";
     position: absolute;
     height: 100%; /* Span the entire height of the row */
     top: 0;
@@ -391,7 +399,7 @@ html {
     width: 1px;
     background-color: white;
     z-index: 0;
-}
+  }
   .achievement-item {
     flex: 0 0 33.333333%;
     max-width: 33.333333%;
@@ -424,7 +432,8 @@ html {
   transform: translateY(-5px);
   background-color: #3a3a3a;
 }
-.player-icon, .enemy-icon {
+.player-icon,
+.enemy-icon {
   width: 50px;
   height: 50px;
   object-fit: cover;
@@ -442,7 +451,8 @@ html {
 .loser {
   color: #dc3545;
 }
-.player-name, .enemy-name {
+.player-name,
+.enemy-name {
   color: #fff;
   font-size: 1rem;
   margin: 0;
@@ -486,26 +496,27 @@ html {
 /*-------------------------------------------------------*/
 
 .edit-icon {
-  position: absolute; /* Absolute positioning */
-  right: 5px; /* Distance from the right */
-  bottom: 5px; /* Distance from the bottom */
-  border-radius: 50%; /* Circular background */
-  background-color: white; /* Background color for visibility */
-  cursor: pointer; /* Change cursor to pointer on hover */
-  padding: 6px; /* Padding around the icon */
-  color: var(--colors-cyan); /* Icon color */
-  font-size: 16px; /* Icon size */
-  display: none; /* Hidden by default */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  color: white;
+  display: none;
   z-index: 1;
 }
 
-#editProfileBtn {
-  background-color: var(--colors-cyan) !important;
-  color: wheat !important;
+/* Show the edit icon when hovering over the image in edit mode */
+.profile-picture.editable:hover + .edit-icon {
+  display: block;
 }
 
-.highlight {
-  border: 2px dashed var(--colors-pinky) !important; /* Dashed border to indicate editability */
-  background-color: #f0f8ff !important; /* Light background for visibility */
+ /* For editable name and bio, set hover cursor */
+ [contenteditable="true"] {
+  outline: 0;
+  /* border-bottom: 1px dashed var(--colors-cyan); */
+  cursor: text;
 }
