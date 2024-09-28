@@ -326,7 +326,7 @@ export function initProfilPage() {
     // Recreate the data URL for the image
     return `data:${userData.mimeType};base64,${encryptedImageBase64}`;
   }
-  
+
   fetchUserData();
   // Edit profile logic
   document
@@ -344,7 +344,10 @@ export function initProfilPage() {
         document.getElementById("profileImage").style.cursor = "pointer";
         document
           .getElementById("profileImage")
-          .classList.add("highlight-border");
+          .classList.add("highlight");
+        // document.getElementById('profileImage').classList.add('highlight');
+        document.getElementById("profileName").classList.add("highlight");
+        document.getElementById("profileBio").classList.add("highlight");
         document.getElementById("editImageIcon").style.display = "block";
         this.innerHTML = '<i class="fas fa-save me-2"></i>Save Profile';
 
@@ -377,7 +380,9 @@ export function initProfilPage() {
         document.getElementById("profileImage").style.cursor = "not-allowed";
         document
           .getElementById("profileImage")
-          .classList.remove("highlight-border");
+          .classList.remove("highlight");
+        document.getElementById("profileName").classList.remove("highlight");
+        document.getElementById("profileBio").classList.remove("highlight");
         document.getElementById("editImageIcon").style.display = "none";
         this.innerHTML = '<i class="fas fa-pencil-alt me-2"></i>Edit Profile';
       }
