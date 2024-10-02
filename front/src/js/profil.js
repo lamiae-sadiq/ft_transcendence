@@ -391,34 +391,27 @@ export function initProfilPage() {
   document
     .getElementById("fileInput")
     .addEventListener("change", function (event) {
+      e.preventDefault();
+      let formData = new FormData();
       const file = event.target.files[0];
 
       if (file) {
-        const reader = new FileReader();
-        reader.onload = function (event) {
-          const base64Data = event.target.result;
-          // const formData = new FormData();
-          // formData.append("profileImage", base64Data);
-          fetch("http://0.0.0.0:8000/profile/update/picture", {
-            method: "PUT",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-            body: base64Data,
+        formData.append("image", file);
+        fetch("http://0.0.0.0:8000/profile/update/picture/", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((userData) => {
+            document.getElementById("profilPicture").src =
+              userData.profile_picture;
+            document.getElementById("profileImage").src =
+              userData.profile_picture;
           })
-            .then((response) => response.json())
-            .then((userData) => {
-              let profilePicture = decryptImage(
-                userData.profile_picture,
-                userData
-              );
-              document.getElementById("profilPicture").src = profilePicture;
-              document.getElementById("profileImage").src = profilePicture;
-            })
-            .catch((error) => console.error("Error uploading image:", error));
-        };
-        // Start reading the file as a Data URL
-        reader.readAsDataURL(file);
+          .catch((error) => console.error("Error uploading image:", error));
       }
     });
 }
