@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import UserProfile
 import base64
+from project import settings
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
@@ -17,11 +18,15 @@ class UserProfileSerializer(serializers.ModelSerializer):
     def get_profile_picture(self, obj):
 
         if obj.profile_picture:
-            with open(f'/accounts{obj.profile_picture.path}', "rb") as image_file:
-                image_data = image_file.read()
-                # Convert the image to Base64
-                image_base64 = base64.b64encode(image_data).decode('utf-8')
-                return image_base64
+            try:
+                with open(f'/accounts{obj.profile_picture.path}', "rb") as image_file:
+                    image_data = image_file.read()
+                    # Convert the image to Base64
+                    image_base64 = base64.b64encode(image_data).decode('utf-8')
+                    return image_base64
+            except:
+                return f"{settings.MEDIA_URL}{obj.profile_picture.name}"
+
         return None
 
 

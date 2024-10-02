@@ -1,10 +1,10 @@
 from django.urls import path
-from .viewsUserInfo import ProtectedView
+from .views_signin import LoginView
 from .views_auth import oauth_callback
 from .views_signup import RegisterView
-from .views_signin import LoginView
-from .views_PrflUpdate import UserProfileUpdateView
+from .viewsUserInfo import ProtectedView
 from .views_changePass import ChangePasswordView
+from .views_PrflUpdate import UserProfileUpdateView, ChangeProfilePictureAPIView
 # from .views_changePass import ChangePasswordView
 # from .views_login import loginPage
 
@@ -15,9 +15,7 @@ urlpatterns = [
     path('signup/',RegisterView.as_view(),),
     path('signin/',LoginView.as_view(),),
     path('profile/update/',UserProfileUpdateView.as_view()),
-    path('profile/changepassword/',ChangePasswordView.as_view()),
-    # path('userinfo/',UserInfo),
+    path('profile/update/changepassword/',ChangePasswordView.as_view()),
+    path('profile/update/profile_picture/',ChangeProfilePictureAPIView.as_view(),),
     
-    # this is the old one
-    # path('changePassword/<int:pk>', ChangePasswordView.as_view(),)
 ]

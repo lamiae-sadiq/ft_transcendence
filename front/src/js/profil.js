@@ -397,14 +397,14 @@ export function initProfilPage() {
         const reader = new FileReader();
         reader.onload = function (event) {
           const base64Data = event.target.result;
-          // const formData = new FormData();
-          // formData.append("profileImage", base64Data);
-          fetch("http://0.0.0.0:8000/profile/update/picture", {
+          const formData = new FormData();
+          formData.append("profileImage", base64Data);
+          fetch("http://0.0.0.0:8000/profile/update/", {
             method: "PUT",
             headers: {
               Authorization: `Bearer ${token}`,
             },
-            body: base64Data,
+            body: formData,
           })
             .then((response) => response.json())
             .then((userData) => {
