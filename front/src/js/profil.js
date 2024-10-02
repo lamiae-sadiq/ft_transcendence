@@ -391,12 +391,12 @@ export function initProfilPage() {
   document
     .getElementById("fileInput")
     .addEventListener("change", function (event) {
-      e.preventDefault();
+      event.preventDefault();
       let formData = new FormData();
       const file = event.target.files[0];
 
       if (file) {
-        formData.append("image", file);
+        formData.append("profile_picture", file);
         fetch("http://0.0.0.0:8000/profile/update/picture/", {
           method: "POST",
           headers: {
@@ -406,9 +406,9 @@ export function initProfilPage() {
         })
           .then((response) => response.json())
           .then((userData) => {
-            document.getElementById("profilPicture").src =
+            document.getElementById("profilPicture").src = "http://0.0.0.0:8000" +
               userData.profile_picture;
-            document.getElementById("profileImage").src =
+            document.getElementById("profileImage").src = "http://0.0.0.0:8000" +
               userData.profile_picture;
           })
           .catch((error) => console.error("Error uploading image:", error));

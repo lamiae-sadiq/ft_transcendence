@@ -5,8 +5,7 @@ from .views_signup import RegisterView
 from .viewsUserInfo import ProtectedView
 from .views_changePass import ChangePasswordView
 from .views_PrflUpdate import UserProfileUpdateView, ChangeProfilePictureAPIView
-# from .views_changePass import ChangePasswordView
-# from .views_login import loginPage
+# from .views_smartContract import SmartContract
 
 
 urlpatterns = [
@@ -16,6 +15,6 @@ urlpatterns = [
     path('signin/',LoginView.as_view(),),
     path('profile/update/',UserProfileUpdateView.as_view()),
     path('profile/update/changepassword/',ChangePasswordView.as_view()),
-    path('profile/update/profile_picture/',ChangeProfilePictureAPIView.as_view(),),
-    
+    path('profile/update/picture/',ChangeProfilePictureAPIView.as_view(),),
+    # path('smartcontract/,' SmartContract) #add here what aybiouss need
 ]
