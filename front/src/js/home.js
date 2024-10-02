@@ -146,7 +146,7 @@ export function initHomePage() {
         let userData = await response.json();
         console.log(userData);
         // Decrypt the profile picture and update the user display
-        let profilePicture = decryptImage(userData.profile_picture, userData);
+        let profilePicture = "http://0.0.0.0:8000" + userData.profile_picture;
         console.log(profilePicture, userData);
         updateUserDisplay(userData, profilePicture);
       } else {

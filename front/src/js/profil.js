@@ -279,7 +279,7 @@ export function initProfilPage() {
         let userData = await response.json();
         console.log(userData);
         // Decrypt the profile picture and update the user display
-        let profilePicture = decryptImage(userData.profile_picture, userData);
+        let profilePicture = "http://0.0.0.0:8000" + userData.profile_picture;
         updateUserDisplay(userData, profilePicture);
         document.getElementById("profileName").textContent = userData.nickname;
         document.getElementById("profileBio").textContent = userData.bio;
@@ -383,6 +383,7 @@ export function initProfilPage() {
   document
     .getElementById("profileImage")
     .addEventListener("click", function () {
+      console.log("Image clicked");
       if (isEditing) {
         document.getElementById("fileInput").click();
       }
@@ -392,6 +393,7 @@ export function initProfilPage() {
     .getElementById("fileInput")
     .addEventListener("change", function (event) {
       event.preventDefault();
+      console.log("File input changed");
       let formData = new FormData();
       const file = event.target.files[0];
 
@@ -406,10 +408,9 @@ export function initProfilPage() {
         })
           .then((response) => response.json())
           .then((userData) => {
-            document.getElementById("profilPicture").src = "http://0.0.0.0:8000" +
-              userData.profile_picture;
-            document.getElementById("profileImage").src = "http://0.0.0.0:8000" +
-              userData.profile_picture;
+            const imageUrl = "http://0.0.0.0:8000" + userData.profile_picture;
+            document.getElementById("profilPicture").src = imageUrl;
+            document.getElementById("profileImage").src = imageUrl;
           })
           .catch((error) => console.error("Error uploading image:", error));
       }
