@@ -6,7 +6,6 @@ contract LocalTournament {
     uint8 MATCHPERTOURNAMENT = 3;
     // Structure to represent each match
     struct Match {
-        uint matchId;
         string player1; // name
         string player2; // name
         uint player1Score;
@@ -93,7 +92,6 @@ contract LocalTournament {
 
         // Create a new match
         Match memory newMatch = Match({
-            matchId: tournament.currentMatchCount,
             player1: _player1,
             player2: _player2,
             player1Score: _player1Score,
