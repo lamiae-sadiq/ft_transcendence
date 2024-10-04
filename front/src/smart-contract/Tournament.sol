@@ -2,7 +2,8 @@
 pragma solidity ^0.8.27;
 
 contract LocalTournament {
-    event tournamentCreated();
+    event tournamentCreated(uint tournamentId);
+    event matchRecorded();
     uint8 MATCHPERTOURNAMENT = 3;
     // Structure to represent each match
     struct Match {
@@ -39,12 +40,13 @@ contract LocalTournament {
     /**
      * @notice Creates a new tournament.
      */
-    function createTournament() public {
+    function createTournament() public returns (uint) {
         Tournament storage tournament = tournaments[tournamentCounter]; // SLOAD once
         tournament.tournamentId = tournamentCounter++;
         tournament.currentMatchCount = 0;
 
-        emit tournamentCreated();
+        emit tournamentCreated(tournament.tournamentId);
+        return tournament.tournamentId;
     }
 
     /**
@@ -100,10 +102,9 @@ contract LocalTournament {
         });
 
         // Add the match to the tournament
-        tournament.matches[
-            tournament.currentMatchCount
-        ] = newMatch;
+        tournament.matches[tournament.currentMatchCount] = newMatch;
         tournament.currentMatchCount++;
+        emit matchRecorded();
     }
 
     /**
@@ -113,12 +114,18 @@ contract LocalTournament {
      */
     function getTournamentMatches(
         uint _tournamentId
-    ) public view returns (Match[3] memory) {
+    ) public view returns (Match[] memory) {
         require(
             _tournamentId >= 0 && _tournamentId <= tournamentCounter,
             "Invalid tournament ID"
         );
-        return tournaments[_tournamentId].matches;
+        uint matchCount = tournaments[_tournamentId].currentMatchCount;
+        Tournament memory tournament = tournaments[_tournamentId];
+        Match[] memory matchesPlayed = new Match[](matchCount);
+        for (uint i = 0; i <= matchCount; i++) {
+            matchesPlayed[i] = tournament.matches[i];
+        }
+        return matchesPlayed;
     }
 
     /**
@@ -162,15 +169,11 @@ contract LocalTournament {
                 if (
                     playerHash ==
                     keccak256(
-                        abi.encodePacked(
-                            tournament.matches[cMatches].player1
-                        )
+                        abi.encodePacked(tournament.matches[cMatches].player1)
                     ) ||
                     playerHash ==
                     keccak256(
-                        abi.encodePacked(
-                            tournament.matches[cMatches].player2
-                        )
+                        abi.encodePacked(tournament.matches[cMatches].player2)
                     )
                 ) {
                     // Store the match in the array
