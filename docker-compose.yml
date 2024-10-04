@@ -26,8 +26,9 @@ services:
       - DB_PASSWORD=otitebah1234
       - DB_HOST=db
       - DB_PORT=5432
-    volumes:
-      - ./media:/app/media  # Mount the media directory
+    # volumes:
+    #   - ./accounts/media:/app/media  # This maps the local media directory to the container
+ # Mount the media directory
     networks:
       - my-net
 

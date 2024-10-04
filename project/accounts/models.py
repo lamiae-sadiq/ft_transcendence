@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from .views import profilePics
 import random
+import os
 
 # Create your models here.
 
