@@ -5,10 +5,6 @@ from .views import (create_tournament, record_match,
                     get_tournament_matches)
 
 
-
-
-
-
 urlpatterns = [
     path('create-tournament/', create_tournament, name='create_tournament'),
     path('record-match/', record_match, name='record_match'),
