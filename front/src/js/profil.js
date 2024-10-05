@@ -279,7 +279,8 @@ export function initProfilPage() {
         let userData = await response.json();
         console.log(userData);
         // Decrypt the profile picture and update the user display
-        let profilePicture = "http://0.0.0.0:8000" + userData.profile_picture;
+        let profilePicture = "http://0.0.0.0:8000/" + userData.profile_picture;
+        console.log(profilePicture);
         updateUserDisplay(userData, profilePicture);
         document.getElementById("profileName").textContent = userData.nickname;
         document.getElementById("profileBio").textContent = userData.bio;
@@ -408,7 +409,7 @@ export function initProfilPage() {
         })
           .then((response) => response.json())
           .then((userData) => {
-            const imageUrl = "http://0.0.0.0:8000" + userData.profile_picture;
+            const imageUrl = "http://0.0.0.0:8000/" + userData.profile_picture;
             document.getElementById("profilPicture").src = imageUrl;
             document.getElementById("profileImage").src = imageUrl;
           })
