@@ -70,14 +70,13 @@ export function initLoginPage() {
       }
     });
 
-  // This script runs when the page loads
   window.onload = async function () {
     // Get the query parameters from the URL
     const urlParams = new URLSearchParams(window.location.search);
 
     // Example: Extract a query parameter called 'code'
     const authCode = urlParams.get("code");
-
+    console.log(authCode);
     if (authCode) {
       console.log("Authorization Code:", authCode);
       try {
@@ -88,9 +87,9 @@ export function initLoginPage() {
           console.log("Authentication initiated successfully");
           console.log(response);
           let rewind = await response.json();
-          const token = rewind.access; // Replace with actual token retrieval
+          const token = rewind.access;
           sessionStorage.setItem("jwtToken", token);
-          navigateTo("home"); // to be changed later on
+          navigateTo("home");
         } else {
           console.error("Failed to initiate 42 authentication");
         }

@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 export function navigateTo(page) {
   // location.hash = page;
   // Clean up the current page before loading the new one
-  history.pushState({ page }, '', `#${page}`);
+  history.pushState({ page }, '', `${page}`);
   loadPage(page);
 }
 
@@ -153,3 +153,36 @@ window.addEventListener('hashchange', () => {
   const page = window.location.hash.slice(1) || 'landing';
   loadPage(page);
 });
+
+window.onload = async function () {
+  // Get the query parameters from the URL
+  const urlParams = new URLSearchParams(window.location.search);
+
+  // Example: Extract a query parameter called 'code'
+  const authCode = urlParams.get("code");
+  console.log(authCode);
+  if (authCode) {
+    console.log("Authorization Code landing :", authCode);
+    // ?code=" + authCode
+    try {
+      const response = await fetch(
+        "http://0.0.0.0:8000/oauthcallback/" + "?code=" + authCode
+      );
+      if (response.ok) {
+        console.log("Authentication initiated successfully");
+        console.log(response);
+        let rewind = await response.json();
+        const token = rewind.access;
+        sessionStorage.setItem("jwtToken", token);
+        navigateTo("home");
+      } else {
+        console.error("Failed to initiate 42 authentication");
+      }
+    } catch (error) {
+      console.error("Login with 42 failed:", error);
+    }
+  } else {
+    // Handle the absence of the authorization code
+    console.log("No authorization code found.");
+  }
+};
