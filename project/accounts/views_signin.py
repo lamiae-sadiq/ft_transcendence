@@ -25,4 +25,6 @@ class LoginView(APIView):
                 'access': str(refresh.access_token),
             })
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({
+            'message': 'incorrect login or password, please try again.'
+        }, status=status.HTTP_400_BAD_REQUEST)
