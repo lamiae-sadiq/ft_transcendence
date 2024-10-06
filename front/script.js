@@ -1,55 +1,162 @@
-// /*------------------------------------- NEW CODE ADDED -------------- */
-async function fetchUserData() {
-  let token = sessionStorage.getItem('accessToken');
-  try {
-    let response = await fetch("http://0.0.0.0:8000/userinfo/", {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
+document.addEventListener("DOMContentLoaded", function () {
+  const passwordInput = document.getElementsByClassName("passwordInput");
+  const passwordToggleBtn =
+    document.getElementsByClassName("passwordToggleBtn");
+  const passwordSimilar1 = document.getElementById("passW1");
+  const passwordSimilar2 = document.getElementById("passW2");
+
+  // shifting
+  const container = document.getElementById("container");
+  const registerBtn = document.getElementById("register");
+  const loginBtn = document.getElementById("login");
+
+  registerBtn.addEventListener("click", () => {
+    container.classList.add("active");
+  });
+
+  loginBtn.addEventListener("click", () => {
+    container.classList.remove("active");
+  });
+
+  // Add event listener to toggle button
+  for (let i = 0; i < passwordToggleBtn.length; i++) {
+    passwordToggleBtn[i].addEventListener("click", function () {
+      console.log("Toggle button clicked");
+      // Toggle password visibility
+      if (passwordInput[i].type === "password") {
+        passwordInput[i].type = "text";
+        passwordToggleBtn[i].innerHTML =
+          '<i class="bi bi-eye" style="color: black;"></i>';
+      } else {
+        passwordInput[i].type = "password";
+        passwordToggleBtn[i].innerHTML =
+          '<i class="bi bi-eye-slash" style="color: black;"></i>';
+      }
     });
-    if (response.ok) {
-      let userData = await response.json();
-      updateUserDisplay(userData);
-    } else {
-      console.error('Failed to fetch user data:', response.statusText); // Error handling
-    }
-  } catch (err) {
-    console.error('Error fetching user data:', err);
   }
-}
 
-function renderUser(userData) {
-  return `
-    <button class="user btn p-2">
-      <div class="d-flex align-items-center gap-5">
-        <!-- Profile Image -->
-        <div class="users-container">
-          <img src="./src/assets/home/border.png" alt="" class="users-border">
-          <img src="${userData.img}" alt="Profile Image" class="rounded-circle users">
-          <p class="level">${userData.level}</p>
-        </div>
-        
-        <!-- User Name -->
-        <div class="UserProfile">
-          <a href="#profil" class="text-white text-decoration-none"><strong>${userData.name}</strong></a>
-        </div>
-        
-        <!-- Notification Icon -->
-        <div class="Notifications">
-          <i class="bi bi-bell-fill text-white"></i>
-        </div>
-      </div>
-    </button>
-  `;
-}
+  document
+    .getElementById("signUpForm")
+    .addEventListener("submit", async function (event) {
+      event.preventDefault(); // Prevent the default signUp submission
+      if (passwordSimilar1.value != passwordSimilar2.value) {
+        alert("Password does not meet the requirements.");
+        return; // Stop further execution
+      }
+      const formData = new FormData(this);
+      console.log(formData.get("nickname"));
+      console.log(formData.get("password"));
+      console.log(formData.get("email"));
+      console.log(formData);
+      try {
+        let response = await fetch("http://0.0.0.0:8000/signup/", {
+          // Specify the server endpoint directly
+          headers: {
+            "Content-Type": "application/json", // Ensure the content type is set to JSON
+            Accept: "application/json", // Optionally, specify the format you want the response in
+          },
+          method: "POST",
+          body: formDataToJson(formData),
+        });
+        // console.log("Response : ", rewind);
+        if (response.ok) {
+          // let rewind = await response.json();
+          navigateTo("login"); // to be changed later on
+        }
+      } catch (error) {
+        console.error("Error : ", error);
+      }
+    });
 
-function updateUserDisplay(userData) {
-  let userContainer = document.getElementById("user-container");
-  userContainer.innerHTML = renderUser(userData);
-}
+  window.onload = async function () {
+    // Get the query parameters from the URL
+    const urlParams = new URLSearchParams(window.location.search);
 
-fetchUserData();
+    // Example: Extract a query parameter called 'code'
+    const authCode = urlParams.get("code");
+    console.log(authCode);
+    if (authCode) {
+      console.log("Authorization Code:", authCode);
+      try {
+        const response = await fetch(
+          "http://0.0.0.0:8000/oauthcallback?code=" + authCode
+        );
+        if (response.ok) {
+          console.log("Authentication initiated successfully");
+          console.log(response);
+          let rewind = await response.json();
+          const token = rewind.access;
+          sessionStorage.setItem("jwtToken", token);
+          navigateTo("home");
+        } else {
+          console.error("Failed to initiate 42 authentication");
+        }
+      } catch (error) {
+        console.error("Login with 42 failed:", error);
+      }
+    } else {
+      // Handle the absence of the authorization code
+      console.log("No authorization code found.");
+    }
+  };
 
+  document
+    .getElementById("loginForm")
+    .addEventListener("submit", async function (event) {
+      event.preventDefault(); // Prevent the default signUp submission
+      const formData = new FormData(this);
+      console.log(formData.get("nickname"));
+      console.log(formData.get("password"));
+      // console.log(formData.get('email'));
+      console.log(formData);
+      try {
+        let response = await fetch("http://0.0.0.0:8000/signin/", {
+          // Specify the server endpoint directly
+          headers: {
+            "Content-Type": "application/json", // Ensure the content type is set to JSON
+            Accept: "application/json", // Optionally, specify the format you want the response in
+          },
+          method: "POST",
+          body: formDataToJson(formData),
+        });
+        if (response.ok) {
+          let rewind = await response.json();
+          console.log("Response : ", rewind, "||", response);
+          const token = rewind.access;
+          sessionStorage.setItem("jwtToken", token);
+          navigateTo("home");
+        }
+      } catch (error) {
+        console.error("Error : ", error);
+      }
+    });
 
+  function formDataToJson(formData) {
+    const obj = {};
+    formData.forEach((value, key) => {
+      obj[key] = value;
+    });
+    return JSON.stringify(obj);
+  }
+
+  const signInForm = document.querySelector(".sign-in");
+  const signUpForm = document.querySelector(".sign-up");
+  const toSignupButton = document.getElementById("to-signup");
+  const toSigninButton = document.getElementById("to-signin");
+
+  // Hide the sign-up form initially
+  signUpForm.style.display = "none";
+
+  // Toggle to show sign-up form
+  toSignupButton.addEventListener("click", () => {
+      signInForm.style.display = "none";
+      signUpForm.style.display = "block";
+  });
+
+  // Toggle to show sign-in form
+  toSigninButton.addEventListener("click", () => {
+      signInForm.style.display = "block";
+      signUpForm.style.display = "none";
+  });
+
+});

@@ -1,182 +1,293 @@
-body {
-  background-color: #f8f9fa;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
+*{
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+body{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-direction: column !important;
+  height: 100vh !important;
+  min-width: 60vw !important;
+  overflow: hidden !important;
+  background: radial-gradient(circle at top left, rgb(213, 5, 255) 1%, transparent 30%),
+  radial-gradient(circle at bottom left, rgb(15, 195, 231) 1%, transparent 30%);
+  background-color: var(--colors-body);
 }
 
 .container {
-  max-height: 100vh;
+  background-color: #ffffff !important;
+  border-radius: 30px !important;
+  box-shadow: 0 5px 15px #5c8795 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  width: 90% !important;
+  max-width: 768px !important;
+  min-height: 480px !important;
+  /* display: flex;
+    justify-content: space-between;
+    position: relative; */
 }
 
-.left-container, .right-container {
-  background-color: transparent;
-  height: 100%;
+.container p{
+  font-size: 14px !important;
+  line-height: 20px !important;
+  letter-spacing: 0.3px !important;
+  margin: 20px 0 !important;
 }
 
-.profile-picture {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
+.container span{
+  font-size: 12px !important;
 }
 
-.username {
-  font-size: 1.8em;
+.container a{
+  color: var(--colors-input) !important;
+  font-size: 13px !important;
+  text-decoration: none !important;
+  margin: 15px 0 10px !important;
 }
 
-.last-played {
-  color: #6c757d;
-  font-size: 0.9em;
+.container .styled{
+  background-color: var(--colors-cyan) !important;
+  color: #fff !important;
+  font-size: 12px !important;
+  padding: 10px 45px !important;
+  border: 1px solid transparent !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  margin-top: 10px !important;
+  cursor: pointer !important;
 }
 
-.about-me {
-  font-size: 1.2em;
-  margin-bottom: 0;
+.container button.hidden{
+  background-color: var(--colors-cyan) !important;
 }
 
-.section-title {
-  border-bottom: 2px solid #007bff;
-  padding-bottom: 10px;
-  margin-bottom: 15px;
+.container form{
+  background-color: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-direction: column !important;
+  padding: 0 40px !important;
+  height: 100% !important;
+  color: #000000 !important;
 }
 
-.achievements-section, .friends-section {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
+.container .input-box {
+  background-color: var(--colors-input) !important;
+  border: 1px solid #5c8795 !important;
+  margin: 8px 0 !important;
+  padding: 10px 15px !important;
+  font-size: 13px !important;
+  border-radius: 8px !important;
+  width: 100% !important;
+  outline: none !important;
 }
 
-.achievements-container, .friends-container {
-  flex-grow: 1;
-  overflow-y: auto;
-  padding-right: 10px;
+/* ------------------------------------------------------- */
+.input-container {
+  position: relative !important; /* Container is positioned relative */
+  width: 100% !important; /* Adjust as needed */
 }
 
-.achievement-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+.input-box {
+  position: relative;
 }
 
-.achievement-icon {
-  width: 50px;
-  height: 50px;
-  margin-right: 10px;
+.input-box input {
+  background-color: var(--colors-input) !important;
+  border: none !important;
+  font-size: 13px !important;
+  width: 100% !important;
+  outline: none !important;
+  color: white; 
 }
 
-.scoreboard-section {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  padding: 20px;
+.passwordInput {
+  width: calc(100% - 40px) !important; /* Adjust width to make space for the button */
+  padding-right: 40px !important; /* Space for the button inside the input field */
+  box-sizing: border-box !important; /* Include padding and border in width */
 }
 
-.stat {
-  font-size: 2em;
-  font-weight: bold;
-  color: #007bff;
+.passwordToggleBtn {
+  position: absolute !important; /* Absolute positioning within the container */
+  right: 20px !important; /* Adjust distance from the right edge */
+  transform: translateY(0%) !important; /* Center vertically */
+  cursor: pointer !important; /* Pointer cursor */
+  border: none !important; /* Remove default border */
+  padding: 0 !important; /* Remove padding */
+  background: none !important; /* Remove background color */
+  color: white !important;
 }
 
-.level-pentagon {
-  width: 80px;
-  height: 80px;
-  background-color: #007bff;
-  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
+/* ------------------------------------------------------- */
+
+.form-container{
+  position: absolute !important;
+  top: 0 !important;
+  height: 100% !important;
+  transition: all 0.6s ease-in-out !important;
 }
 
-.level-number {
-  color: white;
-  font-size: 1.8em;
-  font-weight: bold;
+.sign-in{
+  left: 0 !important;
+  width: 50% !important;
+  z-index: 2 !important;
 }
 
-.level-label {
-  display: inline-block;
-  padding: 2px 8px;
-  border: 1px solid #007bff;
-  border-radius: 12px;
-  font-size: 0.9em;
-  color: #007bff;
+.container.active .sign-in{
+  transform: translateX(100%) !important;
 }
 
-.friend-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+.sign-up{
+  left: 0 !important;
+  width: 50% !important;
+  opacity: 0 !important;
+  z-index: 1 !important;
 }
 
-.friend-picture {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 10px;
+.container.active .sign-up{
+  transform: translateX(100%) !important;
+  opacity: 1 !important;
+  z-index: 5 !important;
+  animation: move 0.6s !important;
 }
 
-.friend-name {
-  margin-bottom: 0;
+@keyframes move{
+  0%, 49.99%{
+      opacity: 0 !important;
+      z-index: 1 !important;
+  }
+  50%, 100%{
+      opacity: 1 !important;
+      z-index: 5 !important;
+  }
 }
 
-.friend-status {
-  font-size: 0.8em;
-  display: flex;
-  align-items: center;
+.social-icons{
+  margin: 20px 0 !important;
 }
 
-.status-indicator {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  margin-right: 5px;
+.social-icons a {
+  border: 1px solid #5c8795 !important;
+  border-radius: 50% !important;
+  display: inline-block !important;
+  margin: 0 5px !important;
+  width: 30px !important;
+  height: 30px !important;
+  vertical-align: middle !important;
+  text-align: center !important;
+  line-height: 30px !important;
 }
 
-.online .status-indicator {
-  background-color: #28a745;
+.toggle-container{
+  position: absolute !important;
+  top: 0 !important;
+  left: 50% !important;
+  width: 50% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  transition: all 0.6s ease-in-out !important;
+  border-radius: 20px !important;
+  z-index: 1000 !important;
 }
 
-.offline .status-indicator {
-  background-color: #dc3545;
+.container.active .toggle-container{
+  transform: translateX(-100%) !important;
+  border-radius: 20px !important;
 }
 
-/* Custom scrollbar for achievements and friends list */
-.achievements-container::-webkit-scrollbar,
-.friends-container::-webkit-scrollbar {
-  width: 8px;
+.toggle{
+  background: linear-gradient(
+      180deg,
+      rgba(255,255,255,0.15) 0%,
+      rgba(155, 126, 178, 0.3) 25%,
+      rgba(131, 144, 204, 0.3) 50%,
+      rgba(164, 181, 255, 0.3) 100%) !important;
+  height: 100% !important;
+  color: var(--colors-input) !important;
+  position: relative !important;
+  left: -100% !important;
+  height: 100% !important;
+  width: 200% !important;
+  transform: translateX(0) !important;
+  transition: all 0.6s ease-in-out !important;
 }
 
-.achievements-container::-webkit-scrollbar-track,
-.friends-container::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
+.container.active .toggle{
+  transform: translateX(50%) !important;
 }
 
-.achievements-container::-webkit-scrollbar-thumb,
-.friends-container::-webkit-scrollbar-thumb {
-  background: #00ffff;
-  border-radius: 10px;
+.toggle-panel{
+  position: absolute !important;
+  width: 50% !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-direction: column !important;
+  padding: 0 30px !important;
+  text-align: center !important;
+  top: 0 !important;
+  transform: translateX(0) !important;
+  transition: all 0.6s ease-in-out !important;
 }
 
-.achievements-container::-webkit-scrollbar-thumb:hover,
-.friends-container::-webkit-scrollbar-thumb:hover {
-  background: #00cccc;
+.toggle-left{
+  transform: translateX(-200%) !important;
 }
 
-@media (min-width: 992px) {
-  .row {
-      position: relative;
+.container.active .toggle-left{
+  transform: translateX(0) !important;
+}
+
+.toggle-right{
+  right: 0 !important;
+  transform: translateX(0) !important;
+}
+
+/* Add this to your existing CSS file */
+@media (max-width: 576px) {
+  #container {
+      padding: 20px;
   }
 
-  .row::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      width: 1px;
-      background-color: white;
+  .form-container {
+      width: 100%; /* Full width on small screens */
+      box-shadow: none; /* Optional: remove box shadow for simpler design */
   }
+}
+
+/* Hide the toggle container on small screens */
+@media (max-width: 768px) {
+  .toggle-container {
+      display: none;
+  }
+
+  /* Center the form */
+  .form-container {
+      width: 100%;
+      margin: auto;
+      max-width: 400px; /* You can adjust this */
+  }
+
+  /* Show the form-toggle buttons */
+  .toggle-button {
+      display: block;
+  }
+}
+
+
+.container .styled:hover {
+  background-color: darken(var(--colors-cyan), 10%); /* Use a darker shade on hover */
+}
+
+.toggle-button {
+  color: black;
+  z-index: 200;
 }
