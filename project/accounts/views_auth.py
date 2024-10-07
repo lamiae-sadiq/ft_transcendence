@@ -42,6 +42,7 @@ def tokenFunc(code):
 def oauth_callback(request):
     print("*************************")
     code = request.GET.get('code')
+    print(code)
     #Token Part
     token_json = tokenFunc(code)
     access_token = token_json.get('access_token')
@@ -58,6 +59,7 @@ def oauth_callback(request):
         'login' : login,
         'token' : access_token
     }
+    print("*****USER INFORMATION!!!!!!!!")
     #user creation
       # Create or get the user
     user, created = User.objects.get_or_create(

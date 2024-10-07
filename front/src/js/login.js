@@ -70,13 +70,14 @@ export function initLoginPage() {
       }
     });
 
+  // This script runs when the page loads
   window.onload = async function () {
     // Get the query parameters from the URL
     const urlParams = new URLSearchParams(window.location.search);
 
     // Example: Extract a query parameter called 'code'
     const authCode = urlParams.get("code");
-    console.log(authCode);
+
     if (authCode) {
       console.log("Authorization Code:", authCode);
       try {
@@ -87,9 +88,9 @@ export function initLoginPage() {
           console.log("Authentication initiated successfully");
           console.log(response);
           let rewind = await response.json();
-          const token = rewind.access;
+          const token = rewind.access; // Replace with actual token retrieval
           sessionStorage.setItem("jwtToken", token);
-          navigateTo("home");
+          navigateTo("home"); // to be changed later on
         } else {
           console.error("Failed to initiate 42 authentication");
         }
@@ -140,4 +141,38 @@ export function initLoginPage() {
     });
     return JSON.stringify(obj);
   }
+
+  const signInForm = document.querySelector(".sign-in");
+  const signUpForm = document.querySelector(".sign-up");
+  const toSignupButton = document.getElementById("to-signup");
+  const toSigninButton = document.getElementById("to-signin");
+
+  // signUpForm.style.display = "none";
+
+  toSignupButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    signUpForm.style.display = "block";
+    signInForm.style.display = "none";
+  });
+
+  // Toggle to show sign-in form
+  toSigninButton.addEventListener("click", (e) => {
+    e.preventDefault();
+      signInForm.style.display = "block";
+      signUpForm.style.display = "none";
+  });
+
+// Function to check window width and remove class
+function checkWindowSize() {  
+  if (window.innerWidth < 768) {
+    container.classList.remove("active");
+  } else {
+    signInForm.style.display = "block";
+    signUpForm.style.display = "block";
+  }
+}
+
+window.addEventListener("resize", checkWindowSize);
+
+checkWindowSize();
 }

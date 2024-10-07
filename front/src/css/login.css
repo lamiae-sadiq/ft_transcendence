@@ -2,7 +2,6 @@
     margin: 0 !important;
     padding: 0 !important;
     box-sizing: border-box !important;
-    font: 'Luminari, fantasy' !important;
 }
 
 body{
@@ -13,10 +12,8 @@ body{
     height: 100vh !important;
     min-width: 60vw !important;
     overflow: hidden !important;
-    font-family:'Luminari' !important; /* ---------------------*/
     background: radial-gradient(circle at top left, rgb(213, 5, 255) 1%, transparent 30%),
     radial-gradient(circle at bottom left, rgb(15, 195, 231) 1%, transparent 30%);
-    font-family:'Luminari';
     background-color: var(--colors-body);
 }
 
@@ -26,8 +23,10 @@ body{
     box-shadow: 0 5px 15px #5c8795 !important;
     position: relative !important;
     overflow: hidden !important;
-    width: 768px !important;
+    width: 768px !important; 
     max-width: 100% !important;
+    /* width: 90% !important;
+    max-width: 768px !important; */
     min-height: 480px !important;
 }
 
@@ -147,7 +146,7 @@ body{
 .sign-up{
     left: 0 !important;
     width: 50% !important;
-    opacity: 0 !important;
+    /* opacity: 0 !important; -------------------------- */
     z-index: 1 !important;
 }
 
@@ -250,3 +249,39 @@ body{
     right: 0 !important;
     transform: translateX(0) !important;
 }
+
+.centering {
+    /* width: 100%; */
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    display: none;
+  }
+  
+  .centering p {
+    display: flex;
+    align-items: center; /* Aligns the text and button vertically */
+  }
+  
+  .centering button {
+    margin-left: 50px; /* Adds space between the text and button */
+    text-decoration: none;
+    border: none;
+    background-color: white;
+    color: var(--colors-cyan);
+  }
+  
+  
+  @media (max-width: 768px) {
+    .toggle-container {
+      display: none;
+    }
+  
+    .form-container {
+      min-width: 100%;
+    }
+  
+    .centering {
+      display: block;
+    }
+  }
