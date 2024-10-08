@@ -18,9 +18,9 @@ CHAIN_ID = 11155111
 
 # Load ABI and bytecode
 def load_contract_data():
-    with open('/SmartContract/SM/abi.json', 'r') as abifile:
+    with open('/app/SmartContract/SM/abi.json', 'r') as abifile:
         abi_data = json.load(abifile)
-    with open('/SmartContract/SM/bytecode.json', 'r') as bytefile:
+    with open('/app/SmartContract/SM/bytecode.json', 'r') as bytefile:
         bytecode_data = json.load(bytefile)
     return abi_data["abi"], bytecode_data["byteCode"]
 
