@@ -26,6 +26,8 @@ services:
       - DB_PASSWORD=otitebah1234
       - DB_HOST=db
       - DB_PORT=5432
+      - private_key=08fdb79d0797a2f3be23e65c04b7ea373873132a8b0c1952298ebd103dafa656
+      #private_key khass ikoun f .env
     # volumes:
     #   - ./media:/app/media  # Mount the media directory
     networks:
