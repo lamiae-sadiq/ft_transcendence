@@ -14,7 +14,7 @@ class UserProfile(models.Model):
     mimeType                = models.CharField(max_length=50, default="image/jpg")
     email                   = models.EmailField(max_length=255, blank=True, null=True)
     bio                     = models.CharField(max_length=100, blank=True)
-    friends                 = models.ManyToManyField(User, blank=True, related_name='friends')
+    friends                 = models.ManyToManyField(User, blank=True, related_name='user_friends')
 
     def __str__(self):
         return self.nickname
