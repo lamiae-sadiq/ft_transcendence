@@ -4,30 +4,46 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import UserProfile
 from project import settings
+from friendship.serializers import FriendRequestSerializer
 
 
 
-
-class UserProfileSerializer(serializers.ModelSerializer):
+# Friend Serializer
+class FriendSerializer(serializers.ModelSerializer):
+    id              = serializers.SerializerMethodField()
+    nickname        = serializers.SerializerMethodField()
     profile_picture = serializers.SerializerMethodField()
 
     class Meta:
-        model = UserProfile
-        fields = ['id', 'nickname', 'profile_picture', 'mimeType', 'email', 'bio']
+        model = UserProfile  # Keep it as UserProfile, but get the related profile
+        fields = ['id', 'nickname', 'profile_picture']
 
-    # encrypt image and send it to the front
+    def get_id(self, obj):
+        return obj.user_profile.id
+
+    def get_nickname(self, obj):
+        # Get the nickname from the UserProfile related to the User
+        return obj.user_profile.nickname if hasattr(obj, 'user_profile') else None
+
     def get_profile_picture(self, obj):
+        # Get the profile_picture from the UserProfile related to the User
+        if hasattr(obj, 'user_profile') and obj.user_profile.profile_picture:
+            return f"{settings.MEDIA_URL}{obj.user_profile.profile_picture.name}"
+        return None
 
+
+# User Profile Serializer
+class UserProfileSerializer(serializers.ModelSerializer):
+    profile_picture     = serializers.SerializerMethodField()
+    friends             = FriendSerializer(many=True)  # Use the updated FriendSerializer here
+
+    class Meta:
+        model = UserProfile
+        fields = ['id', 'nickname', 'profile_picture', 'mimeType', 'email', 'bio', 'friends']
+
+    def get_profile_picture(self, obj):
         if obj.profile_picture:
             return f"{settings.MEDIA_URL}{obj.profile_picture.name}"
-            # try:
-            #     with open(f'/accounts{obj.profile_picture.path}', "rb") as image_file:
-            #         image_data = image_file.read()
-            #         # Convert the image to Base64
-            #         image_base64 = base64.b64encode(image_data).decode('utf-8')
-            #         return image_base64
-            # except:
-
         return None
 
 
