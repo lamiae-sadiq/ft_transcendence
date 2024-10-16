@@ -28,9 +28,9 @@ async function fetchOAuthCode(authCode) {
       console.log("Authentication initiated successfully");
       console.log(response);
       let rewind = await response.json();
-      const token = rewind.access; // Replace with actual token retrieval
+      const token = rewind.access;
       sessionStorage.setItem("jwtToken", token);
-      navigateTo("home"); // to be changed later on
+      navigateTo("home");
     } else {
       console.error("Failed to initiate 42 authentication");
     }

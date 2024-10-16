@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Function to handle navigation
 export function navigateTo(page) {
-  // location.hash = page;
+  // Clear all query parameters and hash from the URL
+  history.replaceState({}, '', location.pathname);
   // Clean up the current page before loading the new one
   history.pushState({ page }, '', `#${page}`);
   loadPage(page);
