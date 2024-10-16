@@ -8,21 +8,12 @@ import requests
 import json
 
 
-# def authorization42(request):
-#     print("this is the AUTHORIZE FUNCTION")
-#     print(request.GET.get('client_id'))
-#     authorize_url = (
-#         f"https://api.intra.42.fr/oauth/authorize?client_id=u-s4t2ud-9e8cb1d6b2b0bb181505b29a9397b6d8e3079ab0fe7be47c059b43e8f4603fcf"
-#         f"&redirect_uri=http://127.0.0.1:8000/oauthcallback/&response_type=code&scope=public"
-#     )
-#     return redirect(authorize_url)
-
 def tokenFunc(code):
     token_url = 'https://api.intra.42.fr/oauth/token'
     payload = {
         "grant_type": "authorization_code",
         "client_id": "u-s4t2ud-9e8cb1d6b2b0bb181505b29a9397b6d8e3079ab0fe7be47c059b43e8f4603fcf",
-        "client_secret": "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",
+        "client_secret": "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",
         "redirect_uri": "http://0.0.0.0:8080/login",
         "code": code
     }
@@ -40,7 +31,6 @@ def tokenFunc(code):
 @csrf_exempt
 @ensure_csrf_cookie
 def oauth_callback(request):
-    print("*************************")
     code = request.GET.get('code')
     #Token Part
     token_json = tokenFunc(code)
@@ -52,10 +42,12 @@ def oauth_callback(request):
     #preparing what should be returned
     user_info = user_info_response.json()
     login = user_info.get('login')
+    if not login:
+        return JsonResponse({'error': 'Login is missing from 42 API response'}, status=400)
     picture = user_info.get('image', {}).get('versions', {}).get('small')
     user_information = {
-        'picture' : picture,
-        'login' : login,
+        'profile_picture' : picture,
+        'nickname' : login,
         'token' : access_token
     }
     #user creation
@@ -71,10 +63,9 @@ def oauth_callback(request):
     UserProfile.objects.update_or_create(
         user=user,
         defaults={
-            'loginID': login,
+            'nickname': login,
             'profile_picture': picture
         }
     )
-
     json_user_information = json.dumps(user_information)
     return JsonResponse(user_information)
