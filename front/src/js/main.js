@@ -8,11 +8,14 @@ document.addEventListener('DOMContentLoaded', function () {
 // Function to handle navigation
 export function navigateTo(page) {
   // Clear all query parameters and hash from the URL
-  history.replaceState({}, '', location.pathname);
-  // Clean up the current page before loading the new one
+  const baseUrl = location.origin + '/'; // Set the base URL to just the origin
+  // Replace the current state to clear any query parameters
+  window.history.replaceState({}, '', baseUrl);
+  // Push the new state with the desired page hash
   history.pushState({ page }, '', `#${page}`);
   loadPage(page);
 }
+
 
 // Function to load page content dynamically
 function loadPage(page) {
