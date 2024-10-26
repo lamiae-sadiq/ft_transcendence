@@ -1,3 +1,15 @@
-body {
-    background-color: red;
-}
+
+.developer-card {
+    margin-bottom: 30px;
+  }
+  
+  .developer-card img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  @media (max-width: 767px) {
+    .developer-card {
+      text-align: center;
+    }
+  }
