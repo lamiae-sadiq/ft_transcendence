@@ -54,6 +54,13 @@ export function initHomePage() {
     }
   });
 
+  // document.getElementById("search-btn").addEventListener("input", function() {
+  //   const searchText = searchBar.value.toLowerCase();
+  //   //users = get all the friend list
+  //   // const filteredUsers = users.filter(user => user.name.toLowerCase().includes(searchText));
+  //   renderFriendList(filteredUsers);
+  // });
+
   document.getElementById("add-btn").addEventListener("click", function () {
     if (document.getElementById("add-friend-bar").style.display == "block") {
       document.getElementById("search-bar").style.display = "none";
@@ -63,6 +70,23 @@ export function initHomePage() {
       document.getElementById("add-friend-bar").style.display = "block";
     }
   });
+
+  // document.getElementById("add-btn").addEventListener("input", function() {
+  //   const searchText = searchBar.value.toLowerCase();
+
+  // });
+
+  // Render Friend List
+// function renderFriendList(users) {
+//   friendList.innerHTML = ''; // Clear previous list
+//   users.forEach(user => {
+//     const listItem = document.createElement('li');
+//     listItem.className = 'list-group-item';
+//     listItem.textContent = user.name;
+//     listItem.addEventListener('click', () => loadProfile(user));
+//     friendList.appendChild(listItem);
+//   });
+// }
 
   // Add event listener to "Play" button
   const playButton = document.getElementById("playButton");

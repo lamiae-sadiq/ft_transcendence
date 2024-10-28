@@ -1,178 +1,89 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const passwordInput = document.getElementsByClassName("passwordInput");
-  const passwordToggleBtn =
-    document.getElementsByClassName("passwordToggleBtn");
-  const passwordSimilar1 = document.getElementById("passW1");
-  const passwordSimilar2 = document.getElementById("passW2");
+document.addEventListener('DOMContentLoaded', function () {
+    // Elements
+    const friendListSection = document.getElementById('friendListSection');
+    const friendListToggle = document.getElementById('friendListToggle');
+    const closeFriendList = document.getElementById('closeFriendList');
+    const friendItems = document.querySelectorAll('.friend-item');
+    const defaultContent = document.getElementById('defaultContent');
+    const chatWindow = document.getElementById('chatWindow');
+    const exitChat = document.getElementById('exitChat');
+    const userProfile = document.getElementById('userProfile');
+    const friendProfile = document.getElementById('friendProfile');
+    const searchBtn = document.getElementById('searchBtn');
+    const addFriendBtn = document.getElementById('addFriendBtn');
+    const searchContainer = document.querySelector('.search-container');
+    const addFriendContainer = document.querySelector('.add-friend-container');
+    const closeSearch = document.getElementById('closeSearch');
+    const closeAddFriend = document.getElementById('closeAddFriend');
 
-  // shifting
-  const container = document.getElementById("container");
-  const registerBtn = document.getElementById("register");
-  const loginBtn = document.getElementById("login");
+    // Friend List Toggle
+    // friendListToggle.addEventListener('click', () => {
+    //     friendListSection.classList.add('active');
+    // });
 
-  registerBtn.addEventListener("click", () => {
-    container.classList.add("active");
-  });
+    closeFriendList.addEventListener('click', () => {
+        friendListSection.classList.remove('active');
+    });
 
-  loginBtn.addEventListener("click", () => {
-    container.classList.remove("active");
-  });
+    // Friend Selection
+    friendItems.forEach(friend => {
+        friend.addEventListener('click', () => {
+            const friendName = friend.querySelector('.friend-name').textContent;
+            const friendAvatar = friend.querySelector('.friend-avatar').src;
+            const friendBio = friend.dataset.friendBio;
 
-  // Add event listener to toggle button
-  // for (let i = 0; i < passwordToggleBtn.length; i++) {
-  //   passwordToggleBtn[i].addEventListener("click", function () {
-  //     console.log("Toggle button clicked");
-  //     // Toggle password visibility
-  //     if (passwordInput[i].type === "password") {
-  //       passwordInput[i].type = "text";
-  //       passwordToggleBtn[i].innerHTML =
-  //         '<i class="bi bi-eye" style="color: black;"></i>';
-  //     } else {
-  //       passwordInput[i].type = "password";
-  //       passwordToggleBtn[i].innerHTML =
-  //         '<i class="bi bi-eye-slash" style="color: black;"></i>';
-  //     }
-  //   });
-  // }
+            // Update chat window
+            document.getElementById('chatUserAvatar').src = friendAvatar;
+            document.getElementById('chatUserName').textContent = friendName;
 
-  // document
-  //   .getElementById("signUpForm")
-  //   .addEventListener("submit", async function (event) {
-  //     event.preventDefault(); // Prevent the default signUp submission
-  //     if (passwordSimilar1.value != passwordSimilar2.value) {
-  //       alert("Password does not meet the requirements.");
-  //       return; // Stop further execution
-  //     }
-  //     const formData = new FormData(this);
-  //     console.log(formData.get("nickname"));
-  //     console.log(formData.get("password"));
-  //     console.log(formData.get("email"));
-  //     console.log(formData);
-  //     try {
-  //       let response = await fetch("http://0.0.0.0:8000/signup/", {
-  //         // Specify the server endpoint directly
-  //         headers: {
-  //           "Content-Type": "application/json", // Ensure the content type is set to JSON
-  //           Accept: "application/json", // Optionally, specify the format you want the response in
-  //         },
-  //         method: "POST",
-  //         body: formDataToJson(formData),
-  //       });
-  //       // console.log("Response : ", rewind);
-  //       if (response.ok) {
-  //         // let rewind = await response.json();
-  //         navigateTo("login"); // to be changed later on
-  //       }
-  //     } catch (error) {
-  //       console.error("Error : ", error);
-  //     }
-  //   });
+            // Update friend profile
+            document.getElementById('friendProfileAvatar').src = friendAvatar;
+            document.getElementById('friendProfileName').textContent = friendName;
+            document.getElementById('friendProfileBio').textContent = friendBio;
 
-  // window.onload = async function () {
-  //   // Get the query parameters from the URL
-  //   const urlParams = new URLSearchParams(window.location.search);
+            // Show chat window and friend profile
+            defaultContent.classList.add('d-none');
+            chatWindow.classList.remove('d-none');
+            userProfile.classList.add('d-none');
+            friendProfile.classList.remove('d-none');
 
-  //   // Example: Extract a query parameter called 'code'
-  //   const authCode = urlParams.get("code");
-  //   console.log(authCode);
-  //   if (authCode) {
-  //     console.log("Authorization Code:", authCode);
-  //     try {
-  //       const response = await fetch(
-  //         "http://0.0.0.0:8000/oauthcallback?code=" + authCode
-  //       );
-  //       if (response.ok) {
-  //         console.log("Authentication initiated successfully");
-  //         console.log(response);
-  //         let rewind = await response.json();
-  //         const token = rewind.access;
-  //         sessionStorage.setItem("jwtToken", token);
-  //         navigateTo("home");
-  //       } else {
-  //         console.error("Failed to initiate 42 authentication");
-  //       }
-  //     } catch (error) {
-  //       console.error("Login with 42 failed:", error);
-  //     }
-  //   } else {
-  //     // Handle the absence of the authorization code
-  //     console.log("No authorization code found.");
-  //   }
-  // };
+            // Close friend list on mobile
+            friendListSection.classList.remove('active');
+        });
+    });
 
-  // document
-  //   .getElementById("loginForm")
-  //   .addEventListener("submit", async function (event) {
-  //     event.preventDefault(); // Prevent the default signUp submission
-  //     const formData = new FormData(this);
-  //     console.log(formData.get("nickname"));
-  //     console.log(formData.get("password"));
-  //     // console.log(formData.get('email'));
-  //     console.log(formData);
-  //     try {
-  //       let response = await fetch("http://0.0.0.0:8000/signin/", {
-  //         // Specify the server endpoint directly
-  //         headers: {
-  //           "Content-Type": "application/json", // Ensure the content type is set to JSON
-  //           Accept: "application/json", // Optionally, specify the format you want the response in
-  //         },
-  //         method: "POST",
-  //         body: formDataToJson(formData),
-  //       });
-  //       if (response.ok) {
-  //         let rewind = await response.json();
-  //         console.log("Response : ", rewind, "||", response);
-  //         const token = rewind.access;
-  //         sessionStorage.setItem("jwtToken", token);
-  //         navigateTo("home");
-  //       }
-  //     } catch (error) {
-  //       console.error("Error : ", error);
-  //     }
-  //   });
+    // Exit Chat
+    exitChat.addEventListener('click', () => {
+        defaultContent.classList.remove('d-none');
+        chatWindow.classList.add('d-none');
+        userProfile.classList.remove('d-none');
+        friendProfile.classList.add('d-none');
+    });
 
-  // function formDataToJson(formData) {
-  //   const obj = {};
-  //   formData.forEach((value, key) => {
-  //     obj[key] = value;
-  //   });
-  //   return JSON.stringify(obj);
-  // }
+    // Search and Add Friend Toggles
+    searchBtn.addEventListener('click', () => {
+        searchContainer.classList.remove('d-none');
+        addFriendContainer.classList.add('d-none');
+    });
 
-  const signInForm = document.querySelector(".sign-in");
-  const signUpForm = document.querySelector(".sign-up");
-  const toSignupButton = document.getElementById("to-signup");
-  const toSigninButton = document.getElementById("to-signin");
+    addFriendBtn.addEventListener('click', () => {
+        addFriendContainer.classList.remove('d-none');
+        searchContainer.classList.add('d-none');
+    });
 
-  // signUpForm.style.display = "none";
+    closeSearch.addEventListener('click', () => {
+        searchContainer.classList.add('d-none');
+    });
 
-  toSignupButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    signUpForm.style.display = "block";
-    signInForm.style.display = "none";
-  });
+    closeAddFriend.addEventListener('click', () => {
+        addFriendContainer.classList.add('d-none');
+    });
 
-  // Toggle to show sign-in form
-  toSigninButton.addEventListener("click", (e) => {
-    e.preventDefault();
-      signInForm.style.display = "block";
-      signUpForm.style.display = "none";
-  });
+    const mobileFriendsToggle = document.getElementById('mobileFriendsToggle');
 
-// Function to check window width and remove class
-function checkWindowSize() {  
-  if (window.innerWidth < 768) {
-    container.classList.remove("active");
-  } else {
-    signInForm.style.display = "block";
-    signUpForm.style.display = "block";
-  }
-}
-
-// Run the check on page load
-checkWindowSize();
-
-// Also run the check when the window is resized
-window.addEventListener("resize", checkWindowSize);
+    mobileFriendsToggle.addEventListener('click', () => {
+        friendListSection.classList.toggle('active');
+    });
 
 });
+
