@@ -1,6 +1,219 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: visible !important;
+    overflow-x: hidden !important;
+    background: radial-gradient(circle at top left, rgb(213, 5, 255) 1%, transparent 30%),
+    radial-gradient(circle at bottom left, rgb(15, 195, 231) 1%, transparent 30%);
+    font-family:'Luminari';
+    background-color: var(--colors-body);
+}
 
-.developer-card {
-    margin-bottom: 30px;
+/* LOGO */
+.image { 
+    display: block;
+    width: 40px;
+    height: auto;
+    margin: 0 0 0 20px;
+}
+
+.Text {
+    /* display: block; */
+    /* position: absolute; */
+    margin: 10vw 10px 10px 10px;
+    top: 50%;
+    left: 50%;
+    width: auto; /* Allow width to adjust automatically */
+    max-width: 33vw; /* Set a maximum width */
+    color: white;
+    z-index: 0;
+    font-size: 14vw; /* Adjust font size relative to viewport width */
+}
+
+.Title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--colors-cyan);
+}
+
+.fonts {
+    font-size: 1.2rem;
+    color: #ffffff;
+}
+
+/* NAVBAR */
+.navbar {
+    height: 120px !important;
+    border-bottom: 1px solid #f2bddf !important; /* Bottom border color */
+    /* background-color: transparent; */
+}
+
+.navbar .image {
+    height: 3rem !important;
+    margin-right: 1rem !important;
+}
+
+.user {
+    margin-left: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+.container-fluid {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    height: 100% !important;
+}
+
+.navbar-nav {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 3rem;
+}
+
+.nav-item a {
+  font-size: 1rem; /* Adjust font size */
+  text-align: center; /* katcentri f togglebar*/
+}
+
+.navbar-toggler {
+    margin-right: auto !important;
+    margin-left: 0 !important;
+}
+
+.navbar .sidebar .offcanvas-header .image {
+    height: 40px !important;
+}
+
+.navbar .sidebar .offcanvas-body .nav-link {
+    /* color: #ff0000 !important; */
+    padding: 10px !important;
+    margin: 10px;
+}
+
+.navbar .sidebar .offcanvas-body .nav-link:hover {
+    color: var(--colors-cyan) !important;
+    border-radius: 5px !important;
+}
+
+.navbar .user {
+    background: none !important;
+    border: none !important;
+}
+
+.navbar .user .customBack {
+    /* background-color: #007bff !important; */
+    color: #a6009e !important; /*user !!!!*/
+    font-weight: bold !important;
+    border: none !important;
+}
+
+@media (max-width: 991px) {
+    .offcanvas-body, .offcanvas-header  {
+        background-color: var(--colors-body);
+    }
+}
+
+@media (max-width: 989px) {
+    .contain {
+      flex-direction: column;
+    }
+    
+    .friend-list, .conversation {
+      width: calc(100% - 66px);
+      margin: 20px 0;
+    }
+
+    .toggle-btn {
+      width: 10rem;
+      display: block;
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      z-index: 3;
+    }
+
+    .Text {
+        display: none;
+    }
+/* 
+    .play {
+        position: fixed;
+        left: 20%;
+        top: 20%;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+      } later on !!!!! */ 
+  }
+  
+  @media (min-width: 990px) {
+    .contain {
+      flex-direction: row;
+    }
+
+    .friend-list {
+        display: block;
+    }
+    
+    .conversation {
+      /* display: block; */
+      position: static; /* Reset positioning */
+    }
+    
+    .toggle-btn {
+      display: none;
+    }
+
+    .Text {
+        font-size: 3vw;
+        left: 30%;
+      }
+}
+
+.users-container {
+    width: 100px !important;
+    height: 100px !important;
+    position: relative !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .users-border {
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 1;
+  }
+  
+  .users {
+    width: 55.5% !important; /*AVATAR */
+    height: 55.5% !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+    position: absolute !important;
+    top: 23% !important; /* Center the avatar */
+    left: 23% !important;
+    z-index: 0;
+  }
+  
+  .level {
+    color: white;
+    font-weight: bold;
+    font-size: 10px;
+    position: inherit;
+    top: 73%;
+    z-index: 1;
+  }
+
+  .developer-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
   }
   
   .developer-card img {

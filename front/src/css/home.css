@@ -225,13 +225,7 @@ body, html {
 
 .fonts {
     font-size: 1.2rem;
-    /* font-weight: bold; */
     color: #ffffff;
-    /* text-shadow: 
-        -1px -1px 0 #5c8795,  
-         1px -1px 0 #5c8795,
-        -1px  1px 0 #5c8795,
-         1px  1px 0 #5c8795; */
 }
 
 /* NAVBAR */
@@ -271,9 +265,9 @@ body, html {
   text-align: center; /* katcentri f togglebar*/
 }
 
-.navbar .navbar-toggler {
-    order: 0 !important;
-    margin-right: 20px !important;
+.navbar-toggler {
+  margin-right: auto !important;
+  margin-left: 0 !important;
 }
 
 .navbar .sidebar .offcanvas-header .image {

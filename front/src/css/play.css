@@ -68,10 +68,11 @@ html {
   /* katcentri f togglebar*/
 }
 
-.navbar .navbar-toggler {
-  order: 0 !important;
-  margin-right: 20px !important;
+.navbar-toggler {
+  margin-right: auto !important;
+  margin-left: 0 !important;
 }
+
 
 .navbar .sidebar .offcanvas-header .image {
   height: 40px !important;

@@ -66,25 +66,25 @@ export function initAboutPage() {
         {
             name: "..........",
             role: "Front-end Developer",
-            image: "https://placehold.co/100x100",
+            image: "https://placehold.co/125x125",
             description: "..... .. . . . .......... . ......... .........  .......  . . . . . .. . . . . ."
         },
         {
             name: "...........",
             role: "Back-end Developer",
-            image: "https://placehold.co/100x100",
+            image: "https://placehold.co/125x125",
             description: "..... .. . . . .......... . ......... .........  .......  . . . . . .. . . . . ."
         },
         {
             name: "............",
             role: "..............",
-            image: "https://placehold.co/100x100",
+            image: "https://placehold.co/125x125",
             description: "..... .. . . . .......... . ......... .........  .......  . . . . . .. . . . . ."
         },
         {
             name: "..............",
             role: ".............",
-            image: "https://placehold.co/100x100",
+            image: "https://placehold.co/125x125",
             description: "..... .. . . . .......... . ......... .........  .......  . . . . . .. . . . . ."
         }
     ];
@@ -93,7 +93,7 @@ export function initAboutPage() {
 
     developers.forEach(developer => {
         const card = document.createElement("div");
-        card.classList.add("col-md-6", "col-lg-3", "developer-card");
+        card.classList.add("col-md-6", "col-lg-3", "developer-card", "mx-auto", "mb-4", "text-white");
 
         const image = document.createElement("img");
         image.src = `${developer.image}`;

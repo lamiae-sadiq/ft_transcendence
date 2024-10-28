@@ -1,4 +1,12 @@
 - other page for other users
-- limit pic size and encrypt
 - need to be styled
-- 42 AUTHENTICATION IT GOES TO LANDING PAGE AND NOT THE FUCKING LOGIN ONE TO SEND 
+
+
+- curl \
+  -H 'Authorization: token *************************************************************' \
+  -d '{"query":"query { currentUser { username } }"}' \
+  https://sourcegraph.com/.api/graphql
+
+  sgp_fd1b4edb60bf82b8_02fd96cc25e3c0f9e4b75f9ae256d21f3e232d4b
+
+  sgp_fd1b4edb60bf82b8_d49a1f6b34afe466b8f36f527b244f9af163b007
