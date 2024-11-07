@@ -44,6 +44,11 @@ body {
   background-color: black;
 }
 
+.navbar .sidebar .offcanvas-body .nav-link {
+  padding: 10px !important;
+  margin: 10px;
+}
+
 .main-container {
   height: calc(100vh - 156px);
   padding: 0 1.5rem;

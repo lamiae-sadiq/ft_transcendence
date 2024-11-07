@@ -24,7 +24,7 @@ body{
     position: relative !important;
     overflow: hidden !important;
     width: 90% !important;
-    min-width: 90vw !important;
+    min-width: 70vw !important;
     min-height: 480px !important;
 }
 
