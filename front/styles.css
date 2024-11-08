@@ -4,10 +4,11 @@ body {
   overflow: hidden;
   margin: 0;
   padding: 0;
-  background: radial-gradient(circle at top left, rgb(213, 5, 255) 1%, transparent 30%),
+  /* background: radial-gradient(circle at top left, rgb(213, 5, 255) 1%, transparent 30%),
     radial-gradient(circle at bottom left, rgb(15, 195, 231) 1%, transparent 30%);
     font-family:'Luminari';
-  background-color: #1b0236;
+  background-color: #1b0236; */
+  background-color: black;
   color: white !important;
 }
 
@@ -238,4 +239,19 @@ body {
   .chat-messages {
       height: calc(100% - 200px);
   }
+}
+
+#confirmButton {
+  background-color: #1E2328;
+  color: #C8AA6E;
+  border: 1px solid #C8AA6E;
+  padding: 15px 80px;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#confirmButton:hover {
+  background-color: #C8AA6E;
+  color: #1E2328;
 }
