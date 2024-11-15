@@ -3,10 +3,9 @@ body, html {
     padding: 0;
     overflow: visible !important;
     overflow-x: hidden !important;
-    background: radial-gradient(circle at top left, rgb(213, 5, 255) 1%, transparent 30%),
-    radial-gradient(circle at bottom left, rgb(15, 195, 231) 1%, transparent 30%);
-    font-family:'Luminari';
-    background-color: var(--colors-body);
+    /* background: radial-gradient(circle at top left, rgb(213, 5, 255) 1%, transparent 30%),
+    radial-gradient(circle at bottom left, rgb(15, 195, 231) 1%, transparent 30%); */
+    background-color: black;
 }
 
 /* LOGO */
@@ -17,40 +16,16 @@ body, html {
     margin: 0 0 0 20px;
 }
 
-.Text {
-    /* display: block; */
-    /* position: absolute; */
-    margin: 10vw 10px 10px 10px;
-    top: 50%;
-    left: 50%;
-    width: auto; /* Allow width to adjust automatically */
-    max-width: 33vw; /* Set a maximum width */
-    color: white;
-    z-index: 0;
-    font-size: 14vw; /* Adjust font size relative to viewport width */
-}
-
-.Title {
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--colors-cyan);
-}
-
 .fonts {
     font-size: 1.2rem;
-    color: #ffffff;
+    color: #F0E6D2;
 }
 
 /* NAVBAR */
 .navbar {
-    height: 120px !important;
-    border-bottom: 1px solid #f2bddf !important; /* Bottom border color */
-    /* background-color: transparent; */
-}
-
-.navbar .image {
-    height: 3rem !important;
-    margin-right: 1rem !important;
+  height: 120px;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--colors-gold) !important;
 }
 
 .user {
@@ -67,12 +42,6 @@ body, html {
     height: 100% !important;
 }
 
-.navbar-nav {
-  display: flex !important;
-  justify-content: center !important;
-  gap: 3rem;
-}
-
 .nav-item a {
   font-size: 1rem; /* Adjust font size */
   text-align: center; /* katcentri f togglebar*/
@@ -83,19 +52,13 @@ body, html {
     margin-left: 0 !important;
 }
 
-.navbar .sidebar .offcanvas-header .image {
-    height: 40px !important;
+.shows {
+  background-color: black;
 }
 
 .navbar .sidebar .offcanvas-body .nav-link {
-    /* color: #ff0000 !important; */
     padding: 10px !important;
     margin: 10px;
-}
-
-.navbar .sidebar .offcanvas-body .nav-link:hover {
-    color: var(--colors-cyan) !important;
-    border-radius: 5px !important;
 }
 
 .navbar .user {

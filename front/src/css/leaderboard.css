@@ -5,10 +5,10 @@ html {
   padding: 0 !important;
   overflow: visible !important;
   /*problem for smaller screens !!!!!!*/
-  background: radial-gradient(circle at top left, rgb(213, 5, 255) 1%, transparent 30%),
+  /* background: radial-gradient(circle at top left, rgb(213, 5, 255) 1%, transparent 30%),
     radial-gradient(circle at bottom left, rgb(15, 195, 231) 1%, transparent 30%);
-    font-family:'Luminari';
-    background-color: var(--colors-body);
+    font-family:'Luminari'; */
+    background-color: black;
   /* font-family: 'Luminari' !important; */
   overflow-x: hidden !important;
   /* position: relative !important; */
@@ -21,18 +21,14 @@ html {
   margin: 0 0 0 20px !important;
 }
 
-.font {
-    font-size: 0.8rem !important;
-}
-
 .fonts {
   font-size: 1.1rem !important;
-  color: #ffffff !important;
+  color: #F0E6D2;
 }
 
 .navbar {
   height: 120px !important;
-  border-bottom: 1px solid #f2bddf !important;
+  border-bottom: 1px solid var(--colors-gold) !important;
   /* Bottom border color */
   /* background-color: transparent !important; */
 }
@@ -49,12 +45,6 @@ html {
   gap: 10px !important;
 }
 
-/* .container-fluid {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  height: 100% !important;
-} */
 
 .navbar-nav {
   display: flex !important;
@@ -84,11 +74,6 @@ html {
   margin: 10px !important;
 }
 
-.navbar .sidebar .offcanvas-body .nav-link:hover {
-  color: var(--colors-cyan) !important;
-  border-radius: 5px !important;
-}
-
 .navbar .user {
   background: none !important;
   border: none !important;
@@ -106,7 +91,7 @@ html {
 
   .offcanvas-body,
   .offcanvas-header {
-    background-color: var(--colors-body) !important;
+    background-color: black !important;
   }
 }
 
@@ -335,28 +320,28 @@ html {
   .box .ellipse-wrapperb {
     position: absolute;
     height: 35vh;
-    background-color: var(--colors-cyan);
+    background-color: var(var(--colors-gold));
     border-width: 15vw 14vh;
-    box-shadow: 0 0 3vw var(--colors-cyan), 
-                0 0 6vw var(--colors-cyan), 
-                0 0 10vw var(--colors-cyan),
-                0 0 20vw var(--colors-cyan), 
-                0 0 35vw var(--colors-cyan), 
-                0 0 60vw var(--colors-cyan);
+    box-shadow: 0 0 3vw var(var(--colors-gold)), 
+                0 0 6vw var(var(--colors-gold)), 
+                0 0 10vw var(var(--colors-gold)),
+                0 0 20vw var(var(--colors-gold)), 
+                0 0 35vw var(var(--colors-gold)), 
+                0 0 60vw var(var(--colors-gold));
   }
   
   .box .ellipseb {
     position: absolute;
     width: 35vw;
     height: 35vh;
-    background-color: var(--colors-cyan);
+    background-color: var(var(--colors-gold));
     border-width: 15vw 14vh;
-    box-shadow: 0 0 3vw var(--colors-cyan), 
-                0 0 6vw var(--colors-cyan), 
-                0 0 10vw var(--colors-cyan),
-                0 0 20vw var(--colors-cyan), 
-                0 0 35vw var(--colors-cyan), 
-                0 0 60vw var(--colors-cyan);
+    box-shadow: 0 0 3vw var(var(--colors-gold)), 
+                0 0 6vw var(var(--colors-gold)), 
+                0 0 10vw var(var(--colors-gold)),
+                0 0 20vw var(var(--colors-gold)), 
+                0 0 35vw var(var(--colors-gold)), 
+                0 0 60vw var(var(--colors-gold));
   } */
 
   .card {

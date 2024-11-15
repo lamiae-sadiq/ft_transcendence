@@ -10,11 +10,8 @@ body{
     justify-content: center !important;
     flex-direction: column !important;
     height: 100vh !important;
-    min-width: 60% !important;
+    /* min-width: 60% !important; */
     overflow: hidden !important;
-    /* background: radial-gradient(circle at top left, rgb(213, 5, 255) 1%, transparent 30%),
-    radial-gradient(circle at bottom left, rgb(15, 195, 231) 1%, transparent 30%);
-    background-color: var(--colors-body); */
     background-color: black;
 }
 
@@ -25,7 +22,8 @@ body{
     position: relative !important;
     overflow: hidden !important;
     width: 90% !important;
-    min-width: 70vw !important;
+    min-width: 300px !important;
+    max-width: 768px;
     min-height: 480px !important;
 }
 
@@ -282,5 +280,11 @@ body{
   
     .centering {
       display: block;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .container {
+        width: 800px !important;
     }
   }

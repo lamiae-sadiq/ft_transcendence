@@ -7,7 +7,7 @@ body {
   /* background: radial-gradient(circle at top left, rgb(213, 5, 255) 1%, transparent 30%),
     radial-gradient(circle at bottom left, rgb(15, 195, 231) 1%, transparent 30%);
     font-family:'Luminari';
-  background-color: #1b0236; */
+  background-color: black; */
   background-color: black;
   color: white !important;
 }
@@ -23,7 +23,7 @@ body {
 .navbar {
   height: 120px;
   margin-bottom: 1rem;
-  border-bottom: 1px solid #f2bddf !important;
+  border-bottom: 1px solid var(--colors-gold) !important;
 }
 
 .nav-item a {

@@ -3,21 +3,8 @@ html {
   margin: 0;
   padding: 0;
   overflow: visible;
-  background: radial-gradient(
-      circle at top left,
-      rgb(213, 5, 255) 1%,
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at bottom left,
-      rgb(15, 195, 231) 1%,
-      transparent 30%
-    );
-  font-family: "Luminari";
-  background-color: var(--colors-body);
-  font-family: "Luminari";
+  background-color: black;
   min-height: 100vh;
-  color: white !important;
 }
 
 /*------------------------------*/
@@ -32,13 +19,13 @@ html {
 
 .fonts {
   font-size: 1.2rem;
-  color: #ffffff;
+  color: #F0E6D2;
 }
 
 /* NAVBAR */
 .navbar {
   height: 120px !important;
-  border-bottom: 1px solid #f2bddf !important;
+  border-bottom: 1px solid var(--colors-gold) !important;
   /* Bottom border color */
   /* background-color: transparent; */
 }
@@ -91,11 +78,6 @@ html {
   margin: 10px;
 }
 
-.navbar .sidebar .offcanvas-body .nav-link:hover {
-  color: var(--colors-cyan) !important;
-  border-radius: 5px !important;
-}
-
 .navbar .user {
   background: none !important;
   border: none !important;
@@ -112,7 +94,7 @@ html {
 @media (max-width: 991px) {
   .offcanvas-body,
   .offcanvas-header {
-    background-color: var(--colors-body);
+    background-color: black;
   }
 }
 
@@ -216,7 +198,7 @@ html {
 }
 
 .section-title {
-  border-bottom: 2px solid #007bff;
+  border-bottom: 2px solid var(--colors-gold);
   padding-bottom: 10px;
   margin-bottom: 5px;
 }
@@ -262,8 +244,9 @@ html {
 } */
 
 .scoreboard-section {
-  background-color: #331d4c;
+  background-color: black;
   border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(253, 249, 23, 0.5);
   padding: 20px;
 }
 
@@ -274,13 +257,13 @@ html {
 }
 
 .stylingColor {
-  color: var(--colors-cyan);
+  color: var(--colors-gold);
 }
 
 .level-pentagon {
   width: 80px;
   height: 80px;
-  background: linear-gradient(to bottom, #6d5ddd, #220c3f) !important;
+  background: linear-gradient(to bottom, var(--colors-gold), black) !important;
   clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
   display: flex;
   justify-content: center;
@@ -299,11 +282,11 @@ html {
 .level-label {
   display: inline-block;
   padding: 2px 8px;
-  border: 1px solid var(--colors-cyan);
+  border: 1px solid var(--colors-gold);
   border-radius: 12px;
   font-size: 0.9em;
   color: #ffffff;
-  background-color: var(--colors-body);
+  background-color: black;
 }
 
 .friends-container {
@@ -312,7 +295,8 @@ html {
 }
 
 .friends-section {
-  background-color: #331d4c;
+  background-color: black;
+  box-shadow: 0 4px 8px rgba(253, 249, 23, 0.5);
   border-radius: 5%;
 }
 
@@ -376,13 +360,13 @@ html {
 
 .achievements-container::-webkit-scrollbar-thumb,
 .friends-container::-webkit-scrollbar-thumb {
-  background: #00ffff;
+  background: var(--colors-gold);
   border-radius: 10px;
 }
 
 .achievements-container::-webkit-scrollbar-thumb:hover,
 .friends-container::-webkit-scrollbar-thumb:hover {
-  background: #00cccc;
+  background: var(--colors-gold);
 }
 
 @media (min-width: 992px) {
@@ -398,7 +382,7 @@ html {
     top: 0;
     left: 66%;
     width: 1px;
-    background-color: white;
+    background-color: var(--colors-gold);
     z-index: 0;
   }
   .achievement-item {
@@ -518,6 +502,6 @@ html {
  /* For editable name and bio, set hover cursor */
  [contenteditable="true"] {
   outline: 0;
-  /* border-bottom: 1px dashed var(--colors-cyan); */
+  /* border-bottom: 1px dashed var(var(--colors-gold)); */
   cursor: text;
 }

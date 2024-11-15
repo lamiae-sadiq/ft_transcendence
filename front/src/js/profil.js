@@ -2,33 +2,33 @@ export function initProfilPage() {
   let token = sessionStorage.getItem("jwtToken");
   let isEditing = false;
 
-  const achievementsContainer = document.getElementById(
-    "achievementsContainer"
-  );
+  // const achievementsContainer = document.getElementById(
+  //   "achievementsContainer"
+  // );
   const friendsContainer = document.getElementById("friendsContainer");
 
   // Mock achievements data
-  const achievements = [
-    { name: "Master Strategist", icon: "https://i.pravatar.cc/160?img=3" },
-    { name: "Level 50 Warrior", icon: "https://i.pravatar.cc/160?img=3" },
-    { name: "1000 Games Played", icon: "https://i.pravatar.cc/160?img=3" },
-    { name: "Tournament Winner", icon: "https://i.pravatar.cc/160?img=3" },
-    { name: "Legendary Player", icon: "https://i.pravatar.cc/160?img=3" },
-    { name: "Social Butterfly", icon: "https://i.pravatar.cc/160?img=3" },
-  ];
+  // const achievements = [
+  //   { name: "Master Strategist", icon: "https://i.pravatar.cc/160?img=3" },
+  //   { name: "Level 50 Warrior", icon: "https://i.pravatar.cc/160?img=3" },
+  //   { name: "1000 Games Played", icon: "https://i.pravatar.cc/160?img=3" },
+  //   { name: "Tournament Winner", icon: "https://i.pravatar.cc/160?img=3" },
+  //   { name: "Legendary Player", icon: "https://i.pravatar.cc/160?img=3" },
+  //   { name: "Social Butterfly", icon: "https://i.pravatar.cc/160?img=3" },
+  // ];
 
-  // Populate Achievements
-  achievements.forEach((achievement) => {
-    const div = document.createElement("div");
-    div.className = "achievement-item";
-    div.innerHTML = `
-            <img src="${achievement.icon}" alt="${achievement.name}" class="achievement-icon">
-            <div>
-                <p class="achievement-name">${achievement.name}</p>
-            </div>
-        `;
-    achievementsContainer.appendChild(div);
-  });
+  // // Populate Achievements
+  // achievements.forEach((achievement) => {
+  //   const div = document.createElement("div");
+  //   div.className = "achievement-item";
+  //   div.innerHTML = `
+  //           <img src="${achievement.icon}" alt="${achievement.name}" class="achievement-icon">
+  //           <div>
+  //               <p class="achievement-name">${achievement.name}</p>
+  //           </div>
+  //       `;
+  //   achievementsContainer.appendChild(div);
+  // });
 
   // Mock friends data
   const friends = [
