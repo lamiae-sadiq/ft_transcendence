@@ -12,15 +12,16 @@ body{
     height: 100vh !important;
     min-width: 60% !important;
     overflow: hidden !important;
-    background: radial-gradient(circle at top left, rgb(213, 5, 255) 1%, transparent 30%),
+    /* background: radial-gradient(circle at top left, rgb(213, 5, 255) 1%, transparent 30%),
     radial-gradient(circle at bottom left, rgb(15, 195, 231) 1%, transparent 30%);
-    background-color: var(--colors-body);
+    background-color: var(--colors-body); */
+    background-color: black;
 }
 
 .container {
     background-color: #ffffff !important;
     border-radius: 30px !important;
-    box-shadow: 0 5px 15px #5c8795 !important;
+    box-shadow: 0 5px 15px var(--colors-gold) !important;
     position: relative !important;
     overflow: hidden !important;
     width: 90% !important;
@@ -40,14 +41,14 @@ body{
 }
 
 .container a{
-    color: var(--colors-input) !important;
+    color: black !important;
     font-size: 13px !important;
     text-decoration: none !important;
     margin: 15px 0 10px !important;
 }
 
 .container .styled{
-    background-color: var(--colors-cyan) !important;
+    background-color: var(--colors-gold) !important;
     color: #fff !important;
     font-size: 12px !important;
     padding: 10px 45px !important;
@@ -61,7 +62,7 @@ body{
 }
 
 .container button.hidden{
-    background-color: var(--colors-cyan) !important;
+    background-color: var(--colors-gold) !important;
 }
 
 .container form{
@@ -76,8 +77,8 @@ body{
 }
 
 .container .input-box {
-    background-color: var(--colors-input) !important;
-    border: 1px solid #5c8795 !important;
+    background-color: black !important;
+    border: 1px solid var(--colors-gold) !important;
     margin: 8px 0 !important;
     padding: 10px 15px !important;
     font-size: 13px !important;
@@ -97,7 +98,7 @@ body{
 }
 
 .input-box input {
-    background-color: var(--colors-input) !important;
+    background-color: black !important;
     border: none !important;
     font-size: 13px !important;
     width: 100% !important;
@@ -171,7 +172,7 @@ body{
 }
 
 .social-icons a {
-    border: 1px solid #5c8795 !important;
+    border: 1px solid var(--colors-gold) !important;
     border-radius: 50% !important;
     display: inline-block !important;
     margin: 0 5px !important;
@@ -207,7 +208,7 @@ body{
         rgba(131, 144, 204, 0.3) 50%,
         rgba(164, 181, 255, 0.3) 100%) !important;
     height: 100% !important;
-    color: var(--colors-input) !important;
+    color: black !important;
     position: relative !important;
     left: -100% !important;
     height: 100% !important;
@@ -266,7 +267,7 @@ body{
     text-decoration: none;
     border: none;
     background-color: white;
-    color: var(--colors-cyan);
+    color: var(--colors-gold);
   }
   
   
