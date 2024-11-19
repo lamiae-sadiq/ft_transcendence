@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  # FrontEnd:
+  #   container_name: FrontEnd
+  #   build: ./FrontEnd
+  #   networks:
+  #     - pingpong
+  #   image: FrontEnd
+  #   restart: always
+  #   depends_on:
+  #     - BackEnd
+  backend:
+    container_name: backend
+    build: ./backend
+    networks:
+      - pingpong
+    image: backend
+    restart: always
+    ports:
+      - 0.0.0.0:8000:8000
+    volumes:
+      - ./backend:/backend
+
+  
+networks:
+  pingpong:
+    name: pingpong
+    driver: bridge

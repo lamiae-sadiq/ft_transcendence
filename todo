@@ -1,0 +1,36 @@
+TASKS:
+
+*local: 
+
+    -adding the name of the person that you play against ;)
+
+*add remote playing:
+
+    -adding name and picture of the player in remote player
+    -adding count on 3 befor the game | DONE;)
+
+*add ESC button:
+
+    -adding ESC click |  DONE ;)
+    -adding font for pause ;)
+*add tournemt:
+
+    -adding tournemt page and the names and stuff ...
+
+*add W|S and UP|DOWN icon in the start of the game:
+
+    -DONE ;)
+
+*add rule of the game in the start of the game:
+
+*put the work in containers: ;)
+
+
+*have some tests and ux asking pepole:
+
+*add blur event in remote ;)
+*remove console error
+*handal remote when someone disconnect ;)
+
+    
+
