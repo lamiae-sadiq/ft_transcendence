@@ -143,6 +143,11 @@ function initializePageScripts(page) {
         module.initProfilPage();
       });
       break;
+      case 'game':
+        import('./game.js').then(module => {
+          module.initGamePage();
+        });
+        break;
     default:
       console.log('No script found for this page');
   }
