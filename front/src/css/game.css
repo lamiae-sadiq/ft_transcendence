@@ -401,7 +401,7 @@ h1 {
 
 /* tournemt css */
 .body-style {
-    background-image: url('src/assets/resources/background.png');
+    background-image: url('../assets/resources/background.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

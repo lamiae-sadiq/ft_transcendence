@@ -164,6 +164,7 @@ export function initGamePage() {
       } else if (gametype === "remote") {
         secondwindow();
       } else if (gametype === "tournament") {
+        console.log("PLOP");
         tournamentFile.namesForms().then((formData) => {
           secondwindow(formData);
         });
@@ -985,8 +986,8 @@ export function initGamePage() {
       }
     }
   }
-  // game("remote");
-  // game("tournament");
-  game("bot");
+//   game("remote");
+//   game("tournament");
+//   game("bot");
 //   game("local");
 }
