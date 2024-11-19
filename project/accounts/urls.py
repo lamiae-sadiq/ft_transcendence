@@ -5,8 +5,6 @@ from .views_signup import RegisterView
 from .viewsUserInfo import ProtectedView
 from .views_changePass import ChangePasswordView
 from .views_PrflUpdate import UserProfileUpdateView, ChangeProfilePictureAPIView
-# from .views_changePass import ChangePasswordView
-# from .views_login import loginPage
 
 
 urlpatterns = [
