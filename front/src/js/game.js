@@ -188,14 +188,14 @@ export function initGamePage() {
       }
 
       if (gametype === "local") {
-        socket = new WebSocket("ws://localhost:8000/ws/pingPong/local");
+        socket = new WebSocket("ws://localhost:8001/ws/pingPong/local");
       } else if (gametype === "remote") {
         // Use backticks for string interpolation
-        socket = new WebSocket("ws://localhost:8000/ws/pingPong/remote/");
+        socket = new WebSocket("ws://localhost:8001/ws/pingPong/remote/");
       } else if (gametype === "tournament") {
-        socket = new WebSocket("ws://localhost:8000/ws/pingPong/tournament/");
+        socket = new WebSocket("ws://localhost:8001/ws/pingPong/tournament/");
       }
-      // const socket = new WebSocket('ws://localhost:8000/ws/pingPong/');
+      // const socket = new WebSocket('ws://localhost:8001/ws/pingPong/');
       let id = randomID();
       socket.onopen = function (e) {
         console.log("Connection established");
