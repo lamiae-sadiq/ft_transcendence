@@ -3,7 +3,7 @@ html {
   margin: 0;
   padding: 0;
   overflow: visible;
-  background-color: black;
+  background-color: #1E2328;
   min-height: 100vh;
 }
 
@@ -172,6 +172,7 @@ html {
 
 .profile-section {
   position: relative; /* Set relative position for positioning child elements */
+  height: 480px;
 }
 
 .profile-picture {
@@ -201,12 +202,13 @@ html {
   border-bottom: 2px solid var(--colors-gold);
   padding-bottom: 10px;
   margin-bottom: 5px;
+  color: white;
 }
 
-.achievements-section {
+/* .achievements-section {
   background: linear-gradient(to right, #08d7f9, #2d75cd, #4044b6, #5a3ebb);
   border-radius: 1%;
-}
+} */
 
 .title-container {
   display: flex !important;
@@ -216,17 +218,17 @@ html {
   margin-bottom: 5px !important;
 }
 
-.achievement-icon {
+/* .achievement-icon {
   width: 36px !important;
   height: 36px !important;
   margin-right: 10px !important;
   margin-bottom: 10px !important;
-}
+} */
 
 .achievements-container {
   display: flex;
   flex-wrap: wrap;
-  max-height: 23vh;
+  max-height: 20vh;
   overflow-y: auto;
 }
 
@@ -244,16 +246,17 @@ html {
 } */
 
 .scoreboard-section {
-  background-color: black;
+  background-color: #1E2328;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(253, 249, 23, 0.5);
   padding: 20px;
+  height: 300px;
 }
 
 .stat {
   font-size: 2em;
   font-weight: bold;
-  /* color: #007bff; */
+  color: white;
 }
 
 .stylingColor {
@@ -286,7 +289,7 @@ html {
   border-radius: 12px;
   font-size: 0.9em;
   color: #ffffff;
-  background-color: black;
+  background-color: #1E2328;
 }
 
 .friends-container {
@@ -295,7 +298,7 @@ html {
 }
 
 .friends-section {
-  background-color: black;
+  background-color: #1E2328;
   box-shadow: 0 4px 8px rgba(253, 249, 23, 0.5);
   border-radius: 5%;
 }

@@ -103,25 +103,25 @@ export function initHomePage() {
   //   window.addEventListener("resize", handleResize); // TO BE REMOVED F PLAY AND FRIEND DISPLAY NONE fiha
 
   //   /*------------------------------------- NEW CODE ADDED -------------- */
-  //   //   async function fetchUserData() {
-  //   //   let token = sessionStorage.getItem('accessToken');
-  //   //   try {
-  //   //     let response = await fetch("http://0.0.0.0:8000/user/", {
-  //   //       headers: {
-  //   //         'Authorization': `Bearer ${token}`,
-  //   //         'Content-Type': 'application/json'
-  //   //       },
-  //   //       method: "POST",
-  //   //     });
-  //   //     if (response.ok) {
-  //   //       let rewind = await response.json();
-  //   //       /* user data to be rendered here*/
+    //   async function fetchUserData() {
+    //   let token = sessionStorage.getItem('accessToken');
+    //   try {
+    //     let response = await fetch("http://0.0.0.0:8000/user/", {
+    //       headers: {
+    //         'Authorization': `Bearer ${token}`,
+    //         'Content-Type': 'application/json'
+    //       },
+    //       method: "POST",
+    //     });
+    //     if (response.ok) {
+    //       let rewind = await response.json();
+    //       /* user data to be rendered here*/
 
-  //   //     }
-  //   //   } catch (err) {
-  //   //     console.err(err);
-  //   //   }
-  //   // }
+    //     }
+    //   } catch (err) {
+    //     console.err(err);
+    //   }
+    // }
   //   // fetchUserData();
   //   // const dummydata =
   //   //   { id: 1, name: "Alex", level: 999, wins: 150, img: "https://i.pravatar.cc/160?img=1" };
@@ -155,68 +155,68 @@ export function initHomePage() {
   //   //   user.innerHTML = `${renderUser()}`;
   //   // }
   //   // user();
-  //   async function fetchUserData() {
-  //     let token = sessionStorage.getItem("jwtToken");
-  //     console.log(token);
-  //     try {
-  //       let response = await fetch("http://0.0.0.0:8000/userinfo/", {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //           "Content-Type": "application/json",
-  //         },
-  //         method: "GET",
-  //       });
-  //       if (response.ok) {
-  //         let userData = await response.json();
-  //         console.log(userData);
-  //         // Decrypt the profile picture and update the user display
-  //         let profilePicture = "http://0.0.0.0:8000/" + userData.profile_picture;
-  //         console.log(profilePicture, userData);
-  //         updateUserDisplay(userData, profilePicture);
-  //       } else {
-  //         console.error("Failed to fetch user data:", response.statusText); // Error handling
-  //       }
-  //     } catch (err) {
-  //       console.error("Error fetching user data:", err);
-  //     }
-  //   }
+    async function fetchUserData() {
+      let token = sessionStorage.getItem("jwtToken");
+      console.log(token);
+      try {
+        let response = await fetch("http://0.0.0.0:8000/userinfo/", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          method: "GET",
+        });
+        if (response.ok) {
+          let userData = await response.json();
+          console.log(userData);
+          // Decrypt the profile picture and update the user display
+          let profilePicture = "http://0.0.0.0:8000/" + userData.profile_picture;
+          // console.log(profilePicture, userData);
+          updateUserDisplay(userData, profilePicture);
+        } else {
+          console.error("Failed to fetch user data:", response.statusText); // Error handling
+        }
+      } catch (err) {
+        console.error("Error fetching user data:", err);
+      }
+    }
 
-  //   function renderUser(userData, profilePicture) {
-  //     return `
-  //       <button class="user btn p-2">
-  //         <div class="d-flex align-items-center gap-5">
-  //           <!-- Profile Image -->
-  //           <div class="users-container">
-  //             <img src="./src/assets/home/border.png" alt="" class="users-border">
-  //             <img src="${profilePicture}" alt="Profile Image" class="rounded-circle users">
-  //             <!-- <p class="level">${userData.level}</p> -->
-  //           </div>
+    function renderUser(userData, profilePicture) {
+      return `
+        <button class="user btn p-2">
+          <div class="d-flex align-items-center gap-5">
+            <!-- Profile Image -->
+            <div class="users-container">
+              <img src="./src/assets/home/border.png" alt="" class="users-border">
+              <img src="${profilePicture}" alt="Profile Image" class="rounded-circle users">
+              <!-- <p class="level"></p> -->
+            </div>
 
-  //           <!-- User Name -->
-  //           <div class="UserProfile">
-  //             <a href="#profil" class="text-white text-decoration-none"><strong>${userData.nickname}</strong></a>
-  //           </div>
+            <!-- User Name -->
+            <div class="UserProfile">
+              <a href="#profil" class="text-white text-decoration-none"><strong>${userData.nickname}</strong></a>
+            </div>
 
-  //           <!-- Notification Icon -->
-  //           <div class="Notifications">
-  //             <i class="bi bi-bell-fill text-white"></i>
-  //           </div>
-  //         </div>
-  //       </button>
-  //     `;
-  //   }
+            <!-- Notification Icon -->
+            <div class="Notifications">
+              <i class="bi bi-bell-fill text-white"></i>
+            </div>
+          </div>
+        </button>
+      `;
+    }
 
-  //   function updateUserDisplay(userData, profilePicture) {
-  //     let userContainer = document.getElementById("user-container");
-  //     userContainer.innerHTML = renderUser(userData, profilePicture);
-  //   }
+    function updateUserDisplay(userData, profilePicture) {
+      let userContainer = document.getElementById("user-container");
+      userContainer.innerHTML = renderUser(userData, profilePicture);
+    }
 
   //   function decryptImage(encryptedImageBase64, userData) {
   //     // Recreate the data URL for the image
   //     return `data:${userData.mimeType};base64,${encryptedImageBase64}`;
   // }
 
-  //   fetchUserData();
+    fetchUserData();
 
   // Elements
   const friendListSection = document.getElementById("friendListSection");

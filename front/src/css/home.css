@@ -3,8 +3,12 @@ body {
   overflow: hidden;
   margin: 0;
   padding: 0;
-  background-color: black;
+  background-color: #1E2328; 
   color: #F0E6D2;
+}
+
+.container-fluid {
+  /* background-color: #C8AA6E; */
 }
 
 /* LOGO */
@@ -17,8 +21,8 @@ body {
 
 .navbar {
   height: 120px;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid var(--colors-gold) !important;
+  margin-bottom: 0.5rem;
+  /* border-bottom: 1px solid var(--colors-gold) !important; */
 }
 
 .nav-item a {
@@ -51,8 +55,8 @@ body {
 }
 
 .section-card {
-  background: rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5px);
+  /* background: rgba(0, 0, 0, 0.1); */
+  /* backdrop-filter: blur(5px); */
   border-radius: 1rem;
   padding: 1.5rem;
   height: calc(100vh - 156px); /* Taller cards for bigger screens */
@@ -66,6 +70,9 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #C8AA6E;
+  
 }
 
 .friend-actions {
