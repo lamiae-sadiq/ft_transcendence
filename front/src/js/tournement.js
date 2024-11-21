@@ -51,7 +51,7 @@ function tournament(players) {
   item2Child1.className = "item2-child1";
   const trophyImg = document.createElement("img");
   trophyImg.className = "trophy_img";
-  trophyImg.src = "resources/trop.png";
+  trophyImg.src = "./src/assets/resources/trop.png";
   trophyImg.alt = "trophy";
   item2Child1.appendChild(trophyImg);
 
@@ -60,7 +60,7 @@ function tournament(players) {
   item2Child2.className = "item2-child2";
 
   const leftVectorImg = document.createElement("img");
-  leftVectorImg.src = "resources/leftvector.png";
+  leftVectorImg.src = "./src/assets/resources/leftvector.png";
   leftVectorImg.alt = "leftvector";
 
   const finalDiv = document.createElement("div");
@@ -86,7 +86,7 @@ function tournament(players) {
   finalDiv.appendChild(finalDownShape);
 
   const rightVectorImg = document.createElement("img");
-  rightVectorImg.src = "resources/rightvector.png";
+  rightVectorImg.src = "./src/assets/resources/rightvector.png";
   rightVectorImg.alt = "rightvector";
 
   // Append items to item2-child2
@@ -98,7 +98,7 @@ function tournament(players) {
   const item2Child3 = document.createElement("div");
   item2Child3.className = "item2-child3";
   const quoteImg = document.createElement("img");
-  quoteImg.src = "resources/quote.png";
+  quoteImg.src = "./src/assets/resources/quote.png";
   quoteImg.alt = "quote";
   item2Child3.appendChild(quoteImg);
 
@@ -156,7 +156,7 @@ function finaltournament() {
   item2Child1.className = "item2-child1";
   const trophyImg = document.createElement("img");
   trophyImg.className = "trophy_img";
-  trophyImg.src = "resources/trop.png";
+  trophyImg.src = "./src/assets/resources/trop.png";
   trophyImg.alt = "trophy";
   item2Child1.appendChild(trophyImg);
 
@@ -190,7 +190,7 @@ function finaltournament() {
   const item2Child3 = document.createElement("div");
   item2Child3.className = "item2-child3";
   const quoteImg = document.createElement("img");
-  quoteImg.src = "resources/quote.png";
+  quoteImg.src = "./src/assets/resources/quote.png";
   quoteImg.alt = "quote";
   item2Child3.appendChild(quoteImg);
 
@@ -227,7 +227,7 @@ function OneVsOne(players) {
   item1.textContent = `${players[0]}`.toUpperCase();
   item1.id = "player1";
   const img = document.createElement("img");
-  img.src = "resources/vs.png";
+  img.src = "./src/assets/resources/vs.png";
   img.alt = "vs";
   const item2 = document.createElement("span");
   item2.textContent = `${players[1]}`.toUpperCase();
@@ -239,7 +239,7 @@ function OneVsOne(players) {
   const lastdiv = document.createElement("div");
   lastdiv.className = "lastdiv-finale";
   const quote = document.createElement("img");
-  quote.src = "resources/quote.png";
+  quote.src = "./src/assets/resources/quote.png";
   quote.alt = "quote";
   lastdiv.appendChild(quote);
 

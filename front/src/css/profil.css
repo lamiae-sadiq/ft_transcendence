@@ -170,6 +170,13 @@ html {
   /* Make full height minus navbar */
 }
 
+#profileBio {
+  color: white !important;
+}
+#profileName {
+  color: white !important;
+}
+
 .profile-section {
   position: relative; /* Set relative position for positioning child elements */
   height: 480px;

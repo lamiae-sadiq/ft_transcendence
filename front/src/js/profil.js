@@ -296,12 +296,12 @@ export function initProfilPage() {
   function renderUser(userData, profilePicture) {
     return `
     <button class="user btn p-2">
-      <div class="d-flex align-items-center gap-5">
+      <div class="d-flex align-items-center gap-2">
         <!-- Profile Image -->
         <div class="users-container">
           <img src="./src/assets/home/border.png" alt="" class="users-border">
           <img src="${profilePicture}" alt="Profile Image" class="rounded-circle users" id="profilPicture">
-          <!-- <p class="level">${userData.level}</p> -->
+          <!-- <p class="level"></p> -->
         </div>
         
         <!-- User Name -->

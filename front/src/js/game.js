@@ -43,7 +43,7 @@ export function initGamePage() {
       p.innerText = winner.toUpperCase() + " WIN";
       div.appendChild(p);
       let img = document.createElement("img");
-      img.src = "src/assets/resources/trophy.svg";
+      img.src = "./src/assets/resources/trophy.svg";
       img.alt = "trophy";
       div.appendChild(img);
       win_dow.appendChild(div);
@@ -441,12 +441,12 @@ export function initGamePage() {
         // create the img elements
         let leftLetters = document.createElement("img");
         if (gametype === "local" || gametype === "tournament")
-          leftLetters.src = "src/assets/resources/letters.svg";
+          leftLetters.src = "./src/assets/resources/letters.svg";
         else if (gametype === "remote")
-          leftLetters.src = "src/assets/resources/arrows.svg";
+          leftLetters.src = "./src/assets/resources/arrows.svg";
         leftLetters.className = "movement-icon";
         let rightArrows = document.createElement("img");
-        rightArrows.src = "src/assets/resources/arrows.svg";
+        rightArrows.src = "./src/assets/resources/arrows.svg";
         rightArrows.className = "movement-icon";
 
         // Append name and score elements to the respective containers
@@ -483,7 +483,7 @@ export function initGamePage() {
         } else {
           alert("Canvas is not supported");
         }
-        gameData.img.src = "src/assets/resources/background0.png";
+        gameData.img.src = "./src/assets/resources/background0.png";
         gameData.img.onload = function () {
           // window.requestAnimationFrame(draw);
           draw(0);
@@ -986,8 +986,8 @@ export function initGamePage() {
       }
     }
   }
-//   game("remote");
-//   game("tournament");
-//   game("bot");
-//   game("local");
+  // game("remote");
+  game("tournament");
+  // game("bot");
+  // game("local");
 }

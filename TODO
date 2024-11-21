@@ -1,0 +1,21 @@
+OTHMANE:
+    -endpoints : store (win - lose)
+    -database : lvl
+    -env file
+    -SM FILES ?????
+    -42 AUTHENTICATION
+    -2fa
+
+ZAKARIA:
+    -send data to othmane (win - lose)
+    -blockchain ayoub
+    -parsing URL- JWT
+    -level
+
+AYOUB:
+    -other user profil
+    -fix leaderboard
+    - about page
+    - query the mode
+    - navigateTo(game);
+    - landingPage

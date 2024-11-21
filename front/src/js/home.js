@@ -171,7 +171,7 @@ export function initHomePage() {
           console.log(userData);
           // Decrypt the profile picture and update the user display
           let profilePicture = "http://0.0.0.0:8000/" + userData.profile_picture;
-          // console.log(profilePicture, userData);
+          console.log(profilePicture, userData);
           updateUserDisplay(userData, profilePicture);
         } else {
           console.error("Failed to fetch user data:", response.statusText); // Error handling
@@ -184,7 +184,7 @@ export function initHomePage() {
     function renderUser(userData, profilePicture) {
       return `
         <button class="user btn p-2">
-          <div class="d-flex align-items-center gap-5">
+          <div class="d-flex align-items-center gap-2">
             <!-- Profile Image -->
             <div class="users-container">
               <img src="./src/assets/home/border.png" alt="" class="users-border">
