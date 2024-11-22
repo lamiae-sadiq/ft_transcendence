@@ -3,6 +3,6 @@ WORKDIR /backend
 COPY requirements.txt /backend
 RUN pip install -r requirements.txt
 COPY  . /backend
-EXPOSE 8000
+EXPOSE 8001
 RUN  apt-get update && apt-get install -y procps
-CMD [ "python", "gameback/manage.py", "runserver", "0.0.0.0:8000"]
+CMD [ "python", "gameback/manage.py", "runserver", "0.0.0.0:8001"]
