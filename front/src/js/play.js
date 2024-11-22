@@ -1,4 +1,38 @@
+import { navigateTo } from "./main.js";
+
 export function initPlayPage() {
+  const modeItems = document.querySelectorAll(".mode-item");
+  const confirmButton = document.getElementById("confirmButton");
+
+  modeItems.forEach((item) => {
+    const image = item.querySelector(".mode-image");
+    const description = item.querySelector(".mode-description");
+
+    image.addEventListener("click", () => {
+      // Hide all descriptions first
+      document.querySelectorAll(".mode-description").forEach((desc) => {
+        desc.classList.remove("active");
+      });
+
+      // Show clicked item's description
+      description.classList.add("active");
+    });
+  });
+
+  confirmButton.addEventListener("click", () => {
+    const activeMode = document.querySelector(".mode-description.active");
+    if (activeMode) {
+      const modeName =
+        activeMode.parentElement.querySelector(".mode-title").textContent;
+        alert(modeName);
+        navigateTo('game', { mode: modeName });
+    } else {
+      alert("Please select a game mode first!");
+    }
+  });
+}
+
+
   /*------------------------------------- NEW CODE ADDED -------------- */
 
   //     let selectedButton = null;
@@ -90,32 +124,3 @@ export function initPlayPage() {
   //   }
 
   //     fetchUserData();
-  const modeItems = document.querySelectorAll(".mode-item");
-  const confirmButton = document.getElementById("confirmButton");
-
-  modeItems.forEach((item) => {
-    const image = item.querySelector(".mode-image");
-    const description = item.querySelector(".mode-description");
-
-    image.addEventListener("click", () => {
-      // Hide all descriptions first
-      document.querySelectorAll(".mode-description").forEach((desc) => {
-        desc.classList.remove("active");
-      });
-
-      // Show clicked item's description
-      description.classList.add("active");
-    });
-  });
-
-  confirmButton.addEventListener("click", () => {
-    const activeMode = document.querySelector(".mode-description.active");
-    if (activeMode) {
-      const modeName =
-        activeMode.parentElement.querySelector(".mode-title").textContent;
-      alert(`Starting ${modeName} mode!`);
-    } else {
-      alert("Please select a game mode first!");
-    }
-  });
-}

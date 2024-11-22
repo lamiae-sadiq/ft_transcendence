@@ -6,13 +6,21 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Function to handle navigation
-export function navigateTo(page) {
+export function navigateTo(page, queryParams = {}) {
   // Clear all query parameters and hash from the URL
-  const baseUrl = location.origin + '/'; // Set the base URL to just the origin
+  const baseUrl = location.origin + '/';
+  
+  // Construct query string from the queryParams object
+  const queryString = new URLSearchParams(queryParams).toString();
+  
+  // If there are query parameters, append them to the URL
+  const urlWithParams = queryString ? `${baseUrl}#${page}?${queryString}` : `${baseUrl}#${page}`;
+
   // Replace the current state to clear any query parameters
   window.history.replaceState({}, '', baseUrl);
-  // Push the new state with the desired page hash
-  history.pushState({ page }, '', `#${page}`);
+  
+  // Push the new state with the desired page hash and optional query parameters
+  history.pushState({ page }, '', urlWithParams);
   loadPage(page);
 }
 
@@ -36,6 +44,10 @@ function loadPage(page) {
   link.href = `src/css/${page}.css`; // Dynamic CSS based on page
   link.id = 'page-style'; // Assign an ID to the link tag for future removal
   document.head.appendChild(link);
+
+  // Extract query parameters from the URL hash
+   const mode = getQueryParamsFromUrl();
+   console.log(mode, "heeeeeeeree1")
 
   // Handle special cases for landing and login
   if (page === 'landing' || page === 'login') {
@@ -68,11 +80,6 @@ function loadPage(page) {
           contentDiv.innerHTML = html;
           // Dynamically load and initialize JavaScript for the page
           initializePageScripts(page);
-          // Add event listener for the login form submission
-          // document.getElementById('loginForm').addEventListener('submit', function (event) {
-          //   event.preventDefault(); 
-          //   navigateTo('home'); 
-          // });
         })
         .catch(error => {
           console.log(error);
@@ -90,7 +97,7 @@ function loadPage(page) {
         // console.log(html);
         contentDiv.innerHTML = `${html}`;
         // Dynamically load and initialize JavaScript for the page
-        initializePageScripts(page);
+        initializePageScripts(page, mode);
       })
       .catch(error => {
         contentDiv.innerHTML = '<h1>404 Page Not Found</h1>';
@@ -99,7 +106,7 @@ function loadPage(page) {
 }
 
 
-function initializePageScripts(page) {
+function initializePageScripts(page, mode) {
   // Remove existing script if necessary
   const existingScript = document.getElementById('dynamic-script');
   if (existingScript) {
@@ -145,12 +152,21 @@ function initializePageScripts(page) {
       break;
       case 'game':
         import('./game.js').then(module => {
-          module.initGamePage();
+          module.initGamePage(mode);
         });
         break;
     default:
       console.log('No script found for this page');
   }
+}
+
+// Helper function to get query parameters from the current URL
+function getQueryParamsFromUrl() {
+  const hash = window.location.hash;
+  const queryString = hash.split('?')[1]; // after '?'
+  const urlParams = new URLSearchParams(queryString);
+  const mode = urlParams.get('mode');
+  return mode;
 }
 
 window.addEventListener('popstate', (event) => {
