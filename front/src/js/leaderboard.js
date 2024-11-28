@@ -1,23 +1,63 @@
 export function initLeaderboardPage() {
   /*------------------------------------- NEW CODE ADDED -------------- */
   async function fetchUserData() {
-    let token = sessionStorage.getItem("accessToken");
+    console.log(token);
     try {
-      let response = await fetch("http://0.0.0.0:8000/user/", {
+      let response = await fetch("http://0.0.0.0:8000/userinfo/", {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        method: "POST",
+        method: "GET",
       });
       if (response.ok) {
-        let rewind = await response.json();
-        /* user data to be rendered here*/
+        let userData = await response.json();
+        console.log(userData);
+        // Decrypt the profile picture and update the user display
+        let profilePicture = "http://0.0.0.0:8000/" + userData.profile_picture;
+        console.log(profilePicture);
+        updateUserDisplay(userData, profilePicture);
+        document.getElementById("profileName").textContent = userData.nickname;
+        document.getElementById("profileBio").textContent = userData.bio;
+        document.getElementById("profileImage").src = profilePicture;
+      } else {
+        console.error("Failed to fetch user data:", response.statusText);
       }
     } catch (err) {
-      console.err(err);
+      console.error("Error fetching user data:", err);
     }
   }
+
+  function renderUser(userData, profilePicture) {
+    return `
+    <button class="user btn p-2">
+      <div class="d-flex align-items-center gap-2">
+        <!-- Profile Image -->
+        <div class="users-container">
+          <img src="./src/assets/home/border.png" alt="" class="users-border">
+          <img src="${profilePicture}" alt="Profile Image" class="rounded-circle users" id="profilPicture">
+          <!-- <p class="level"></p> -->
+        </div>
+        
+        <!-- User Name -->
+        <div class="UserProfile">
+          <a href="#profil" class="text-white text-decoration-none" id="nickName"><strong>${userData.nickname}</strong></a>
+        </div>
+        
+        <!-- Notification Icon -->
+        <div class="Notifications">
+          <i class="bi bi-bell-fill text-white"></i>
+        </div>
+      </div>
+    </button>
+  `;
+  }
+
+  function updateUserDisplay(userData, profilePicture) {
+    let userContainer = document.getElementById("user-container");
+    userContainer.innerHTML = renderUser(userData, profilePicture);
+  }
+
   fetchUserData();
   /*------------------------------------- NEW CODE ADDED -------------- */
   const leaderboardData = [

@@ -24,7 +24,6 @@ export function initPlayPage() {
     if (activeMode) {
       const modeName =
         activeMode.parentElement.querySelector(".mode-title").textContent;
-        alert(modeName);
         navigateTo('game', { mode: modeName });
     } else {
       alert("Please select a game mode first!");

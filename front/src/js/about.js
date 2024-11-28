@@ -55,11 +55,6 @@ export function initAboutPage() {
         userContainer.innerHTML = renderUser(userData, profilePicture);
     }
 
-    function decryptImage(encryptedImageBase64, userData) {
-        // Recreate the data URL for the image
-        return `data:${userData.mimeType};base64,${encryptedImageBase64}`;
-    }
-
     fetchUserData();
     
     const developers = [

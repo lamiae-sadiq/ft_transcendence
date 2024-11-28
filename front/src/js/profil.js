@@ -62,7 +62,74 @@ export function initProfilPage() {
       status: "offline",
       picture: "https://i.pravatar.cc/160?img=3",
     },
+    {
+      name: "54y6",
+      status: "offline",
+      picture: "https://i.pravatar.cc/160?img=3",
+    },
+    {
+      name: "y",
+      status: "offline",
+      picture: "https://i.pravatar.cc/160?img=3",
+    },
+    {
+      name: "4",
+      status: "offline",
+      picture: "https://i.pravatar.cc/160?img=3",
+    },
+    {
+      name: "y",
+      status: "offline",
+      picture: "https://i.pravatar.cc/160?img=3",
+    },
+    {
+      name: "h",
+      status: "offline",
+      picture: "https://i.pravatar.cc/160?img=3",
+    },
+    {
+      name: "b",
+      status: "offline",
+      picture: "https://i.pravatar.cc/160?img=3",
+    },
+    {
+      name: "w",
+      status: "offline",
+      picture: "https://i.pravatar.cc/160?img=3",
+    },
+    {
+      name: "p",
+      status: "offline",
+      picture: "https://i.pravatar.cc/160?img=3",
+    },
+    {
+      name: "c",
+      status: "offline",
+      picture: "https://i.pravatar.cc/160?img=3",
+    },
   ];
+
+
+  const bio = document.getElementById("profileBio");
+  const maxLength = 100;
+
+  bio.addEventListener("input", () => {
+    // Trim extra characters if exceeded
+    if (bio.textContent.length > maxLength) {
+      bio.textContent = bio.textContent.slice(0, maxLength);
+      placeCaretAtEnd(bio); // Reposition the cursor
+    }
+  });
+
+// Helper function to place caret at the end of contenteditable
+function placeCaretAtEnd(el) {
+  const range = document.createRange();
+  const selection = window.getSelection();
+  range.selectNodeContents(el);
+  range.collapse(false);
+  selection.removeAllRanges();
+  selection.addRange(range);
+}
 
   // Sort friends by status (online first)
   friends.sort((a, b) => (a.status === "offline") - (b.status === "offline"));
@@ -295,7 +362,7 @@ export function initProfilPage() {
 
   function renderUser(userData, profilePicture) {
     return `
-    <button class="user btn p-2">
+    <button class="user btn p-2 no-border">
       <div class="d-flex align-items-center gap-2">
         <!-- Profile Image -->
         <div class="users-container">

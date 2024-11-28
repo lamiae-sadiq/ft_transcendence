@@ -183,7 +183,7 @@ export function initHomePage() {
 
     function renderUser(userData, profilePicture) {
       return `
-        <button class="user btn p-2">
+        <button class="user btn p-2 no-border">
           <div class="d-flex align-items-center gap-2">
             <!-- Profile Image -->
             <div class="users-container">
@@ -210,12 +210,6 @@ export function initHomePage() {
       let userContainer = document.getElementById("user-container");
       userContainer.innerHTML = renderUser(userData, profilePicture);
     }
-
-  //   function decryptImage(encryptedImageBase64, userData) {
-  //     // Recreate the data URL for the image
-  //     return `data:${userData.mimeType};base64,${encryptedImageBase64}`;
-  // }
-
     fetchUserData();
 
   // Elements
