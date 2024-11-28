@@ -1,9 +1,9 @@
 OTHMANE:
-    -endpoints : store (win - lose)
+    -endpoints : store (win - lose)✅
+    -42 AUTHENTICATION✅
     -database : lvl
     -env file
     -SM FILES ?????
-    -42 AUTHENTICATION
     -2fa
 
 ZAKARIA:

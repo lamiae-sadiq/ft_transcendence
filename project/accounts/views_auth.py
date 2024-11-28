@@ -20,7 +20,7 @@ def tokenFunc(code):
     payload = {
         "grant_type": "authorization_code",
         "client_id": "u-s4t2ud-9e8cb1d6b2b0bb181505b29a9397b6d8e3079ab0fe7be47c059b43e8f4603fcf",
-        "client_secret": "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",
+        "client_secret": "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",
         "redirect_uri": "http://0.0.0.0:8080/login",
         "code": code
     }
