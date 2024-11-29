@@ -5,6 +5,7 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 import asyncio
 
 from . import gameLogic
+import aiohttp
 
 
 # rooms = {}
@@ -230,6 +231,15 @@ class pingPongConsumer(AsyncWebsocketConsumer):
     async def tournamentGame(self, gameStatus):
         # len of the players
         self.playersNum = len(self.playerNames)
+        #send request for tournament id
+        async with aiohttp.ClientSession() as session:
+            async with session.post('http://0.0.0.0:8000/smartcontract/create-tournament/', json={}) as response:
+                if response.status == 200:
+                    data = await response.json()
+                    self.tournament_id = data.get('tournamentId')
+                else:
+                    print("Failed to get tournament ID")
+                    return
         # generate random groups
         self.groupss_Players = self.generateRandomGroups()
         self.n = self.playersNum - 1
@@ -267,6 +277,19 @@ class pingPongConsumer(AsyncWebsocketConsumer):
             else:
                 print(self.groupss_Players[self.groNum + 1][1])
                 self.winners.append(self.groupss_Players[self.groNum + 1][1])
+            #send data
+            async with aiohttp.ClientSession() as session:
+                async with session.post('http://0.0.0.0:8000/smartcontract/record-match/', json={
+                'tournament_id': self.tournament_id,
+                'player1_name': self.groupss_Players[self.groNum + 1][0],
+                'player1_score': gameStatus.leftPlayerScore,
+                'player2_name': self.groupss_Players[self.groNum + 1][1],
+                'player2_score': gameStatus.rightPlayerScore
+                }) as response:
+                    if response.status == 200:
+                        print("Result sent successfully")
+                    else:
+                        print("Failed to send result")
             self.restoreGame(self.gameStatus)
             self.n -= 1
         print('winners = ',self.winners)
