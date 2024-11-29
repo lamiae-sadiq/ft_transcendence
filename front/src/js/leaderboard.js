@@ -1,6 +1,8 @@
+import { navigateTo } from "./main.js";
 export function initLeaderboardPage() {
   /*------------------------------------- NEW CODE ADDED -------------- */
   async function fetchUserData() {
+    let token = sessionStorage.getItem("jwtToken");
     console.log(token);
     try {
       let response = await fetch("http://0.0.0.0:8000/userinfo/", {
@@ -219,10 +221,8 @@ export function initLeaderboardPage() {
       });
       if (response.ok) {
         let userData = await response.json();
-        console.log(userData);
         // Decrypt the profile picture and update the user display
-        let profilePicture = "http://0.0.0.0:8000" + userData.profile_picture;
-        console.log(profilePicture, userData);
+        let profilePicture = "http://0.0.0.0:8000/" + userData.profile_picture;
         updateUserDisplay(userData, profilePicture);
       } else {
         console.error("Failed to fetch user data:", response.statusText); // Error handling
@@ -268,4 +268,46 @@ export function initLeaderboardPage() {
   }
 
   fetchUserData();
+  /******************************************************************************** */
+  const homebtn = document.getElementsByClassName("home");
+  if (homebtn[0]) {
+    homebtn[0].addEventListener("click", function (event) {
+      event.preventDefault();
+      navigateTo("home");
+    });
+  }
+  
+  const homeButton = document.getElementById("home");
+  if (homeButton) {
+    homeButton.addEventListener("click", function (event) {
+      event.preventDefault();
+      navigateTo("home");
+    });
+  }
+
+  const leaderboardButton = document.getElementById("leaderboard");
+  if (leaderboardButton) {
+    leaderboardButton.addEventListener("click", function (event) {
+      event.preventDefault();
+      navigateTo("leaderboard");
+    });
+  }
+
+  const aboutButton = document.getElementById("about");
+  if (aboutButton) {
+    aboutButton.addEventListener("click", function (event) {
+      event.preventDefault();
+      navigateTo("about");
+    });
+  }
+  // if (document.getElementsByClassName("profil")) {
+    const profilButton = document.getElementsByClassName("profil");
+    if (profilButton[0]) {
+      profilButton[0].addEventListener("click", function (event) {
+        event.preventDefault();
+        navigateTo("profil");
+      });
+    }
+  // }
+  /******************************************************************************** */
 }

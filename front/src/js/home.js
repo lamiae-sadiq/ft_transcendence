@@ -102,87 +102,34 @@ export function initHomePage() {
 
   //   window.addEventListener("resize", handleResize); // TO BE REMOVED F PLAY AND FRIEND DISPLAY NONE fiha
 
-  //   /*------------------------------------- NEW CODE ADDED -------------- */
-    //   async function fetchUserData() {
-    //   let token = sessionStorage.getItem('accessToken');
-    //   try {
-    //     let response = await fetch("http://0.0.0.0:8000/user/", {
-    //       headers: {
-    //         'Authorization': `Bearer ${token}`,
-    //         'Content-Type': 'application/json'
-    //       },
-    //       method: "POST",
-    //     });
-    //     if (response.ok) {
-    //       let rewind = await response.json();
-    //       /* user data to be rendered here*/
-
-    //     }
-    //   } catch (err) {
-    //     console.err(err);
-    //   }
-    // }
-  //   // fetchUserData();
-  //   // const dummydata =
-  //   //   { id: 1, name: "Alex", level: 999, wins: 150, img: "https://i.pravatar.cc/160?img=1" };
-
-  //   // function renderUser() {
-  //   //   return `
-  //   //   <button class="user btn p-2">
-  //   //     <div class="d-flex align-items-center gap-5">
-  //   //       <!-- Profile Image -->
-  //   //       <div class="users-container">
-  //   //         <img src="./src/assets/home/border.png" alt="" class="users-border">
-  //   //         <img src="${dummydata.img}" alt="Profile Image" class="rounded-circle users">
-  //   //         <p class="level">${dummydata.level}</p>
-  //   //       </div>
-
-  //   //       <!-- User Name -->
-  //   //       <div class="UserProfile">
-  //   //         <a href="#profil" class="text-white text-decoration-none"><strong>${dummydata.name}</strong></a>
-  //   //       </div>
-
-  //   //       <!-- Notification Icon -->
-  //   //       <div class="Notifications">
-  //   //         <i class="bi bi-bell-fill text-white"></i>
-  //   //       </div>
-  //   //     </div>
-  //   //   </button>
-  //   //   `;
-  //   // }
-  //   // function user() {
-  //   //   let user = document.getElementById("user-container");
-  //   //   user.innerHTML = `${renderUser()}`;
-  //   // }
-  //   // user();
-    async function fetchUserData() {
-      let token = sessionStorage.getItem("jwtToken");
-      console.log(token);
-      try {
-        let response = await fetch("http://0.0.0.0:8000/userinfo/", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          method: "GET",
-        });
-        if (response.ok) {
-          let userData = await response.json();
-          console.log(userData);
-          // Decrypt the profile picture and update the user display
-          let profilePicture = "http://0.0.0.0:8000/" + userData.profile_picture;
-          console.log(profilePicture, userData);
-          updateUserDisplay(userData, profilePicture);
-        } else {
-          console.error("Failed to fetch user data:", response.statusText); // Error handling
-        }
-      } catch (err) {
-        console.error("Error fetching user data:", err);
+  async function fetchUserData() {
+    let token = sessionStorage.getItem("jwtToken");
+    console.log(token);
+    try {
+      let response = await fetch("http://0.0.0.0:8000/userinfo/", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        method: "GET",
+      });
+      if (response.ok) {
+        let userData = await response.json();
+        console.log(userData);
+        // Decrypt the profile picture and update the user display
+        let profilePicture = "http://0.0.0.0:8000/" + userData.profile_picture;
+        console.log(profilePicture, userData);
+        updateUserDisplay(userData, profilePicture);
+      } else {
+        console.error("Failed to fetch user data:", response.statusText); // Error handling
       }
+    } catch (err) {
+      console.error("Error fetching user data:", err);
     }
+  }
 
-    function renderUser(userData, profilePicture) {
-      return `
+  function renderUser(userData, profilePicture) {
+    return `
         <button class="user btn p-2 no-border">
           <div class="d-flex align-items-center gap-2">
             <!-- Profile Image -->
@@ -194,7 +141,7 @@ export function initHomePage() {
 
             <!-- User Name -->
             <div class="UserProfile">
-              <a href="#profil" class="text-white text-decoration-none"><strong>${userData.nickname}</strong></a>
+              <a href="" class="text-white text-decoration-none"><strong>${userData.nickname}</strong></a>
             </div>
 
             <!-- Notification Icon -->
@@ -204,13 +151,14 @@ export function initHomePage() {
           </div>
         </button>
       `;
-    }
+  }
 
-    function updateUserDisplay(userData, profilePicture) {
-      let userContainer = document.getElementById("user-container");
-      userContainer.innerHTML = renderUser(userData, profilePicture);
-    }
-    fetchUserData();
+  function updateUserDisplay(userData, profilePicture) {
+    let userContainer = document.getElementById("user-container");
+    userContainer.innerHTML = renderUser(userData, profilePicture);
+  }
+  console.log("BEFORE FETCHING DATA: will it be twice and why");
+  fetchUserData();
 
   // Elements
   const friendListSection = document.getElementById("friendListSection");
@@ -298,7 +246,49 @@ export function initHomePage() {
   const playButton = document.getElementById("confirmButton");
   if (playButton) {
     playButton.addEventListener("click", function () {
-      navigateTo("play"); // Redirect to 'login' page when Play button is clicked
+      navigateTo("play");
     });
   }
+  /******************************************************************************** */
+  const homebtn = document.getElementsByClassName("home");
+  if (homebtn[0]) {
+    homebtn[0].addEventListener("click", function (event) {
+      event.preventDefault();
+      navigateTo("home");
+    });
+  }
+  
+  const homeButton = document.getElementById("home");
+  if (homeButton) {
+    homeButton.addEventListener("click", function (event) {
+      event.preventDefault();
+      navigateTo("home");
+    });
+  }
+
+  const leaderboardButton = document.getElementById("leaderboard");
+  if (leaderboardButton) {
+    leaderboardButton.addEventListener("click", function (event) {
+      event.preventDefault();
+      navigateTo("leaderboard");
+    });
+  }
+
+  const aboutButton = document.getElementById("about");
+  if (aboutButton) {
+    aboutButton.addEventListener("click", function (event) {
+      event.preventDefault();
+      navigateTo("about");
+    });
+  }
+  // if (document.getElementsByClassName("profil")) {
+  const profilButton = document.getElementsByClassName("profil");
+  if (profilButton[0]) {
+    profilButton[0].addEventListener("click", function (event) {
+      event.preventDefault();
+      navigateTo("profil");
+    });
+  }
+  // }
+  /******************************************************************************** */
 }

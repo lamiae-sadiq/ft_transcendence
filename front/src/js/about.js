@@ -1,3 +1,5 @@
+import { navigateTo } from "./main.js";
+
 export function initAboutPage() {
     async function fetchUserData() {
         let token = sessionStorage.getItem("jwtToken");
@@ -111,4 +113,46 @@ export function initAboutPage() {
 
         developerCards.appendChild(card);
     });
+   /******************************************************************************** */
+   const homebtn = document.getElementsByClassName("home");
+   if (homebtn[0]) {
+     homebtn[0].addEventListener("click", function (event) {
+       event.preventDefault();
+       navigateTo("home");
+     });
+   }
+   
+   const homeButton = document.getElementById("home");
+   if (homeButton) {
+     homeButton.addEventListener("click", function (event) {
+       event.preventDefault();
+       navigateTo("home");
+     });
+   }
+ 
+   const leaderboardButton = document.getElementById("leaderboard");
+   if (leaderboardButton) {
+     leaderboardButton.addEventListener("click", function (event) {
+       event.preventDefault();
+       navigateTo("leaderboard");
+     });
+   }
+ 
+   const aboutButton = document.getElementById("about");
+   if (aboutButton) {
+     aboutButton.addEventListener("click", function (event) {
+       event.preventDefault();
+       navigateTo("about");
+     });
+   }
+   // if (document.getElementsByClassName("profil")) {
+    const profilButton = document.getElementsByClassName("profil");
+    if (profilButton[0]) {
+      profilButton[0].addEventListener("click", function (event) {
+        event.preventDefault();
+        navigateTo("profil");
+      });
+    }
+   // }
+   /******************************************************************************** */
 }
