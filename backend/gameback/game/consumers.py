@@ -7,6 +7,7 @@ import asyncio
 from . import gameLogic
 import aiohttp
 
+import requests
 
 # rooms = {}
 rooms_game_logic = {}
@@ -232,14 +233,20 @@ class pingPongConsumer(AsyncWebsocketConsumer):
         # len of the players
         self.playersNum = len(self.playerNames)
         #send request for tournament id
-        async with aiohttp.ClientSession() as session:
-            async with session.post('http://0.0.0.0:8000/smartcontract/create-tournament/', json={}) as response:
-                if response.status == 200:
-                    data = await response.json()
-                    self.tournament_id = data.get('tournamentId')
-                else:
-                    print("Failed to get tournament ID")
-                    return
+        url = "http://0.0.0.0:8000/smartcontract/create-tournament/"
+        headers = {"Accept": "application/json"}
+
+        try:
+            response = requests.post(url, headers=headers)
+            if response.status_code == 200:
+                data = response.json()
+                tournament_id = data.get("tournamentId")
+                print(f"Tournament ID: {tournament_id}")
+            else:
+                print(f"Failed to get tournament ID. Status code: {response.status}")
+                print(response.text)
+        except requests.exceptions.RequestException as e:
+            print(f"An error occurred: {e}")
         # generate random groups
         self.groupss_Players = self.generateRandomGroups()
         self.n = self.playersNum - 1
@@ -278,18 +285,25 @@ class pingPongConsumer(AsyncWebsocketConsumer):
                 print(self.groupss_Players[self.groNum + 1][1])
                 self.winners.append(self.groupss_Players[self.groNum + 1][1])
             #send data
-            async with aiohttp.ClientSession() as session:
-                async with session.post('http://0.0.0.0:8000/smartcontract/record-match/', json={
+            url = 'http://0.0.0.0:8000/smartcontract/record-match/'
+
+            # Construct the data to be sent in the request
+            data = {
                 'tournament_id': self.tournament_id,
                 'player1_name': self.groupss_Players[self.groNum + 1][0],
                 'player1_score': gameStatus.leftPlayerScore,
                 'player2_name': self.groupss_Players[self.groNum + 1][1],
                 'player2_score': gameStatus.rightPlayerScore
-                }) as response:
-                    if response.status == 200:
-                        print("Result sent successfully")
-                    else:
-                        print("Failed to send result")
+            }
+
+            # Send the POST request using requests
+            response = requests.post(url, json=data)
+
+            # Check if the request was successful
+            if response.status_code == 200:
+                print("Result sent successfully")
+            else:
+                print(f"Failed to send result. Status code: {response.status_code}")
             self.restoreGame(self.gameStatus)
             self.n -= 1
         print('winners = ',self.winners)
