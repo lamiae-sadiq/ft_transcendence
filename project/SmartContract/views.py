@@ -32,23 +32,50 @@ contract = w3.eth.contract(address=CONTRACT_ADDRESS, abi=abi)
 account = w3.eth.account.from_key(privateKey)
 gas_price = w3.eth.gas_price
 
+# @csrf_exempt
+# def send_transaction(func, *args):
+#     try:
+#         transaction = func(*args).build_transaction({
+#             'chainId': CHAIN_ID,
+#             'gasPrice': gas_price,
+#             'nonce': w3.eth.get_transaction_count(account.address),
+#         })
+#         signed_tx = w3.eth.account.sign_transaction(transaction, privateKey)
+#         hash_tx = w3.eth.send_raw_transaction(signed_tx.raw_transaction)
+#         w3.eth.wait_for_transaction_receipt(hash_tx, timeout=360)
+
+#         # Call the contract function to get the integer result (e.g., tournamentId)
+#         if func == contract.functions.createTournament:
+#             return func().call()  # Assuming this returns the integer
+#     except Exception as e:
+#         raise Exception(f"Transaction failed: {str(e)}")  # Rethrow the exception to be caught later
+
 @csrf_exempt
 def send_transaction(func, *args):
     try:
+        # Get current gas price data
+        max_priority_fee = w3.to_wei(2, 'gwei')  # Reasonable tip for miners
+
+        # Build the transaction with EIP-1559 parameters
         transaction = func(*args).build_transaction({
             'chainId': CHAIN_ID,
-            'gasPrice': gas_price,
             'nonce': w3.eth.get_transaction_count(account.address),
+            'maxFeePerGas': gas_price + max_priority_fee,  # Total max gas fee
+            'maxPriorityFeePerGas': max_priority_fee,  # Tip for miners
+            'gas': 3000000,  # Estimate or set manually
         })
+
+        # Sign and send the transaction
         signed_tx = w3.eth.account.sign_transaction(transaction, privateKey)
         hash_tx = w3.eth.send_raw_transaction(signed_tx.raw_transaction)
         w3.eth.wait_for_transaction_receipt(hash_tx, timeout=360)
 
-        # Call the contract function to get the integer result (e.g., tournamentId)
+        # Optional: Return the result of the contract function if applicable
         if func == contract.functions.createTournament:
             return func().call()  # Assuming this returns the integer
     except Exception as e:
         raise Exception(f"Transaction failed: {str(e)}")  # Rethrow the exception to be caught later
+
 
 @csrf_exempt
 def create_tournament(request):

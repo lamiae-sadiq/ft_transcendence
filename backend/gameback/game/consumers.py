@@ -234,7 +234,10 @@ class pingPongConsumer(AsyncWebsocketConsumer):
         self.playersNum = len(self.playerNames)
         #send request for tournament id
         url = "http://0.0.0.0:8000/smartcontract/create-tournament/"
-        headers = {"Accept": "application/json"}
+        # Define the headers
+        headers = {
+            'Accept': 'application/json',
+        }
 
         try:
             response = requests.post(url, headers=headers)
@@ -287,6 +290,11 @@ class pingPongConsumer(AsyncWebsocketConsumer):
             #send data
             url = 'http://0.0.0.0:8000/smartcontract/record-match/'
 
+            # Define the headers
+            headers = {
+                'Accept': 'application/json',
+            }
+
             # Construct the data to be sent in the request
             data = {
                 'tournament_id': self.tournament_id,
@@ -297,7 +305,7 @@ class pingPongConsumer(AsyncWebsocketConsumer):
             }
 
             # Send the POST request using requests
-            response = requests.post(url, json=data)
+            response = requests.post(url, json=data, headers=headers)
 
             # Check if the request was successful
             if response.status_code == 200:
