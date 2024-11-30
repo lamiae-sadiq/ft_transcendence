@@ -6,6 +6,10 @@ from dotenv import load_dotenv
 import os
 import json
 
+import logging
+
+logger = logging.getLogger('django')
+
 # Load environment variables
 load_dotenv()
 privateKey = os.getenv('private_key')
@@ -55,7 +59,7 @@ def send_transaction(func, *args):
     try:
         # Get current gas price data
         max_priority_fee = w3.to_wei(2, 'gwei')  # Reasonable tip for miners
-
+        logger.debug("---------------------------------------------------------------")
         # Build the transaction with EIP-1559 parameters
         transaction = func(*args).build_transaction({
             'chainId': CHAIN_ID,

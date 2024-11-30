@@ -28,6 +28,7 @@ services:
       - DB_HOST=db
       - DB_PORT=5432
       - private_key=08fdb79d0797a2f3be23e65c04b7ea373873132a8b0c1952298ebd103dafa656
+      - PYTHONUNBUFFERED=1
     networks:
       - my-net
     volumes:
@@ -58,6 +59,8 @@ services:
         - ./backend:/backend
       networks:
         - my-net
+      environment:
+        - PYTHONUNBUFFERED=1
 
 
 volumes:

@@ -2,6 +2,7 @@ import json
 import random
 import logging
 import requests
+from asgiref.sync import sync_to_async
 
 logger = logging.getLogger('django')
 
@@ -227,6 +228,33 @@ class pingPongConsumer(AsyncWebsocketConsumer):
                 # 'message': game.toJson()
             }
         )
+   
+    @sync_to_async
+    def sendRequest(self):
+        #send request for tournament id
+        url = "http://localhost:8000/smartcontract/create-tournament/"
+        # Define the headers
+        headers = {
+            'Accept': 'application/json',
+        }
+
+        try:
+            print("**********************************************")
+            response = requests.post(url, headers=headers, timeout=10)
+            print(response)
+            print(response.status_code)
+            
+            if response.status_code == 200:
+                data = response.json()
+                tournament_id = data.get("tournamentId")
+                print(f"Tournament ID: {tournament_id}")
+            else:
+                print(f"Failed to get tournament ID. Status code: {response.status}")
+                print(response.text)
+        except requests.exceptions.RequestException as e:
+            print(f"An error occurred: {e}")
+            
+            
     async def send_game(self, event):
         message = event['message']
         await self.send(text_data=json.dumps(message))
@@ -235,25 +263,7 @@ class pingPongConsumer(AsyncWebsocketConsumer):
         # len of the players
         self.playersNum = len(self.playerNames)
          #send request for tournament id
-        url = "http://0.0.0.0:8000/smartcontract/create-tournament/"
-        # Define the headers
-        headers = {
-            'Accept': 'application/json',
-        }
-
-        try:
-            print("**********************************************")
-            logger.debug("**********************************************")
-            response = requests.post(url, headers=headers, timeout=10)
-            if response.status_code == 200:
-                data = response.json()
-                tournament_id = data.get("tournamentId")
-                logger.debug(f"Tournament ID: {tournament_id}")
-            else:
-                logger.debug(f"Failed to get tournament ID. Status code: {response.status}")
-                logger.debug(response.text)
-        except requests.exceptions.RequestException as e:
-            logger.debug(f"An error occurred: {e}")
+        await self.sendRequest()
 
         # generate random groups
         self.groupss_Players = self.generateRandomGroups()
@@ -293,7 +303,7 @@ class pingPongConsumer(AsyncWebsocketConsumer):
                 print(self.groupss_Players[self.groNum + 1][1])
                 self.winners.append(self.groupss_Players[self.groNum + 1][1])
             #send data
-            url = 'http://0.0.0.0:8000/smartcontract/record-match/'
+            url = 'http://127.0.0.1:8000/smartcontract/record-match/'
 
             # Define the headers
             headers = {
@@ -310,7 +320,11 @@ class pingPongConsumer(AsyncWebsocketConsumer):
             }
 
             # Send the POST request using requests
+            print("**********************************************")
+            
             response = requests.post(url, json=data, headers=headers)
+
+            print(response.status_code)
 
             # Check if the request was successful
             if response.status_code == 200:

@@ -178,6 +178,7 @@ APPEND_SLASH=True
 
 
 
+
 #the superuser is : "otitebah" with the password: "1234" 
 
 
