@@ -242,16 +242,18 @@ class pingPongConsumer(AsyncWebsocketConsumer):
         }
 
         try:
-            response = requests.post(url, headers=headers)
+            print("**********************************************")
+            logger.debug("**********************************************")
+            response = requests.post(url, headers=headers, timeout=10)
             if response.status_code == 200:
                 data = response.json()
                 tournament_id = data.get("tournamentId")
-                print(f"Tournament ID: {tournament_id}")
+                logger.debug(f"Tournament ID: {tournament_id}")
             else:
-                print(f"Failed to get tournament ID. Status code: {response.status}")
-                print(response.text)
+                logger.debug(f"Failed to get tournament ID. Status code: {response.status}")
+                logger.debug(response.text)
         except requests.exceptions.RequestException as e:
-            print(f"An error occurred: {e}")
+            logger.debug(f"An error occurred: {e}")
 
         # generate random groups
         self.groupss_Players = self.generateRandomGroups()
