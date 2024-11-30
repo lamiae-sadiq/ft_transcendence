@@ -1,13 +1,15 @@
 import json
 import random
+import logging
+import requests
+
+logger = logging.getLogger('django')
 
 from channels.generic.websocket import AsyncWebsocketConsumer
 import asyncio
 
 from . import gameLogic
-import aiohttp
 
-import requests
 
 # rooms = {}
 rooms_game_logic = {}
@@ -232,7 +234,7 @@ class pingPongConsumer(AsyncWebsocketConsumer):
     async def tournamentGame(self, gameStatus):
         # len of the players
         self.playersNum = len(self.playerNames)
-        #send request for tournament id
+         #send request for tournament id
         url = "http://0.0.0.0:8000/smartcontract/create-tournament/"
         # Define the headers
         headers = {
@@ -250,6 +252,7 @@ class pingPongConsumer(AsyncWebsocketConsumer):
                 print(response.text)
         except requests.exceptions.RequestException as e:
             print(f"An error occurred: {e}")
+
         # generate random groups
         self.groupss_Players = self.generateRandomGroups()
         self.n = self.playersNum - 1
@@ -359,4 +362,3 @@ class pingPongConsumer(AsyncWebsocketConsumer):
         gameStatus.begin = True
         gameStatus.keycontrol = False
         gameStatus.key = ''
-        
