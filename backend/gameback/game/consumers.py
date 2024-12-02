@@ -117,6 +117,7 @@ class pingPongConsumer(AsyncWebsocketConsumer):
         if(self.game_type == 'remote'):
             # text_data_json = json.loads(text_data)
             if(text_data_json.get('message') == 'Hello, server!'):
+                #send request with the token to get player id
                 self.playerID = text_data_json.get('id')
                 # print('id = ',self.playerID ,'channel = ',self.channel_name)
                 if not self.room_group_name:

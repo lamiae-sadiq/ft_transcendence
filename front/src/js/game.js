@@ -202,11 +202,13 @@ export function initGamePage(mode) {
       socket.onopen = function (e) {
         console.log("Connection established");
         if (gametype === "remote") {
+          const token = sessionStorage.getItem('jwtToken');
           console.log(id);
           socket.send(
             JSON.stringify({
               message: "Hello, server!",
               id: id,
+              token: token,
             })
           );
 
@@ -835,6 +837,23 @@ export function initGamePage(mode) {
       }
 
       let keys = {};
+      if(gametype === "remote")
+      {
+        window.addEventListener("beforeunload", () => {
+          if (socket.readyState === WebSocket.OPEN) {
+              console.log('close socket before unload');
+              socket.close();
+          }
+      });
+      
+      // Close the socket on back button navigation
+      window.addEventListener("popstate", () => {
+          if (socket.readyState === WebSocket.OPEN) {
+              console.log('close socket on back button');
+              socket.close();
+          }
+      });
+      }
       window.addEventListener("resize", sendNewSize);
       window.addEventListener("keyup", handleKeyEvent);
       window.addEventListener("keydown", handleKeyEvent);
