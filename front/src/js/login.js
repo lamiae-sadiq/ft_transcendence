@@ -23,7 +23,7 @@ export function initLoginPage() {
   // Add event listener to toggle button
   for (let i = 0; i < passwordToggleBtn.length; i++) {
     passwordToggleBtn[i].addEventListener("click", function () {
-      console.log("Toggle button clicked");
+      // console.log("Toggle button clicked");
       // Toggle password visibility
       if (passwordInput[i].type === "password") {
         passwordInput[i].type = "text";
@@ -46,10 +46,10 @@ export function initLoginPage() {
         return; // Stop further execution
       }
       const formData = new FormData(this);
-      console.log(formData.get("nickname"));
-      console.log(formData.get("password"));
-      console.log(formData.get("email"));
-      console.log(formData);
+      // console.log(formData.get("nickname"));
+      // console.log(formData.get("password"));
+      // console.log(formData.get("email"));
+      // console.log(formData);
       try {
         let response = await fetch("http://0.0.0.0:8000/signup/", {
           // Specify the server endpoint directly
@@ -79,7 +79,7 @@ export function initLoginPage() {
     const authCode = urlParams.get("code");
 
     if (authCode) {
-      console.log("Authorization Code:", authCode);
+      // console.log("Authorization Code:", authCode);
       try {
         const response = await fetch(
           "http://0.0.0.0:8000/oauthcallback?code=" + authCode
@@ -108,10 +108,10 @@ export function initLoginPage() {
     .addEventListener("submit", async function (event) {
       event.preventDefault(); // Prevent the default signUp submission
       const formData = new FormData(this);
-      console.log(formData.get("nickname"));
-      console.log(formData.get("password"));
+      // console.log(formData.get("nickname"));
+      // console.log(formData.get("password"));
       // console.log(formData.get('email'));
-      console.log(formData);
+      // console.log(formData);
       try {
         let response = await fetch("http://0.0.0.0:8000/signin/", {
           // Specify the server endpoint directly
@@ -124,7 +124,7 @@ export function initLoginPage() {
         });
         if (response.ok) {
           let rewind = await response.json();
-          console.log("Response : ", rewind, "||", response);
+          // console.log("Response : ", rewind, "||", response);
           const token = rewind.access;
           sessionStorage.setItem("jwtToken", token);
           navigateTo("home");

@@ -1,5 +1,6 @@
 import * as tournamentFile from "./tournement.js";
-export function initGamePage() {
+export function initGamePage(mode) {
+
  function game(mode) {
     let gametype = "local";
     let gameMode = "player";
@@ -986,8 +987,17 @@ export function initGamePage() {
       }
     }
   }
-  // game("remote");
-  game("tournament");
-  // game("bot");
-  // game("local");
+  
+  if (mode) {
+    if (mode == 'Remote 1v1')
+      game('remote');
+    else if (mode == 'Tournament')
+      game('tournament');
+    else if (mode == '1vAI')
+      game('bot');
+    else if (mode == '1v1')
+      game('local');
+  } else {
+    alert('No mode specified');
+  }
 }

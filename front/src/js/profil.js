@@ -1,3 +1,5 @@
+import { navigateTo } from "./main.js";
+
 export function initProfilPage() {
   let token = sessionStorage.getItem("jwtToken");
   let isEditing = false;
@@ -62,7 +64,74 @@ export function initProfilPage() {
       status: "offline",
       picture: "https://i.pravatar.cc/160?img=3",
     },
+    {
+      name: "54y6",
+      status: "offline",
+      picture: "https://i.pravatar.cc/160?img=3",
+    },
+    {
+      name: "y",
+      status: "offline",
+      picture: "https://i.pravatar.cc/160?img=3",
+    },
+    {
+      name: "4",
+      status: "offline",
+      picture: "https://i.pravatar.cc/160?img=3",
+    },
+    {
+      name: "y",
+      status: "offline",
+      picture: "https://i.pravatar.cc/160?img=3",
+    },
+    {
+      name: "h",
+      status: "offline",
+      picture: "https://i.pravatar.cc/160?img=3",
+    },
+    {
+      name: "b",
+      status: "offline",
+      picture: "https://i.pravatar.cc/160?img=3",
+    },
+    {
+      name: "w",
+      status: "offline",
+      picture: "https://i.pravatar.cc/160?img=3",
+    },
+    {
+      name: "p",
+      status: "offline",
+      picture: "https://i.pravatar.cc/160?img=3",
+    },
+    {
+      name: "c",
+      status: "offline",
+      picture: "https://i.pravatar.cc/160?img=3",
+    },
   ];
+
+
+  const bio = document.getElementById("profileBio");
+  const maxLength = 100;
+
+  bio.addEventListener("input", () => {
+    // Trim extra characters if exceeded
+    if (bio.textContent.length > maxLength) {
+      bio.textContent = bio.textContent.slice(0, maxLength);
+      placeCaretAtEnd(bio); // Reposition the cursor
+    }
+  });
+
+// Helper function to place caret at the end of contenteditable
+function placeCaretAtEnd(el) {
+  const range = document.createRange();
+  const selection = window.getSelection();
+  range.selectNodeContents(el);
+  range.collapse(false);
+  selection.removeAllRanges();
+  selection.addRange(range);
+}
 
   // Sort friends by status (online first)
   friends.sort((a, b) => (a.status === "offline") - (b.status === "offline"));
@@ -295,7 +364,7 @@ export function initProfilPage() {
 
   function renderUser(userData, profilePicture) {
     return `
-    <button class="user btn p-2">
+    <button class="user btn p-2 no-border">
       <div class="d-flex align-items-center gap-2">
         <!-- Profile Image -->
         <div class="users-container">
@@ -323,11 +392,7 @@ export function initProfilPage() {
     userContainer.innerHTML = renderUser(userData, profilePicture);
   }
 
-  function decryptImage(encryptedImageBase64, userData) {
-    // Recreate the data URL for the image
-    return `data:${userData.mimeType};base64,${encryptedImageBase64}`;
-  }
-
+  console.log("displayed twice for some reason: ");
   fetchUserData();
   // Edit profile logic
   document
@@ -416,4 +481,46 @@ export function initProfilPage() {
           .catch((error) => console.error("Error uploading image:", error));
       }
     });
+  /******************************************************************************** */
+  const homebtn = document.getElementsByClassName("home");
+  if (homebtn[0]) {
+    homebtn[0].addEventListener("click", function (event) {
+      event.preventDefault();
+      navigateTo("home");
+    });
+  }
+  
+  const homeButton = document.getElementById("home");
+  if (homeButton) {
+    homeButton.addEventListener("click", function (event) {
+      event.preventDefault();
+      navigateTo("home");
+    });
+  }
+
+  const leaderboardButton = document.getElementById("leaderboard");
+  if (leaderboardButton) {
+    leaderboardButton.addEventListener("click", function (event) {
+      event.preventDefault();
+      navigateTo("leaderboard");
+    });
+  }
+
+  const aboutButton = document.getElementById("about");
+  if (aboutButton) {
+    aboutButton.addEventListener("click", function (event) {
+      event.preventDefault();
+      navigateTo("about");
+    });
+  }
+  // if (document.getElementsByClassName("profil")) {
+    const profilButton = document.getElementsByClassName("profil");
+    if (profilButton[0]) {
+      profilButton[0].addEventListener("click", function (event) {
+        event.preventDefault();
+        navigateTo("profil");
+      });
+    }
+  // }
+  /******************************************************************************** */
 }

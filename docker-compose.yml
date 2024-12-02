@@ -6,12 +6,13 @@ services:
       build: ./front  # Assuming the frontend Dockerfile is in a folder named 'frontend'
       ports:
         - "8080:80"
-      # volumes:
-      #   - ./frontend:/usr/share/nginx/html
       networks:
         - my-net
       depends_on:
         - web  # Make sure the backend is running
+        - backend
+      volumes:
+        - ./front:/usr/share/nginx/html
   web:
     container_name: web
     build: ./project
@@ -27,11 +28,11 @@ services:
       - DB_HOST=db
       - DB_PORT=5432
       - private_key=08fdb79d0797a2f3be23e65c04b7ea373873132a8b0c1952298ebd103dafa656
-      #private_key khass ikoun f .env
-    # volumes:
-    #   - ./media:/app/media  # Mount the media directory
+      - PYTHONUNBUFFERED=1
     networks:
       - my-net
+    volumes:
+      - ./project:/usr/src/app
 
   db:
     container_name: database
@@ -57,7 +58,9 @@ services:
       volumes:
         - ./backend:/backend
       networks:
-        - my-net 
+        - my-net
+      environment:
+        - PYTHONUNBUFFERED=1
 
 
 volumes:

@@ -5,4 +5,4 @@ RUN pip install -r requirements.txt
 COPY  . /backend
 EXPOSE 8001
 RUN  apt-get update && apt-get install -y procps
-CMD [ "python", "gameback/manage.py", "runserver", "0.0.0.0:8001"]
+CMD [ "python","-u", "gameback/manage.py", "runserver", "0.0.0.0:8001"]

@@ -138,6 +138,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://0.0.0.0:5501",
     "http://127.0.0.1:5501",
     "http://127.0.0.1:8080",
+    "http://0.0.0.0:8000",
+    "http://localhost:8000",
 ]
 
 CORS_ALLOW_METHODS = [
@@ -175,6 +177,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 APPEND_SLASH=True
+
 
 
 

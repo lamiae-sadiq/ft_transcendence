@@ -263,7 +263,7 @@ function namesForms() {
 
     ["Player 1", "Player 2", "Player 3", "Player 4"].forEach((labelText, i) => {
       const inputGroup = document.createElement("div");
-      inputGroup.className = "input-groups-mine";
+      inputGroup.className = "input-group";
 
       const label = document.createElement("label");
       label.textContent = labelText;
