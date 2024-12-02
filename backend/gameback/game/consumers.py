@@ -118,6 +118,8 @@ class pingPongConsumer(AsyncWebsocketConsumer):
             # text_data_json = json.loads(text_data)
             if(text_data_json.get('message') == 'Hello, server!'):
                 #send request with the token to get player id
+                self.token = text_data_json.get('token')
+                await self.sendRequestInfo()
                 self.playerID = text_data_json.get('id')
                 # print('id = ',self.playerID ,'channel = ',self.channel_name)
                 if not self.room_group_name:
@@ -210,7 +212,7 @@ class pingPongConsumer(AsyncWebsocketConsumer):
     async def sendPingRemote(self, game):
         
         # game = rooms_game_logic[game]
-        
+
         while game.keepSending:
             game.calculation()
             json_data = game.toJson()
@@ -229,6 +231,29 @@ class pingPongConsumer(AsyncWebsocketConsumer):
                 # 'message': game.toJson()
             }
         )
+    @sync_to_async
+    def sendRequestInfo(self):
+        url = "http://web:8000/userinfo/"
+        
+        headers = {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + self.token
+        }
+        try:
+            response = requests.get(url, headers=headers)
+            if response.status_code == 200:
+                data = response.json()
+                print(data)
+            else:
+                print(f"Failed to get user info. Status code: {response.status_code}")
+                print(response.text)
+        except requests.exceptions.ConnectionError as e:
+            print(f"Connection error occurred: {e}")
+        except requests.exceptions.Timeout as e:
+            print(f"Timeout error occurred: {e}")
+        except requests.exceptions.RequestException as e:
+            print(f"An error occurred: {e}")
+
    
     @sync_to_async
     def sendRequest(self):
