@@ -447,19 +447,19 @@ h1 {
     gap: 1.5vw;
     box-shadow: 0 0 1vw 0.5vw rgba(212, 7, 219, 0.1);
 }
-.input-group {
+.input-group-mine {
     display: flex;
     flex-direction: column;
     /* gap: 1vw; */
 }
-.input-group label {
+.input-group-mine label {
     color: #ffffff;
     font-size: 1.2vw;
     position: relative;
     left: 0.8vw;
     /* font-weight: bold; */
 }
-.input-group input {
+.input-group-mine input {
     
         padding: 0.8vw;
         border: none;

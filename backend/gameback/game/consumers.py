@@ -2,7 +2,6 @@ import json
 import random
 import logging
 import requests
-import httpx
 from asgiref.sync import sync_to_async
 
 logger = logging.getLogger('django')
@@ -260,31 +259,37 @@ class pingPongConsumer(AsyncWebsocketConsumer):
             print(f"Timeout error occurred: {e}")
         except requests.exceptions.RequestException as e:
             print(f"An error occurred: {e}")
-    # async def sendRequest(self):
-    #     url = "http://localhost:8000/smartcontract/create-tournament/"
-    #     headers = {
-    #         'Accept': 'application/json',
-    #     }
+    
+    @sync_to_async
+    def sendResult(self, tournament_id, player1_name, player1_score, player2_name, player2_score):
+        url = "http://web:8000/smartcontract/record-match/"
 
-    #     try:
-    #         print("**********************************************")
-    #         print(f"Sending request to {url} with headers {headers}")
-    #         async with httpx.AsyncClient() as client:
-    #             response = await client.post(url, headers=headers, timeout=10)
-    #             if response.status_code == 200:
-    #                 data = response.json()
-    #                 tournament_id = data.get("tournamentId")
-    #                 print(f"Tournament ID: {tournament_id}")
-    #             else:
-    #                 print(f"Failed to get tournament ID. Status code: {response.status_code}")
-    #                 print(response.text)
-    #     except httpx.RequestError as e:
-    #         print(f"An error occurred while requesting {url}: {e}")
-    #     except httpx.HTTPStatusError as e:
-    #         print(f"HTTP error occurred: {e.response.status_code} - {e.response.text}")
+        # Define the headers
+        headers = {
+            'Accept': 'application/json',
+        }
 
-    #     return None  # Return None if something goes wrong
-            
+        # Construct the data to be sent in the request
+        data = {
+            'tournament_id': tournament_id,
+            'player1_name': player1_name,
+            'player1_score': player1_score,
+            'player2_name': player2_name,
+            'player2_score': player2_score
+        }
+
+        # Send the POST request using requests
+        print("**********************************************")
+        
+        response = requests.post(url, json=data, headers=headers)
+
+        print(response.status_code)
+
+        # Check if the request was successful
+        if response.status_code == 200:
+            print("Result sent successfully")
+        else:
+            print(f"Failed to send result. Status code: {response.status_code}")     
             
             
     async def send_game(self, event):
@@ -339,34 +344,8 @@ class pingPongConsumer(AsyncWebsocketConsumer):
                 print(self.groupss_Players[self.groNum + 1][1])
                 self.winners.append(self.groupss_Players[self.groNum + 1][1])
             #send data
-            url = 'http://web:8000/smartcontract/record-match/'
-
-            # Define the headers
-            headers = {
-                'Accept': 'application/json',
-            }
-
-            # Construct the data to be sent in the request
-            data = {
-                'tournament_id': self.tournament_id,
-                'player1_name': self.groupss_Players[self.groNum + 1][0],
-                'player1_score': gameStatus.leftPlayerScore,
-                'player2_name': self.groupss_Players[self.groNum + 1][1],
-                'player2_score': gameStatus.rightPlayerScore
-            }
-
-            # Send the POST request using requests
-            print("**********************************************")
+            await  self.sendResult(tournament_id, self.groupss_Players[self.groNum + 1][0], gameStatus.leftPlayerScore, self.groupss_Players[self.groNum + 1][1], gameStatus.rightPlayerScore)
             
-            response = requests.post(url, json=data, headers=headers)
-
-            print(response.status_code)
-
-            # Check if the request was successful
-            if response.status_code == 200:
-                print("Result sent successfully")
-            else:
-                print(f"Failed to send result. Status code: {response.status_code}")
             self.restoreGame(self.gameStatus)
             self.n -= 1
         print('winners = ',self.winners)
