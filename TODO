@@ -23,7 +23,7 @@ AYOUB:
 
 ZAKARIA:
     -add level to game
-    -add a waiting page for tournamet when tournament id is loading
+    -add a waiting page for tournamet when tournament id is loading:  DONE:) we should add a time out
     -check any soulution for the tournament sending request to blockchain 
     -send data to othmane (win - lose)
     -add a play with your friend mode
