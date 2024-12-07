@@ -358,6 +358,8 @@ class remotGameLogic:
         self.start_time = 0
         self.theCounter = 0
         self.winner = ''
+        self.player1_Name = ''
+        self.player2_Name = ''
         
         
     def toJson(self):
@@ -382,6 +384,11 @@ class remotGameLogic:
             'theCounter': int(self.theCounter),
             'winner': self.winner,
             'player1': self.player1,
+            'player1_Name': self.player1_name,
+            'player1_pic': self.player1_pic,
+            'player2': self.player2,
+            'player2_Name': self.player2_name,
+            'player2_pic': self.player2_pic
             
             
         }

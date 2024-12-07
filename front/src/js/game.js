@@ -252,6 +252,10 @@ export function initGamePage(mode) {
         if (gametype === "tournament") {
           if (data.event === "tournament") {
             console.log("begin tournament");
+            let checkBoyd = document.getElementById("flex-container-names2");
+            if (checkBoyd) {
+              checkBoyd.remove();
+            }
             tournamentFile.tournament(data.groups);
           }
           if (data.event === "OneVsOne") {
@@ -263,6 +267,7 @@ export function initGamePage(mode) {
         }
 
         if (data.event === "draw") {
+          console.log(data);
           if (gametype === "remote") {
             document.getElementById("window").remove();
           } else if (gametype === "tournament") {

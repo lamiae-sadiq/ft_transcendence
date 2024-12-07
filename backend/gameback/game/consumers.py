@@ -3,6 +3,7 @@ import random
 import logging
 import requests
 from asgiref.sync import sync_to_async
+import httpx
 
 logger = logging.getLogger('django')
 
@@ -120,7 +121,7 @@ class pingPongConsumer(AsyncWebsocketConsumer):
                 #send request with the token to get player id
                 self.token = text_data_json.get('token')
                 await self.sendRequestInfo()
-                self.playerID = text_data_json.get('id')
+                # self.playerID = text_data_json.get('id')
                 # print('id = ',self.playerID ,'channel = ',self.channel_name)
                 if not self.room_group_name:
                     await self.assign_player_to_room(self.playerID)
@@ -183,6 +184,7 @@ class pingPongConsumer(AsyncWebsocketConsumer):
             # player2channel = player_queue.pop(0)
             
             self.room_name = f'room_{player1}_{player2}'
+            
             self.room_group_name = f'pingPong_{self.room_name}'
             
             await self.channel_layer.group_add(self.room_group_name, self.channel_name)
@@ -199,6 +201,8 @@ class pingPongConsumer(AsyncWebsocketConsumer):
             player2Channel['self'].room_group_name = self.room_group_name
             rooms_game_logic[self.room_group_name].player1 = self.playerID
             rooms_game_logic[self.room_group_name].player2 = player2Channel['self'].playerID
+            rooms_game_logic[self.room_group_name].player1_name = self.nickname
+            rooms_game_logic[self.room_group_name].player2_name = player2Channel['self'].nickname
             self.other_playerId = player2Channel['self'].playerID
             if(self.room_group_name not in room_task):
                 room_task[self.room_group_name] = asyncio.create_task(self.sendPingRemote(rooms_game_logic[self.room_group_name]))
@@ -243,6 +247,12 @@ class pingPongConsumer(AsyncWebsocketConsumer):
             response = requests.get(url, headers=headers)
             if response.status_code == 200:
                 data = response.json()
+                self.playerID = data.get("id")
+                self.nickname = data.get("nickname")
+                self.level = data.get("level")
+                print("player ID: ", self.playerID)
+                print("nickname: ", self.nickname)
+                print("level: ", self.level)
                 print(data)
             else:
                 print(f"Failed to get user info. Status code: {response.status_code}")
@@ -286,16 +296,41 @@ class pingPongConsumer(AsyncWebsocketConsumer):
         except requests.exceptions.RequestException as e:
             print(f"An error occurred: {e}")
     
-    @sync_to_async
-    def sendResult(self, tournament_id, player1_name, player1_score, player2_name, player2_score):
+    # # @sync_to_async
+    # async def sendResult(self, tournament_id, player1_name, player1_score, player2_name, player2_score):
+    #     url = "http://web:8000/smartcontract/record-match/"
+
+    #     # Define the headers
+    #     headers = {
+    #         'Accept': 'application/json',
+    #     }
+
+    #     # Construct the data to be sent in the request
+    #     data = {
+    #         'tournament_id': tournament_id,
+    #         'player1_name': player1_name,
+    #         'player1_score': player1_score,
+    #         'player2_name': player2_name,
+    #         'player2_score': player2_score
+    #     }
+
+    #     # Send the POST request using requests
+    #     print("**********************************************")
+        
+    #     # requests.post(url, json=data, headers=headers)
+    #     async with httpx.AsyncClient() as client:
+    #         # Fire and forget the request
+    #         try:
+    #             await client.post(url, json=data, headers=headers)
+    #         except Exception as e:
+    #             print(f"Error occurred while sending the request: {e}")
+        
+
+    # @sync_to_async
+    async def sendResult(self, tournament_id, player1_name, player1_score, player2_name, player2_score):
         url = "http://web:8000/smartcontract/record-match/"
-
-        # Define the headers
-        headers = {
-            'Accept': 'application/json',
-        }
-
-        # Construct the data to be sent in the request
+        # url = "https://google.com"
+        headers = {'Accept': 'application/json'}
         data = {
             'tournament_id': tournament_id,
             'player1_name': player1_name,
@@ -303,19 +338,23 @@ class pingPongConsumer(AsyncWebsocketConsumer):
             'player2_name': player2_name,
             'player2_score': player2_score
         }
+        async def post_request():
+            timeout = 10  # Increase timeout to 10 seconds
 
-        # Send the POST request using requests
-        print("**********************************************")
-        
-        response = requests.post(url, json=data, headers=headers)
+            async with httpx.AsyncClient(timeout=timeout) as client:
+                try:
+                    response = await client.post(url, json=data, headers=headers)
+                    response.raise_for_status()  # Raise error for non-2xx responses
+                    print(f"Request succeeded with response: {response.text}")
+                    return
+                except (httpx.RequestError, httpx.HTTPStatusError) as e:
+                    print(f"Error occurred: {e}")
+                except Exception as e:
+                    print(f"Unexpected error: {e}")
 
-        print(response.status_code)
-
-        # Check if the request was successful
-        if response.status_code == 200:
-            print("Result sent successfully")
-        else:
-            print(f"Failed to send result. Status code: {response.status_code}")     
+        # Schedule the asynchronous request
+        asyncio.create_task(post_request())
+        print("Request sent asynchronously.")
             
             
     async def send_game(self, event):

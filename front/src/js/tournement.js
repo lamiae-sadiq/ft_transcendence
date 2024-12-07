@@ -317,6 +317,7 @@ function namesForms() {
         msg.textContent = ""; // Clear any error messages
         flexContainer.remove(); // Remove the form from the DOM
         resolve(players); // Resolve the Promise with the players array
+        waiting_for_response();
       }
     });
 
@@ -325,7 +326,43 @@ function namesForms() {
     document.body.appendChild(flexContainer);
   });
 }
-export { tournament, finaltournament, OneVsOne, namesForms };
+
+function waiting_for_response() {
+  const flexContainer = document.createElement("div");
+    flexContainer.className = "flex-container-names2";
+
+  const tick = document.createElement("div");
+  const dii = document.createElement("div");
+  dii.className = "loading-animation__list-wrapper";
+
+
+  tick.className = "loading-animation__tick";
+  dii.appendChild(tick);
+
+  const list = document.createElement("ul");
+  list.className = "loading-animation__list";
+
+  const items = [
+    "Sending request to backend...",
+    "Connecting to blockchain...",
+    "Awaiting response from server...",
+    "Processing data...",
+    "Finalizing tournament setup...",
+    "Almost there..."
+  ];
+
+  items.forEach(text => {
+    const listItem = document.createElement("li");
+    listItem.textContent = text;
+    list.appendChild(listItem);
+  });
+
+  dii.appendChild(list);
+  flexContainer.appendChild(dii);
+
+  document.body.appendChild(flexContainer);
+}
+export { tournament, finaltournament, OneVsOne, namesForms , waiting_for_response};
 // namesForms();
 // OneVsOne();
 // tournament();

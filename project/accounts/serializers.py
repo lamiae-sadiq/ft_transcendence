@@ -39,7 +39,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserProfile
-        fields = ['id', 'nickname', 'profile_picture', 'mimeType', 'email', 'bio', 'friends']
+        fields = ['id', 'nickname', 'profile_picture', 'mimeType', 'email', 
+                  'bio', 'friends', 'level', 'win', 'loss']
 
     def get_profile_picture(self, obj):
         if obj.profile_picture:

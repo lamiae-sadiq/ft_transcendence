@@ -809,3 +809,182 @@ h1 {
     color: #ffffff;
 }
 
+/* waiting_for_response */
+
+.loading-animation__list-wrapper {
+    position: relative;
+    padding: 2.75rem 0 0;
+    height: 11rem;
+    overflow: hidden;
+}
+.loading-animation__list-wrapper .loading-animation__tick {
+    position: absolute;
+    left: 0;
+    top: 3rem;
+    width: 1rem;
+    height: 1rem;
+}
+.loading-animation__list-wrapper .loading-animation__tick:before {
+    display: block;
+    position: absolute;
+    left: 1px;
+    top: 5px;
+    content: "";
+    width: 9px;
+    height: 4px;
+    transform: rotate(45deg);
+    transform-origin: left;
+    background-color: #00d158;
+    animation: tick-1 1.6s ease-out infinite;
+}
+.loading-animation__list-wrapper .loading-animation__tick:after {
+    display: block;
+    position: absolute;
+    left: 5px;
+    top: 11px;
+    content: "";
+    width: 15px;
+    height: 4px;
+    transform: rotate(-45deg);
+    transform-origin: left;
+    background-color: #00d158;
+    animation: tick-2 1.6s ease-in infinite;
+}
+.loading-animation__list-wrapper:after {
+    display: block;
+    position: absolute;
+    content: "";
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    height: 6.75rem;
+    /* background: linear-gradient(180deg, rgba(154, 6, 162, 0) 0%, rgba(154, 6, 162, 0.5) 30%, #9a06a2 100%); */
+    /* background: linear-gradient(rgba(155, 5, 162,0.5), rgba(140, 11, 155,0.5) 30%, rgba(110, 20, 141,0.5) 100% , 180deg , rgba(155, 5, 162,0.5), rgba(140, 11, 155,0.5) 30%, rgba(110, 20, 141,0.5) 100%); */
+
+}
+.loading-animation__list {
+    position: relative;
+    padding-left: 2rem;
+    max-width: calc(100vw - 2rem);
+    animation: list 8s 0.8s linear infinite;
+}
+.loading-animation__list li {
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+    font-size: 1.125rem;
+    line-height: 1.25rem;
+    letter-spacing: -0.05em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    overflow: hidden;
+    animation: fade-out 8s 0.8s ease-out infinite;
+}
+.loading-animation__list li:nth-child(2) {
+    animation-delay: 2.4s;
+}
+.loading-animation__list li:nth-child(3) {
+    animation-delay: 4s;
+}
+.loading-animation__list li:nth-child(4) {
+    animation-delay: 5.6s;
+}
+.loading-animation__list li:nth-child(5) {
+    animation-delay: 7.2s;
+}
+.loading-animation__list li:nth-child(6) {
+    animation-delay: 8.8s;
+}
+.loading-animation__list li:nth-child(7) {
+    animation-delay: 10.4s;
+}
+.loading-animation__list li:nth-child(8) {
+    animation-delay: 12s;
+}
+.loading-animation__list li:nth-child(9) {
+    animation-delay: 13.6s;
+}
+.loading-animation__list li:nth-child(10) {
+    animation-delay: 15.2s;
+}
+@keyframes list {
+    0% {
+        transform: translateY(0);
+   }
+    7%, 20% {
+        transform: translateY(-2.75rem);
+   }
+    27%, 40% {
+        transform: translateY(-5.5rem);
+   }
+    47%, 60% {
+        transform: translateY(-8.25rem);
+   }
+    67%, 80% {
+        transform: translateY(-11rem);
+   }
+    87%, 100% {
+        transform: translateY(-13.75rem);
+   }
+}
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+   }
+    10%, 70% {
+        opacity: 0;
+   }
+    80%, 100% {
+        opacity: 1;
+   }
+}
+@keyframes tick-1 {
+    0% {
+        width: 0;
+        opacity: 1;
+   }
+    16% {
+        width: 9px;
+        opacity: 1;
+   }
+    50% {
+        width: 9px;
+        opacity: 1;
+   }
+    66%, 100% {
+        width: 9px;
+        opacity: 0;
+   }
+}
+@keyframes tick-2 {
+    0%, 16% {
+        width: 0;
+        opacity: 1;
+   }
+    33% {
+        width: 15px;
+        opacity: 1;
+   }
+    50% {
+        width: 15px;
+        opacity: 1;
+   }
+    66%, 100% {
+        width: 15px;
+        opacity: 0;
+   }
+}
+.flex-container-names2
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2vw;
+    user-select: none;
+  /* background-color: #000; */
+    font-family: 'youi_helv', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #ffffff;
+  font-size: 1rem;
+
+}

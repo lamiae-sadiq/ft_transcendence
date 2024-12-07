@@ -17,6 +17,7 @@ class UserProfile(models.Model):
     friends                 = models.ManyToManyField(User, blank=True, related_name='user_friends')
     wins                    = models.IntegerField(default=0)
     losses                  = models.IntegerField(default=0)
+    level                   = models.IntegerField(default=0)
 
     def __str__(self):
         return self.nickname
