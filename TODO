@@ -24,9 +24,9 @@ AYOUB:
 ZAKARIA:
     -add level to game
     -add a waiting page for tournamet when tournament id is loading:  DONE:) we should add a time out
-    -check any soulution for the tournament sending request to blockchain 
+    -check any soulution for the tournament sending request to blockchain: Done:) sometimes it's not working
     -send data to othmane (win - lose)
-    -add a play with your friend mode
+    -add a play with your friend mode lamia 
     -check with ayoub that if someone is alreday in a game he can't join another one
     -block th player with the same id to join the same remote game
-    -add name of players in remote game front 
+    -add name of players in remote game front: DONE:)

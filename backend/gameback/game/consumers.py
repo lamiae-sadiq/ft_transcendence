@@ -32,6 +32,10 @@ class pingPongConsumer(AsyncWebsocketConsumer):
             self.room_group_name = None
             self.playerID = None
             self.other_playerId = None
+            self.nickname = None
+            self.level = 0
+            self.wins = 0
+            self.token = None
             # await self.channel_layer.group_add(
             #     self.room_group_name,
             #     self.channel_name
@@ -57,7 +61,6 @@ class pingPongConsumer(AsyncWebsocketConsumer):
             if self.room_group_name is not None:
                 print('room deleted')
                 #send a message to the other client that the game is over
-                print(self.playerID)
                 await self.channel_layer.group_send(
                     self.room_group_name,
                     {
@@ -116,25 +119,22 @@ class pingPongConsumer(AsyncWebsocketConsumer):
                 elif(event == 'pause'):
                     self.gameStatus.pause = not self.gameStatus.pause
         if(self.game_type == 'remote'):
-            # text_data_json = json.loads(text_data)
             if(text_data_json.get('message') == 'Hello, server!'):
                 #send request with the token to get player id
                 self.token = text_data_json.get('token')
                 await self.sendRequestInfo()
-                # self.playerID = text_data_json.get('id')
-                # print('id = ',self.playerID ,'channel = ',self.channel_name)
+                await self.send(text_data=json.dumps({
+                    'message': 'remote-id',
+                    'id': self.playerID
+                }))
                 if not self.room_group_name:
                     await self.assign_player_to_room(self.playerID)
                 else:
                     print('no room')
                 if self.room_group_name:
                     print('room = ',self.room_group_name)
-            # print('room = ',self.room_group_name)
             if(self.room_group_name and text_data_json.get('event') == 'movement'):
                 rooms_game_logic[self.room_group_name].parsMove(text_data_json)
-            # if(self.room_group_name and text_data_json.get('event') == 'start'):
-            #     rooms_game_logic[self.room_group_name].startTheGame = True
-            #     rooms_game_logic[self.room_group_name].firstInstructions = False
         if(self.game_type == 'tournament'):
             game = gameLogic.gamelogic()
             if(text_data_json.get('message') == 'Hello, server!'):
@@ -203,7 +203,16 @@ class pingPongConsumer(AsyncWebsocketConsumer):
             rooms_game_logic[self.room_group_name].player2 = player2Channel['self'].playerID
             rooms_game_logic[self.room_group_name].player1_name = self.nickname
             rooms_game_logic[self.room_group_name].player2_name = player2Channel['self'].nickname
-            self.other_playerId = player2Channel['self'].playerID
+            rooms_game_logic[self.room_group_name].player1_level = self.level
+            rooms_game_logic[self.room_group_name].player2_level = player2Channel['self'].level
+            rooms_game_logic[self.room_group_name].player1_total_wins = self.wins
+            rooms_game_logic[self.room_group_name].player2_total_wins = player2Channel['self'].wins
+            rooms_game_logic[self.room_group_name].player1_token = self.token
+            rooms_game_logic[self.room_group_name].player2_token = player2Channel['self'].token
+            
+            
+            self.other_playerId = player2Channel['self'].nickname
+            player2Channel['self'].other_playerId = self.nickname
             if(self.room_group_name not in room_task):
                 room_task[self.room_group_name] = asyncio.create_task(self.sendPingRemote(rooms_game_logic[self.room_group_name]))
             # print('room length = ',len(rooms) , 'room game logic = ',len(rooms_game_logic) , 'room task = ',len(room_task) , 'player queue = ',len(player_queue))
@@ -216,9 +225,9 @@ class pingPongConsumer(AsyncWebsocketConsumer):
     async def sendPingRemote(self, game):
         
         # game = rooms_game_logic[game]
-
         while game.keepSending:
             game.calculation()
+            await game.sendResultDataBase(game.winner)
             json_data = game.toJson()
             await asyncio.sleep(0.006)
             await self.handle_remote(json_data)
@@ -235,6 +244,7 @@ class pingPongConsumer(AsyncWebsocketConsumer):
                 # 'message': game.toJson()
             }
         )
+
     @sync_to_async
     def sendRequestInfo(self):
         url = "http://web:8000/userinfo/"
@@ -250,10 +260,9 @@ class pingPongConsumer(AsyncWebsocketConsumer):
                 self.playerID = data.get("id")
                 self.nickname = data.get("nickname")
                 self.level = data.get("level")
-                print("player ID: ", self.playerID)
-                print("nickname: ", self.nickname)
-                print("level: ", self.level)
+                self.wins = data.get("wins")
                 print(data)
+
             else:
                 print(f"Failed to get user info. Status code: {response.status_code}")
                 print(response.text)
@@ -263,6 +272,7 @@ class pingPongConsumer(AsyncWebsocketConsumer):
             print(f"Timeout error occurred: {e}")
         except requests.exceptions.RequestException as e:
             print(f"An error occurred: {e}")
+        
 
    
     @sync_to_async

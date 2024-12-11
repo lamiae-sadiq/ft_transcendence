@@ -20,6 +20,7 @@ export function initGamePage(mode) {
 
     firstwindow();
     function gameOver(winner) {
+      console.log("winner", winner);
       if (winner === "left")
         winner = document.getElementById("leftPlayerP").innerText;
       else if (winner === "right")
@@ -198,7 +199,7 @@ export function initGamePage(mode) {
         socket = new WebSocket("ws://localhost:8001/ws/pingPong/tournament/");
       }
       // const socket = new WebSocket('ws://localhost:8001/ws/pingPong/');
-      let id = randomID();
+      let id = 0;
       socket.onopen = function (e) {
         console.log("Connection established");
         if (gametype === "remote") {
@@ -207,7 +208,6 @@ export function initGamePage(mode) {
           socket.send(
             JSON.stringify({
               message: "Hello, server!",
-              id: id,
               token: token,
             })
           );
@@ -265,9 +265,17 @@ export function initGamePage(mode) {
             playerName[1] = data.players[1];
           }
         }
-
+        if(gametype === "remote")
+        {
+          if(data.message === "remote-id")
+          {
+            id = data.id;
+            console.log("id",id);
+          }
+        }
         if (data.event === "draw") {
-          console.log(data);
+          console.log(data.player1," ",data.player2);
+          console.log(data.player1_Name," ",data.player2_Name);
           if (gametype === "remote") {
             document.getElementById("window").remove();
           } else if (gametype === "tournament") {
@@ -278,7 +286,7 @@ export function initGamePage(mode) {
           }
           gameData.width = data.canvasWidth;
           gameData.height = data.canvasHeight;
-          letsStart();
+          letsStart(data);
           //    console.log('draw');
         }
         if (data.event === "gameOver") {
@@ -293,15 +301,9 @@ export function initGamePage(mode) {
             window.removeEventListener("keydown", handleKeyEvent);
             gameOver(data.winner);
           } else if (gametype === "remote") {
-            // console.log("player1 ", data.player1, ",id ", id);
-            // if(data.player1 === id)
-            // {
-            //     gameOver('right');
-            // }
-            // else
-            // {
-            //     gameOver('left');
-            // }
+            window.removeEventListener("resize", sendNewSize);
+            window.removeEventListener("keyup", handleKeyEvent);
+            window.removeEventListener("keydown", handleKeyEvent);
             gameOver(data.winner);
           }
         }
@@ -390,7 +392,7 @@ export function initGamePage(mode) {
       let leftPlayer;
       let rightPlayer;
       let firstInstructions = true;
-      function letsStart() {
+      function letsStart(data) {
         let div = document.createElement("div");
         div.id = "myDiv";
         document.body.appendChild(div);
@@ -423,7 +425,12 @@ export function initGamePage(mode) {
         else if (gametype === "tournament") {
           rightPlayerP.innerText = playerName[1].toUpperCase();
           leftPlayerP.innerText = playerName[0].toUpperCase();
-        } else rightPlayerP.innerText = "PLAYER 2";
+        }
+        else if (gametype === "remote") {
+              rightPlayerP.innerText = data.player1_Name;
+              leftPlayerP.innerText = data.player2_Name
+        }
+        else rightPlayerP.innerText = "PLAYER 2";
         leftPlayerScore.innerText = "0";
         rightPlayerScore.innerText = "0";
 
