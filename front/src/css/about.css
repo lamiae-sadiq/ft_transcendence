@@ -1,0 +1,191 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: visible !important;
+    overflow-x: hidden !important;
+    /* background: radial-gradient(circle at top left, rgb(213, 5, 255) 1%, transparent 30%),
+    radial-gradient(circle at bottom left, rgb(15, 195, 231) 1%, transparent 30%); */
+    background-color: black;
+}
+
+/* LOGO */
+.image { 
+    display: block;
+    width: 40px;
+    height: auto;
+    margin: 0 0 0 20px;
+}
+
+.fonts {
+    font-size: 1.2rem;
+    color: #F0E6D2;
+}
+
+/* NAVBAR */
+.navbar {
+  height: 120px;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--colors-gold) !important;
+}
+
+.user {
+    margin-left: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+.container-fluid {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    height: 100% !important;
+}
+
+.nav-item a {
+  font-size: 1rem; /* Adjust font size */
+  text-align: center; /* katcentri f togglebar*/
+}
+
+.navbar-toggler {
+    margin-right: auto !important;
+    margin-left: 0 !important;
+}
+
+.shows {
+  background-color: black;
+}
+
+.navbar .sidebar .offcanvas-body .nav-link {
+    padding: 10px !important;
+    margin: 10px;
+}
+
+.navbar .user {
+    background: none !important;
+    border: none !important;
+}
+
+.navbar .user .customBack {
+    /* background-color: #007bff !important; */
+    color: #a6009e !important; /*user !!!!*/
+    font-weight: bold !important;
+    border: none !important;
+}
+
+@media (max-width: 991px) {
+    .offcanvas-body, .offcanvas-header  {
+        background-color: var(--colors-body);
+    }
+}
+
+@media (max-width: 989px) {
+    .contain {
+      flex-direction: column;
+    }
+    
+    .friend-list, .conversation {
+      width: calc(100% - 66px);
+      margin: 20px 0;
+    }
+
+    .toggle-btn {
+      width: 10rem;
+      display: block;
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      z-index: 3;
+    }
+
+    .Text {
+        display: none;
+    }
+/* 
+    .play {
+        position: fixed;
+        left: 20%;
+        top: 20%;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+      } later on !!!!! */ 
+  }
+  
+  @media (min-width: 990px) {
+    .contain {
+      flex-direction: row;
+    }
+
+    .friend-list {
+        display: block;
+    }
+    
+    .conversation {
+      /* display: block; */
+      position: static; /* Reset positioning */
+    }
+    
+    .toggle-btn {
+      display: none;
+    }
+
+    .Text {
+        font-size: 3vw;
+        left: 30%;
+      }
+}
+
+.users-container {
+    width: 100px !important;
+    height: 100px !important;
+    position: relative !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .users-border {
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 1;
+  }
+  
+  .users {
+    width: 55.5% !important; /*AVATAR */
+    height: 55.5% !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+    position: absolute !important;
+    top: 23% !important; /* Center the avatar */
+    left: 23% !important;
+    z-index: 0;
+  }
+  
+  .level {
+    color: white;
+    font-weight: bold;
+    font-size: 10px;
+    position: inherit;
+    top: 73%;
+    z-index: 1;
+  }
+
+  .developer-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .developer-card img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  @media (max-width: 767px) {
+    .developer-card {
+      text-align: center;
+    }
+  }

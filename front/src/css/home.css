@@ -1,0 +1,479 @@
+body {
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background-color: #1E2328; 
+  color: #F0E6D2;
+}
+
+/* LOGO */
+.image { 
+  display: block;
+  width: 40px;
+  height: auto;
+  margin: 0 0 0 20px;
+}
+
+.navbar {
+  height: 120px;
+  margin-bottom: 0.5rem;
+  /* border-bottom: 1px solid var(--colors-gold) !important; */
+}
+
+.nav-item a {
+  font-size: 1rem; /* Adjust font size */
+  text-align: center; /* katcentri f togglebar*/
+}
+
+.navbar-toggler {
+  margin-right: auto !important;
+  margin-left: 0 !important;
+}
+
+.fonts {
+  font-size: 1.2rem;
+  color: #F0E6D2;
+}
+
+.shows {
+  background-color: black;
+}
+
+.navbar .sidebar .offcanvas-body .nav-link {
+  padding: 10px !important;
+  margin: 10px;
+}
+
+.main-container {
+  height: calc(100vh - 156px);
+  padding: 0 1.5rem;
+}
+
+.section-card {
+  /* background: rgba(0, 0, 0, 0.1); */
+  /* backdrop-filter: blur(5px); */
+  border-radius: 1rem;
+  padding: 1.5rem;
+  height: calc(100vh - 156px); /* Taller cards for bigger screens */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: relative; /* For chat input positioning */
+}
+
+.no-border:focus {
+  outline: none; /* Remove focus outline */
+  box-shadow: none; /* Remove shadow on focus */
+  border: none; /* Remove any border */
+}
+
+
+/* Friend List Styles */
+.friend-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #C8AA6E;
+  
+}
+
+.friend-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.friend-list {
+  height: calc(100% - 110px);
+  overflow-y: auto;
+}
+
+.friend-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 0.5rem;
+}
+
+.friend-item:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-2px);
+}
+
+.friend-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
+.friend-info {
+  flex: 1;
+}
+
+.friend-status {
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+/* Content Center Styles */
+.content-center {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.play-button {
+  margin-top: 2rem;
+  padding: 1rem 3rem;
+  font-size: 1.25rem;
+}
+
+/* Chat Styles */
+.chat-header {
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.message {
+  max-width: 60%;
+  padding: 10px;
+  margin: 5px 0;
+  display: inline-block;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  position: relative;
+}
+
+.message.sent {
+  /* align-self: flex-end;
+  background-color: #46494d;
+  color: white; */
+  align-self: flex-end;
+  background-color: #c8e6c9; /* Light green for sent messages */
+  color: #000;
+  border-radius: 10px 10px 0 10px;
+}
+
+.message.received {
+  /* align-self: flex-start;
+  background-color: #e5e5e5;
+  color: black; */
+  align-self: flex-start;
+  background-color: #e3f2fd;
+  color: #000;
+  border-radius: 10px 10px 10px 0;
+}
+#chat-messages {
+  max-height: 600px;
+  overflow-y: auto;
+}
+.message-timestamp {
+  font-size: 0.7rem;
+  color: #555;
+  text-align: right;
+  margin-top: 5px;
+}
+
+.chat-messages {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: calc(100% - 100px);
+  overflow-y: auto;
+  padding-right: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+.chat-messages::-webkit-scrollbar {
+  width: 8px;
+}
+.chat-input {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  background: transparent;
+  width: calc(100% - 3rem);
+}
+/* Profile Styles */
+.profile-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.mobile-friends-toggle {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #0d6efd;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.mobile-friends-toggle:hover {
+  transform: scale(1.05);
+  background: #0b5ed7;
+}
+
+@media (max-width: 991.98px) {
+  #friendListSection {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100vh;
+      z-index: 1050;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(5px);
+      transition: left 0.3s ease;
+      padding: 1rem;
+  }
+
+  #friendListSection.active {
+      left: 0;
+  }
+
+  .content-center {
+      min-height: calc(100vh - 156px);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .section-card {
+      height: calc(100vh - 156px);
+      box-shadow: none;
+      border: none;
+      position: relative;
+  }
+
+  #userProfile, 
+  #friendProfile {
+      display: none !important;
+  }
+
+  .chat-messages {
+      height: calc(100% - 200px);
+  }
+}
+
+#confirmButton {
+  background-color: #1E2328;
+  color: #C8AA6E;
+  border: 1px solid #C8AA6E;
+  padding: 15px 80px;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#confirmButton:hover {
+  background-color: #C8AA6E;
+  color: #1E2328;
+}
+
+.customBtn {
+  color: var(--colors-gold) !important;
+  border: 1px solid var(--colors-gold) !important;
+}
+
+.customBtn:hover {
+  color: black !important;
+  border: black !important;
+  background-color: var(--colors-gold) !important;
+}
+
+/*-------------------------------------------------------*/
+/* new */
+
+.search-container {
+  position: relative;
+}
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  transition: background 0.3s ease;
+}
+
+.search-result-item:hover {
+  background: #f9f9f9;
+  cursor: pointer;
+}
+
+.result-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.result-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.result-name {
+  font-weight: bold;
+  color: #333;
+}
+
+.result-bio {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.add-friend-btn {
+  background-color: var(--colors-gold);
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 0.8em;
+  color: white;
+  cursor: pointer;
+}
+
+.add-friend-btn:hover {
+  background-color: darkgoldenrod;
+}
+
+.no-results {
+  text-align: center;
+  padding: 20px;
+  color: #999;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-10px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* #friendRequestBadge {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.notification-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 5px;
+  width: 200px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+  padding: 10px;
+}
+
+.notification-dropdown .friend-request {
+  margin-bottom: 10px;
+} */
+
+/* new ^ */
+
+.users-container {
+  width: 100px !important;
+  height: 100px !important;
+  position: relative !important;
+  margin-bottom: 10px !important;
+}
+
+.users-border {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  z-index: 1;
+}
+
+.users {
+  width: 55.5% !important; /*AVATAR */
+  height: 55.5% !important;
+  object-fit: cover !important;
+  border-radius: 50% !important;
+  position: absolute !important;
+  top: 23% !important; /* Center the avatar */
+  left: 23% !important;
+  z-index: 0;
+}
+
+.level {
+  color: white;
+  font-weight: bold;
+  font-size: 10px;
+  position: inherit;
+  top: 73%;
+  z-index: 1;
+}
+/*-------------------------------------------------------*/

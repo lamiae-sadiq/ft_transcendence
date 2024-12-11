@@ -1,0 +1,114 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+    <!-- fluid to be added later on -->
+    <div class="container-fluid">
+      <!-- Logo -->
+      <a href="" class="home"
+        ><img class="image" src="src/assets/home/logo.svg" alt="logopng"
+      /></a>
+      <!-- SideBar -->
+      <div
+        class="sidebar offcanvas offcanvas-start shows"
+        tabindex="-1"
+        id="offcanvasNavbar"
+        aria-labelledby="offcanvasNavbarLabel"
+      >
+        <!-- SideBar Header -->
+        <div class="offcanvas-header border-bottom shadow-none">
+          <a href=""
+            ><img class="image" src="src/assets/home/logo.svg" alt="logopng"
+          /></a>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <!-- SideBar Body -->
+        <div class="offcanvas-body justify-content-center">
+          <ul class="navbar-nav">
+            <!-- justify-content-center fs-6 flex-grow-1 pe-3 gap-2 -->
+            <li class="nav-item p-3">
+              <a class="nav-link fonts" href="" id="home"><strong>Home</strong></a>
+            </li>
+            <li class="nav-item p-3">
+              <a class="nav-link fonts" href="" id="leaderboard"
+                ><strong>Leaderboard</strong></a
+              >
+            </li>
+            <li class="nav-item p-3">
+              <a class="nav-link fonts" href="" id="about"
+                ><strong>About Us</strong></a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Toggle Button -->
+      <button
+        class="navbar-toggler shadow-none border-0"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasNavbar"
+        aria-controls="offcanvasNavbar"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon" style="color: var(--colors-gold) !important;"></span>
+      </button>
+      <!-- USER PROFILE -->
+      <div id="user-container" class="profil"></div>
+    </div>
+  </nav>
+
+  <div class="container main-container">
+      <div class="modes-container">
+          <div class="mode-item">
+              <img src="./src/assets/play/1v1.png" alt="1v1 Image" class="mode-image">
+              <h5 class="mode-title">1v1</h5>
+              <!-- <p class="mode-time">20-45 minutes</p> -->
+              <div class="mode-description">
+                  <p class="description-text">Challenge a fellow summoner to a one-on-one match. Show off your skills in a
+                      classic duel!</p>
+              </div>
+          </div>
+          <div class="mode-item">
+              <img src="./src/assets/play/vsBot.png" alt="1vsAI Image" class="mode-image">
+              <h5 class="mode-title">1vAI</h5>
+              <!-- <p class="mode-time">15-30 minutes</p> -->
+              <div class="mode-description">
+                  <p class="description-text">Test your abilities against an AI opponent. Perfect for practice and honing
+                      your strategy.</p>
+              </div>
+          </div>
+          <div class="mode-item">
+              <img src="./src/assets/play/tournament.png" alt="Tournament Image" class="mode-image">
+              <h5 class="mode-title">Tournament</h5>
+              <!-- <p class="mode-time">15-35 minutes</p> -->
+              <div class="mode-description">
+                  <p class="description-text">Join a thrilling tournament and compete against multiple summoners for glory
+                      and prizes.</p>
+              </div>
+          </div>
+          <div class="mode-item">
+              <img src="./src/assets/play/friend.png" alt="Invite Friend Image" class="mode-image">
+              <h5 class="mode-title">Invite friend</h5>
+              <!-- <p class="mode-time">15-25 minutes</p> -->
+              <div class="mode-description">
+                  <p class="description-text">Invite a friend for a friendly match. Play and compete in real-time with
+                      someone you know.</p>
+              </div>
+          </div>
+          <div class="mode-item">
+              <img src="https://placehold.jp/150x150.png" alt="Remote 1v1" class="mode-image">
+              <h5 class="mode-title">Remote 1v1</h5>
+              <!-- <p class="mode-time">15-20 minutes</p> -->
+              <div class="mode-description">
+                  <p class="description-text">Face the unknown—challenge a random opponent and prove your skill. Adapt, strategize, and conquer the unexpected.</p>
+              </div>
+          </div>
+      </div>
+      <div class="button-container">
+          <button id="confirmButton">Play</button>
+      </div>
+  </div>

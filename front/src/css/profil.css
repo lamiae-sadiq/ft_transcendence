@@ -1,0 +1,545 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  background-color: #1E2328;
+  min-height: 100vh;
+}
+
+/*------------------------------*/
+
+/* LOGO */
+.image {
+  display: block;
+  width: 40px;
+  height: auto;
+  margin: 0 0 0 20px;
+}
+
+.fonts {
+  font-size: 1.2rem;
+  color: #F0E6D2;
+}
+
+/* NAVBAR */
+.navbar {
+  height: 120px !important;
+  border-bottom: 1px solid var(--colors-gold) !important;
+  /* Bottom border color */
+  /* background-color: transparent; */
+}
+
+.navbar .image {
+  height: 3rem !important;
+  margin-right: 1rem !important;
+}
+
+.user {
+  margin-left: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+.container-fluid {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  height: 100% !important;
+}
+
+.navbar-nav {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 3rem;
+}
+
+.nav-item a {
+  font-size: 1rem;
+  /* Adjust font size */
+  text-align: center;
+  /* katcentri f togglebar*/
+}
+
+.navbar-toggler {
+  margin-right: auto !important;
+  margin-left: 0 !important;
+}
+
+
+.navbar .sidebar .offcanvas-header .image {
+  height: 40px !important;
+}
+
+.navbar .sidebar .offcanvas-body .nav-link {
+  /* color: #ff0000 !important; */
+  padding: 10px !important;
+  margin: 10px;
+}
+
+.navbar .user {
+  background: none !important;
+  border: none !important;
+}
+
+.navbar .user .customBack {
+  /* background-color: #007bff !important; */
+  color: #a6009e !important;
+  /*user !!!!*/
+  font-weight: bold !important;
+  border: none !important;
+}
+
+@media (max-width: 991px) {
+  .offcanvas-body,
+  .offcanvas-header {
+    background-color: black;
+  }
+}
+
+@media (max-width: 989px) {
+  .contain {
+    flex-direction: column;
+  }
+
+  .friend-list,
+  .conversation {
+    width: calc(100% - 66px);
+    margin: 20px 0;
+  }
+
+  .toggle-btn {
+    width: 10rem;
+    display: block;
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    z-index: 3;
+  }
+
+  .Text {
+    display: none;
+  }
+
+  /* 
+    .play {
+        position: fixed;
+        left: 20%;
+        top: 20%;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+      } later on !!!!! */
+}
+
+@media (min-width: 990px) {
+  .contain {
+    flex-direction: row;
+  }
+
+  .friend-list {
+    display: block;
+  }
+
+  .conversation {
+    /* display: block; */
+    position: static;
+    /* Reset positioning */
+  }
+
+  .toggle-btn {
+    display: none;
+  }
+
+  .Text {
+    font-size: 3vw;
+    left: 30%;
+  }
+}
+
+/*------------------------------------*/
+
+.container {
+  max-height: 100%;
+}
+
+.left-container,
+.right-container {
+  background-color: transparent;
+  height: var(100% - 120px);
+  /* Make full height minus navbar */
+}
+
+#editProfileBtn {
+  background-color: var(--colors-gold);
+  border: 1px solid var(--colors-gold);
+}
+
+#profileBio {
+  color: white !important;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  background-color: #1E2328;
+}
+
+.max-width-container {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.bio {
+  /* border: 1px solid #C8AA6E; */
+  border-radius: 4px;
+  /* padding: 20px; */
+  box-sizing: border-box; /* Include padding in width */
+  width: 100%;
+  max-height: 120px; /* Optional for consistent height */
+  overflow: auto;
+  overflow-wrap: break-word; /* Break long words */
+  word-wrap: break-word;
+  word-break: break-word; /* Break words that are too long */
+  white-space: pre-wrap; /* Preserve spaces and line breaks */
+}
+
+.bio:focus {
+  outline: none;
+  border: 1px solid #C8AA6E;
+  /* border-color: #C8AA6E; Highlight border on focus */
+}
+
+
+#profileName {
+  color: white !important;
+}
+
+.profile-section {
+  position: relative; /* Set relative position for positioning child elements */
+  /* height: 480px; */
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: not-allowed; /* Cursor style when not editing */
+  position: relative;
+}
+
+.username {
+  font-size: 1.8em;
+}
+
+.last-played {
+  color: #6c757d;
+  font-size: 0.9em;
+}
+
+.about-me {
+  font-size: 1.2em;
+  margin-bottom: 0;
+  color: white;
+}
+
+.section-title {
+  border-bottom: 2px solid var(--colors-gold);
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+  color: white;
+}
+
+.title-container {
+  display: flex !important;
+  align-items: center !important;
+  border-bottom: 2px solid #007bff !important; /* The bottom border shared by both */
+  /* padding-bottom: 5px !important; */
+  margin-bottom: 5px !important;
+}
+
+.achievements-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 20vh;
+  overflow-y: auto;
+}
+
+.achievement-item {
+  text-align: center;
+  margin-bottom: 15px;
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.scoreboard-section {
+  background-color: #1E2328;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(253, 249, 23, 0.5);
+  padding: 20px;
+  /* height: auto; */
+  width: 98%;
+}
+
+.stat {
+  font-size: 2em;
+  font-weight: bold;
+  color: white;
+}
+
+.stylingColor {
+  color: var(--colors-gold);
+}
+
+.level-pentagon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(to bottom, var(--colors-gold), black) !important;
+  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  /* position: relative;
+  z-index: 1; */
+}
+
+.level-number {
+  color: white;
+  font-size: 1.8em;
+  font-weight: bold;
+}
+
+.level-label {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1px solid var(--colors-gold);
+  border-radius: 12px;
+  font-size: 0.9em;
+  color: #ffffff;
+  background-color: #1E2328;
+}
+
+.friends-container {
+  height: 600px;
+  overflow-y: auto;
+}
+
+.friends-section {
+  background-color: #1E2328;
+  box-shadow: 0 4px 8px rgba(253, 249, 23, 0.5);
+  border-radius: 5%;
+}
+
+.friend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.friend-picture {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.friend-name {
+  margin-bottom: 0;
+  color: white;
+}
+
+.friend-status {
+  font-size: 0.8em;
+  display: flex;
+  align-items: center;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.online {
+  color: var(--colors-online) !important;
+}
+
+.offline {
+  color: var(--colors-offline) !important;
+}
+
+.online .status-indicator {
+  background-color: var(--colors-online);
+}
+
+.offline .status-indicator {
+  background-color: #dc3545;
+}
+
+/* Custom scrollbar for achievements and friends list */
+.bio::-webkit-scrollbar,
+.friends-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.bio::-webkit-scrollbar-track,
+.friends-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.bio::-webkit-scrollbar-thumb,
+.friends-container::-webkit-scrollbar-thumb {
+  background: var(--colors-gold);
+  border-radius: 10px;
+}
+
+.bio::-webkit-scrollbar-thumb:hover,
+.friends-container::-webkit-scrollbar-thumb:hover {
+  background: var(--colors-gold);
+}
+
+@media (min-width: 992px) {
+  .row {
+    position: relative !important;
+  }
+
+  .container > .row::after {
+    /*4 hours looking for the answer :) .container > */
+    content: "";
+    position: absolute;
+    height: 100%; /* Span the entire height of the row */
+    top: 0;
+    left: 66%;
+    width: 1px;
+    background-color: var(--colors-gold);
+    z-index: 0;
+  }
+  .achievement-item {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+}
+/* Adjust the columns to account for the line */
+.col-lg-6 {
+  position: relative !important;
+  z-index: 2 !important; /* Ensure columns are above the vertical line */
+}
+
+/*-----------------------------------------------*/
+
+.match-history {
+  max-width: 100%;
+  margin: 0 auto;
+  background-color: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 15px;
+  padding: 20px;
+}
+.match-card {
+  background-color: #2a2a2a;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.2s;
+  margin-bottom: 15px;
+}
+.match-card:hover {
+  transform: translateY(-5px);
+  background-color: #3a3a3a;
+}
+.player-icon,
+.enemy-icon {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.score {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  white-space: nowrap;
+}
+.winner {
+  color: #28a745;
+}
+.loser {
+  color: #dc3545;
+}
+.player-name,
+.enemy-name {
+  color: #fff;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.no-border:focus {
+  outline: none; /* Remove focus outline */
+  box-shadow: none; /* Remove shadow on focus */
+  border: none; /* Remove any border */
+}
+
+/*-------------------------------------------------------*/
+.users-container {
+  width: 100px !important;
+  height: 100px !important;
+  position: relative !important;
+  margin-bottom: 10px !important;
+}
+
+.users-border {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  z-index: 1;
+}
+
+.users {
+  width: 55.5% !important; /*AVATAR */
+  height: 55.5% !important;
+  object-fit: cover !important;
+  border-radius: 50% !important;
+  position: absolute !important;
+  top: 23% !important; /* Center the avatar */
+  left: 23% !important;
+  z-index: 0;
+}
+
+.level {
+  color: white;
+  font-weight: bold;
+  font-size: 10px;
+  position: inherit;
+  top: 73%;
+  z-index: 1;
+}
+/*-------------------------------------------------------*/
+
+.edit-icon {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  color: white;
+  display: none;
+  z-index: 1;
+}
+
+/* Show the edit icon when hovering over the image in edit mode */
+.profile-picture.editable:hover + .edit-icon {
+  display: block;
+}
+
+ /* For editable name and bio, set hover cursor */
+ [contenteditable="true"] {
+  outline: 0;
+  /* border-bottom: 1px dashed var(var(--colors-gold)); */
+  cursor: text;
+}

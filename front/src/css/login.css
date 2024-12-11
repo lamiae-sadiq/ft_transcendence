@@ -1,0 +1,290 @@
+*{
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+body{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    height: 100vh !important;
+    /* min-width: 60% !important; */
+    overflow: hidden !important;
+    background-color: black;
+}
+
+.container {
+    background-color: #ffffff !important;
+    border-radius: 30px !important;
+    box-shadow: 0 5px 15px var(--colors-gold) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    width: 90% !important;
+    min-width: 300px !important;
+    max-width: 768px;
+    min-height: 480px !important;
+}
+
+.container p{
+    font-size: 14px !important;
+    line-height: 20px !important;
+    letter-spacing: 0.3px !important;
+    margin: 20px 0 !important;
+}
+
+.container span{
+    font-size: 12px !important;
+}
+
+.container a{
+    color: black !important;
+    font-size: 13px !important;
+    text-decoration: none !important;
+    margin: 15px 0 10px !important;
+}
+
+.container .styled{
+    background-color: var(--colors-gold) !important;
+    color: #fff !important;
+    font-size: 12px !important;
+    padding: 10px 45px !important;
+    border: 1px solid transparent !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    margin-top: 10px !important;
+    cursor: pointer !important;
+}
+
+.container button.hidden{
+    background-color: var(--colors-gold) !important;
+}
+
+.container form{
+    background-color: #ffffff !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    padding: 0 40px !important;
+    height: 100% !important;
+    color: #000000 !important;
+}
+
+.container .input-box {
+    background-color: black !important;
+    border: 1px solid var(--colors-gold) !important;
+    margin: 8px 0 !important;
+    padding: 10px 15px !important;
+    font-size: 13px !important;
+    border-radius: 8px !important;
+    width: 100% !important;
+    outline: none !important;
+}
+
+/* ------------------------------------------------------- */
+.input-container {
+    position: relative !important; /* Container is positioned relative */
+    width: 100% !important; /* Adjust as needed */
+}
+
+.input-box {
+    position: relative;
+}
+
+.input-box input {
+    background-color: black !important;
+    border: none !important;
+    font-size: 13px !important;
+    width: 100% !important;
+    outline: none !important;
+    color: white;
+}
+
+.passwordInput {
+    width: calc(100% - 40px) !important; /* Adjust width to make space for the button */
+    padding-right: 40px !important; /* Space for the button inside the input field */
+    box-sizing: border-box !important; /* Include padding and border in width */
+}
+
+.passwordToggleBtn {
+    position: absolute !important; /* Absolute positioning within the container */
+    right: 20px !important; /* Adjust distance from the right edge */
+    transform: translateY(0%) !important; /* Center vertically */
+    cursor: pointer !important; /* Pointer cursor */
+    border: none !important; /* Remove default border */
+    padding: 0 !important; /* Remove padding */
+    background: none !important; /* Remove background color */
+    color: white !important;
+}
+
+/* ------------------------------------------------------- */
+
+.form-container{
+    position: absolute !important;
+    top: 0 !important;
+    height: 100% !important;
+    transition: all 0.6s ease-in-out !important;
+}
+
+.sign-in{
+    left: 0 !important;
+    width: 50% !important;
+    z-index: 2 !important;
+}
+
+.container.active .sign-in{
+    transform: translateX(100%) !important;
+}
+
+.sign-up{
+    left: 0 !important;
+    width: 50% !important;
+    /* opacity: 0 !important; -------------------------- */
+    z-index: 1 !important;
+}
+
+.container.active .sign-up{
+    transform: translateX(100%) !important;
+    opacity: 1 !important;
+    z-index: 5 !important;
+    animation: move 0.6s !important;
+}
+
+@keyframes move{
+    0%, 49.99%{
+        opacity: 0 !important;
+        z-index: 1 !important;
+    }
+    50%, 100%{
+        opacity: 1 !important;
+        z-index: 5 !important;
+    }
+}
+
+.social-icons{
+    margin: 20px 0 !important;
+}
+
+.social-icons a {
+    border: 1px solid var(--colors-gold) !important;
+    border-radius: 50% !important;
+    display: inline-block !important;
+    margin: 0 5px !important;
+    width: 30px !important;
+    height: 30px !important;
+    vertical-align: middle !important;
+    text-align: center !important;
+    line-height: 30px !important;
+}
+
+.toggle-container{
+    position: absolute !important;
+    top: 0 !important;
+    left: 50% !important;
+    width: 50% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    transition: all 0.6s ease-in-out !important;
+    border-radius: 20px !important;
+    z-index: 1000 !important;
+}
+
+.container.active .toggle-container{
+    transform: translateX(-100%) !important;
+    border-radius: 20px !important;
+}
+
+.toggle{
+    background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.15) 0%,
+        rgba(155, 126, 178, 0.3) 25%,
+        rgba(131, 144, 204, 0.3) 50%,
+        rgba(164, 181, 255, 0.3) 100%) !important;
+    height: 100% !important;
+    color: black !important;
+    position: relative !important;
+    left: -100% !important;
+    height: 100% !important;
+    width: 200% !important;
+    transform: translateX(0) !important;
+    transition: all 0.6s ease-in-out !important;
+}
+
+.container.active .toggle{
+    transform: translateX(50%) !important;
+}
+
+.toggle-panel{
+    position: absolute !important;
+    width: 50% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    padding: 0 30px !important;
+    text-align: center !important;
+    top: 0 !important;
+    transform: translateX(0) !important;
+    transition: all 0.6s ease-in-out !important;
+}
+
+.toggle-left{
+    transform: translateX(-200%) !important;
+}
+
+.container.active .toggle-left{
+    transform: translateX(0) !important;
+}
+
+.toggle-right{
+    right: 0 !important;
+    transform: translateX(0) !important;
+}
+
+.centering {
+    /* width: 100%; */
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    display: none;
+  }
+  
+  .centering p {
+    display: flex;
+    align-items: center; /* Aligns the text and button vertically */
+  }
+  
+  .centering button {
+    margin-left: 50px; /* Adds space between the text and button */
+    text-decoration: none;
+    border: none;
+    background-color: white;
+    color: var(--colors-gold);
+  }
+  
+  
+  @media (max-width: 768px) {
+    .toggle-container {
+      display: none;
+    }
+  
+    .form-container {
+      min-width: 100%;
+    }
+  
+    .centering {
+      display: block;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .container {
+        width: 800px !important;
+    }
+  }

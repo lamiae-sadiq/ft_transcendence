@@ -1,0 +1,69 @@
+/* @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url("https://fonts.googleapis.com/css?family=Abril+Fatface:400|Abyssinica+SIL:400|Abel:400"); */
+
+:root {
+  --blue-violet50: rgba(238, 241, 255, 1);
+  --blue-violet100: rgba(223, 230, 255, 1);
+  --blue-violet200: rgba(198, 207, 255, 1);
+  --blue-violet300: rgba(163, 175, 254, 1);
+  --blue-violet400: rgba(127, 133, 250, 1);
+  --blue-violet500: rgba(99, 96, 244, 1);
+  --blue-violet600: rgba(98, 83, 234, 1);
+  --blue-violet700: rgba(71, 53, 205, 1);
+  --blue-violet800: rgba(58, 46, 165, 1);
+  --blue-violet900: rgba(52, 44, 131, 1);
+  --blue-violet950: rgba(31, 26, 76, 1);
+  --colors-blue-violet-50: rgba(238, 241, 255, 1);
+  --colors-blue-violet-100: rgba(223, 230, 255, 1);
+  --colors-blue-violet-200: rgba(198, 207, 255, 1);
+  --colors-blue-violet-300: rgba(163, 175, 254, 1);
+  --colors-blue-violet-400: rgba(127, 133, 250, 1);
+  --colors-blue-violet-500: rgba(99, 96, 244, 1);
+  --colors-blue-violet-600: rgba(98, 83, 234, 1);
+  --colors-blue-violet-700: rgba(71, 53, 205, 1);
+  --colors-blue-violet-800: rgba(58, 46, 165, 1);
+  --colors-blue-violet-900: rgba(52, 44, 131, 1);
+  --colors-blue-violet-950: rgba(31, 26, 76, 1);
+
+  --colors-cuteBlue: #4169e1;
+  --colors-cutePink: #d93f9b;
+  --colors-online: #07EF9C;
+  --colors-offline: #dc3545;
+  --colors-gold: #C8AA6E;
+}
+
+
+* {
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow: hidden;
+  margin: 0px;
+  height: 100vh;
+  font-family: 'Arial', sans-serif;
+  color: #F0E6D2;
+}
+
+@media only screen and (min-width: 1024px) {
+  body {
+      overflow: hidden; /* Prevent zooming effects via scrolling */
+  }
+}
+
+/* #app {
+  z-index: 1;
+} */
+/* button:focus-visible {
+  outline: 2px solid #4a90e2 !important;
+  outline: -webkit-focus-ring-color auto 5px !important;
+} */
+
+a {
+  text-decoration: none;
+}
+
+.navbar .sidebar .offcanvas-body .nav-link:hover {
+  color: var(--colors-gold) !important;
+}

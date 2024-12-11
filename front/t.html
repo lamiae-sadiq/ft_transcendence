@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoL Game Modes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- background-color: #1b0236; -->
+     <!-- background: radial-gradient(circle at top left, rgb(213, 5, 255) 1%, transparent 30%),
+            radial-gradient(circle at bottom left, rgb(15, 195, 231) 1%, transparent 30%); -->
+    <style>
+        body {
+            color: #F0E6D2;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #000000;
+
+        }
+
+        /* LOGO */
+        .image {
+            display: block;
+            width: 40px;
+            height: auto;
+            margin: 0 0 0 20px;
+        }
+
+        .navbar {
+            height: 120px;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--colors-gold) !important;
+        }
+
+        .nav-item a {
+            font-size: 1rem;
+            /* Adjust font size */
+            text-align: center;
+            /* katcentri f togglebar*/
+        }
+
+        .navbar-toggler {
+            margin-right: auto !important;
+            margin-left: 0 !important;
+        }
+
+        .navbar .sidebar .offcanvas-body .nav-link {
+            padding: 10px !important;
+            margin: 10px;
+        }
+
+        .fonts {
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+
+        .shows {
+            background-color: black;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: calc(100vh - 120px);
+            width: 90%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        .modes-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+            margin: auto 0;
+        }
+
+        .mode-item {
+            flex: 1;
+            text-align: center;
+            min-width: 200px;
+            cursor: pointer;
+        }
+
+        .mode-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+            border: 2px solid transparent;
+        }
+
+        .mode-image:hover,
+        .mode-item:hover .mode-image {
+            transform: scale(1.05);
+            border-color: #C8AA6E;
+            box-shadow: 0 0 15px rgba(200, 170, 110, 0.3);
+        }
+
+        .mode-title {
+            color: #C8AA6E;
+            font-size: 24px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .mode-time {
+            color: #A09B8C;
+            font-size: 18px;
+            margin: 5px 0;
+        }
+
+        .mode-description {
+            margin-top: 10px;
+            opacity: 0;
+            min-height: 60px;
+            /* Pre-allocated space */
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .mode-description.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+
+        .description-text {
+            color: #A09B8C;
+            font-size: 16px;
+            line-height: 1.4;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: auto;
+        }
+
+        #confirmButton {
+            background-color: #1E2328;
+            color: #C8AA6E;
+            border: 1px solid #C8AA6E;
+            padding: 15px 80px;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #confirmButton:hover {
+            background-color: #C8AA6E;
+            color: #1E2328;
+        }
+
+        @media (max-width: 1200px) {
+            .modes-container {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .mode-item {
+                flex: 0 1 calc(33.333% - 30px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mode-item {
+                flex: 0 1 calc(50% - 30px);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .mode-item {
+                flex: 0 1 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <!-- fluid to be added later on -->
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a href="#home"><img class="image" src="src/assets/home/logo.svg" alt="logopng"></a>
+            <!-- SideBar -->
+            <div class="sidebar offcanvas offcanvas-start shows" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <!-- SideBar Header -->
+                <div class="offcanvas-header text-white border-bottom shadow-none">
+                    <a href="#home"><img class="image" src="src/assets/home/logo.svg" alt="logopng"></a>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <!-- SideBar Body -->
+                <div class="offcanvas-body justify-content-center">
+                    <ul class="navbar-nav"> <!-- justify-content-center fs-6 flex-grow-1 pe-3 gap-2 -->
+                        <li class="nav-item">
+                            <a class="nav-link fonts" href="#home"><strong>Home</strong></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fonts" href="#leaderboard"><strong>Leaderboard</strong></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fonts" href="#about"><strong>About Us</strong></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Toggle Button -->
+            <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- USER PROFILE -->
+            <div id="user-container"></div>
+        </div>
+    </nav>
+
+    <div class="container main-container">
+        <div class="modes-container">
+            <div class="mode-item">
+                <img src="https://placehold.co/150x150" alt="Summoner's Rift" class="mode-image">
+                <h5 class="mode-title">1v1</h5>
+                <!-- <p class="mode-time">20-45 minutes</p> -->
+                <div class="mode-description">
+                    <p class="description-text">Challenge a fellow summoner to a one-on-one match. Show off your skills in a
+                        classic duel!</p>
+                </div>
+            </div>
+            <div class="mode-item">
+                <img src="https://placehold.co/150x150" alt="ARAM" class="mode-image">
+                <h5 class="mode-title">1vAI</h5>
+                <!-- <p class="mode-time">15-30 minutes</p> -->
+                <div class="mode-description">
+                    <p class="description-text">Test your abilities against an AI opponent. Perfect for practice and honing
+                        your strategy.</p>
+                </div>
+            </div>
+            <div class="mode-item">
+                <img src="https://placehold.co/150x150" alt="Ultimate Spellbook" class="mode-image">
+                <h5 class="mode-title">Tournament</h5>
+                <!-- <p class="mode-time">15-35 minutes</p> -->
+                <div class="mode-description">
+                    <p class="description-text">Join a thrilling tournament and compete against multiple summoners for glory
+                        and prizes.</p>
+                </div>
+            </div>
+            <div class="mode-item">
+                <img src="https://placehold.co/150x150" alt="URF" class="mode-image">
+                <h5 class="mode-title">Invite friend</h5>
+                <!-- <p class="mode-time">15-25 minutes</p> -->
+                <div class="mode-description">
+                    <p class="description-text">Invite a friend for a friendly match. Play and compete in real-time with
+                        someone you know.</p>
+                </div>
+            </div>
+            <div class="mode-item">
+                <img src="https://placehold.co/150x150" alt="Nexus Blitz" class="mode-image">
+                <h5 class="mode-title">------</h5>
+                <!-- <p class="mode-time">15-20 minutes</p> -->
+                <div class="mode-description">
+                    <p class="description-text">------------------</p>
+                </div>
+            </div>
+        </div>
+        <div class="button-container">
+            <button id="confirmButton">PLAY</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modeItems = document.querySelectorAll('.mode-item');
+            const confirmButton = document.getElementById('confirmButton');
+
+            modeItems.forEach(item => {
+                const image = item.querySelector('.mode-image');
+                const description = item.querySelector('.mode-description');
+
+                image.addEventListener('click', () => {
+                    // Hide all descriptions first
+                    document.querySelectorAll('.mode-description').forEach(desc => {
+                        desc.classList.remove('active');
+                    });
+
+                    // Show clicked item's description
+                    description.classList.add('active');
+                });
+            });
+
+            confirmButton.addEventListener('click', () => {
+                const activeMode = document.querySelector('.mode-description.active');
+                if (activeMode) {
+                    const modeName = activeMode.parentElement.querySelector('.mode-title').textContent;
+                    alert(`Starting ${modeName} mode!`);
+                } else {
+                    alert('Please select a game mode first!');
+                }
+            });
+        });
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

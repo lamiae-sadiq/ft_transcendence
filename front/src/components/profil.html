@@ -1,0 +1,159 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+  <!-- fluid to be added later on -->
+  <div class="container-fluid">
+    <!-- Logo -->
+    <a href="" class="home"
+      ><img class="image" src="src/assets/home/logo.svg" alt="logopng"
+    /></a>
+    <!-- SideBar -->
+    <div
+      class="sidebar offcanvas offcanvas-start shows"
+      tabindex="-1"
+      id="offcanvasNavbar"
+      aria-labelledby="offcanvasNavbarLabel"
+    >
+      <!-- SideBar Header -->
+      <div class="offcanvas-header border-bottom shadow-none">
+        <a href=""
+          ><img class="image" src="src/assets/home/logo.svg" alt="logopng"
+        /></a>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <!-- SideBar Body -->
+      <div class="offcanvas-body justify-content-center">
+        <ul class="navbar-nav">
+          <!-- justify-content-center fs-6 flex-grow-1 pe-3 gap-2 -->
+          <li class="nav-item p-3">
+            <a class="nav-link fonts" href="" id="home"><strong>Home</strong></a>
+          </li>
+          <li class="nav-item p-3">
+            <a class="nav-link fonts" href="" id="leaderboard"
+              ><strong>Leaderboard</strong></a
+            >
+          </li>
+          <li class="nav-item p-3">
+            <a class="nav-link fonts" href="" id="about"
+              ><strong>About Us</strong></a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Toggle Button -->
+    <button
+      class="navbar-toggler shadow-none border-0"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasNavbar"
+      aria-controls="offcanvasNavbar"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon" style="color: var(--colors-gold) !important;"></span>
+    </button>
+    <!-- USER PROFILE -->
+    <div id="user-container" class="profil"></div>
+  </div>
+</nav>
+
+<div class="container mt-4 mb-5">
+  <div class="row mb-5">
+    <!-- Left Container -->
+    <div class="col-lg-8 mb-4 mb-lg-0 mt-4">
+      <div class="left-container d-flex flex-column">
+        <!-- Profile Section -->
+        <div class="profile-section p-4">
+          <div class="d-flex align-items-center mb-4 position-relative">
+            <div class="position-relative">
+              <img
+                src=""
+                alt="Profile Picture"
+                class="profile-picture me-3"
+                id="profileImage"
+                style="cursor: not-allowed"
+              />
+              <input
+                type="file"
+                id="fileInput"
+                style="display: none"
+                accept="image/*"
+              />
+
+              <!-- Camera icon for image edit -->
+              <div id="editImageIcon" class="edit-icon">
+                <i class="fas fa-camera"></i>
+              </div>
+            </div>
+
+            <div>
+              <h2 class="username mb-0 --bs-light" id="profileName"></h2>
+              <p class="last-played mb-0">Last played: 2 hours ago</p>
+            </div>
+          </div>
+
+          <button class="btn btn-primary mb-4" id="editProfileBtn">
+            <i class="fas fa-pencil-alt me-2"></i>Edit Profile
+          </button>
+
+          <div class="container max-width-container">
+            <h3 class="about-me"><strong>About Me</strong></h3>
+            <hr class="my-2" />
+            <p 
+              class="bio" 
+              id="profileBio" >
+            </p>
+          </div>
+          
+          
+        </div>
+
+        <!-- Achievements Section -->
+        <div class="scoreboard-section mt-2 p-4 flex-grow-1">
+          <h3 class="section-title text-center">Scorecard</h3>
+          <div class="row text-center mt-4">
+            <div class="col-4">
+              <p class="stat">150</p>
+              <h4 class="stylingColor">Wins</h4>
+            </div>
+            <div class="col-4">
+              <div class="level-pentagon">
+                <span class="level-number">42</span>
+              </div>
+              <div class="level-label mt-2">Level 42</div>
+            </div>
+            <div class="col-4">
+              <p class="stat">75</p>
+              <h4 class="stylingColor">Losses</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vertical Line for larger screens  d-none d-lg-block -->
+    <!-- <div class="vertical-line"></div> -->
+
+    <!-- Right Container -->
+    <div class="col-lg-4">
+      <div class="right-container d-flex flex-column">
+        <!-- Friends List Section -->
+        <div class="friends-section mt-4 p-4 flex-grow-1">
+          <!--mt-4-->
+          <h3 class="section-title">Friends</h3>
+          <div class="friends-container" id="friendsContainer">
+            <!-- Friends will be dynamically added here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container mt-5">
+  <h1 class="text-center mb-4 text-white">Match History</h1>
+  <div id="matchHistory" class="match-history"></div>
+</div>

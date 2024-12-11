@@ -1,0 +1,409 @@
+body,
+html {
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  /*problem for smaller screens !!!!!!*/
+  /* background: radial-gradient(circle at top left, rgb(213, 5, 255) 1%, transparent 30%),
+    radial-gradient(circle at bottom left, rgb(15, 195, 231) 1%, transparent 30%);
+    font-family:'Luminari'; */
+    background-color: #1E2328;
+  /* font-family: 'Luminari' !important; */
+  overflow-x: hidden !important;
+  /* position: relative !important; */
+}
+
+.image {
+  display: block !important;
+  width: 40px !important;
+  height: auto !important;
+  margin: 0 0 0 20px !important;
+}
+
+.fonts {
+  font-size: 1.1rem !important;
+  color: #F0E6D2;
+}
+
+.navbar {
+  height: 120px !important;
+  border-bottom: 1px solid var(--colors-gold) !important;
+  /* Bottom border color */
+  /* background-color: transparent !important; */
+}
+
+.navbar .image {
+  height: 3rem !important;
+  margin-right: 1rem !important;
+}
+
+.user {
+  margin-left: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+
+.navbar-nav {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 3rem !important;
+}
+
+.nav-item a {
+  font-size: 1rem !important;
+  /* Adjust font size */
+  text-align: center !important;
+  /* katcentri f togglebar*/
+}
+
+.navbar-toggler {
+  margin-right: auto !important;
+  margin-left: 0 !important;
+}
+
+.navbar .sidebar .offcanvas-header .image {
+  height: 40px !important;
+}
+
+.navbar .sidebar .offcanvas-body .nav-link {
+  /* color: #ff0000 !important; */
+  padding: 10px !important;
+  margin: 10px !important;
+}
+
+.navbar .user {
+  background: none !important;
+  border: none !important;
+}
+
+.navbar .user .customBack {
+  /* background-color: #007bff !important; */
+  color: #a6009e !important;
+  /*user !!!!*/
+  font-weight: bold !important;
+  border: none !important;
+}
+
+@media (max-width: 991px) {
+
+  .offcanvas-body,
+  .offcanvas-header {
+    background-color: black !important;
+  }
+}
+
+/*----------------------------------------------------------*/
+
+.podium-container {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-end !important;
+    margin-bottom: 2rem !important;
+    height: 40vh !important;
+    max-height: 100vh !important; /* Ensure it does not exceed 100vh */
+    overflow-y: auto !important; /* Enable scrolling if needed */
+}
+
+.wheat {
+    position: absolute;
+    left: 5%;
+    transform: translateX(-15%);
+    width: 40% !important;
+    height: 40% !important;
+    background-image: url('../assets/leaderboard/wheatL.png') !important;
+    background-repeat: repeat-y !important;
+    background-position: center !important;
+    background-size: contain !important;
+    object-fit: cover !important;
+}
+
+.wheatR {
+    position: absolute;
+    left: 55%;
+    transform: translateX(15%);
+  width: 40% !important;
+  height: 40% !important;
+  background-image: url('../assets/leaderboard/wheatR.png') !important;
+  background-repeat: repeat-y !important;
+  background-position: center !important;
+  background-size: contain !important;
+  object-fit: cover !important;
+}
+
+.podium {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-end !important;
+    height: 100% !important;
+}
+
+.podium-item {
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+}
+
+.avatar-container {
+    width: 120px !important;
+    height: 120px !important;
+    position: relative !important;
+    margin-bottom: 10px !important;
+}
+
+.avatar-border {
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+}
+
+.avatar {
+    width: 60% !important; /*AVATAR */
+    height: 60% !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+    position: absolute !important;
+    top: 15% !important; /* Center the avatar */
+    left: 20% !important;
+}
+
+.podium-1 .avatar-container {
+    width: 120px !important;
+    height: 120px !important;
+}
+
+.podium-2 .avatar-container {
+    width: 100px !important;
+    height: 100px !important;
+}
+
+.podium-3 .avatar-container {
+    width: 80px !important;
+    height: 80px !important;
+}
+
+.podium-block {
+    width: 160px !important; /* Reduce podium width */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #fff !important;
+    font-weight: bold !important;
+    background: #0B689C !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), inset 0 -4px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+.podium-1 .podium-block {
+    height: 100px !important; /* Adjust heights */
+}
+
+.podium-2 .podium-block {
+    height: 90px !important; /* Adjust heights */
+}
+
+.podium-3 .podium-block {
+    height: 80px !important; /* Adjust heights */
+}
+
+.podium-stats {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    padding: 0 10px !important;
+}
+
+.wins, .level {
+    font-size: 0.9rem !important;
+}
+
+.rank {
+    font-size: 1rem !important;
+    width: 40px !important;
+    height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    color: #fff !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important;
+}
+
+.rank-1 {
+    background-image: url('../assets/leaderboard/pennant1.png') !important;
+}
+.rank-2 {
+    background-image: url('../assets/leaderboard/pennant2.png') !important;
+}
+.rank-3 {
+    background-image: url('../assets/leaderboard/pennant3.png') !important;
+}
+
+.name {
+    color: #ffffff !important;
+    font-weight: bold !important;
+    margin-top: 5px !important;
+}
+
+@media (max-width: 991px) {
+    .podium-container, .wheat, .wheatR {
+        display: none !important;
+    }
+
+    .container {
+        max-width: 100% !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+}
+
+.box {
+    position: absolute;
+    width: 35vw; /* Relative to the viewport width */
+    height: 35vh; /* Relative to the viewport height */
+  }
+  
+  /* Pink Group */
+  .box .group {
+    position: absolute;
+    width: 35vw; /* Same as .box width */
+    height: 35vh; /* Same as .box height */
+    top: -100%; /* Leave as percentage if based on the container */
+    left: -50%; /* Leave as percentage if based on the container */
+  }
+  
+  .box .ellipse-wrapper {
+    position: absolute;
+    height: 35vh;
+    background-color: var(--colors-pinky);
+    border-width: 15vw 14vh; /* Adjusted to use vw and vh units */
+    box-shadow: 0 0 3vw var(--colors-pinky), 
+                0 0 6vw var(--colors-pinky), 
+                0 0 10vw var(--colors-pinky),
+                0 0 20vw var(--colors-pinky), 
+                0 0 35vw var(--colors-pinky), 
+                0 0 60vw var(--colors-pinky);
+  }
+  
+  .box .ellipse {
+    position: absolute;
+    width: 35vw;
+    height: 35vh;
+    background-color: var(--colors-pinky);
+    border-width: 15vw 14vh;
+    box-shadow: 0 0 3vw var(--colors-pinky), 
+                0 0 6vw var(--colors-pinky), 
+                0 0 10vw var(--colors-pinky),
+                0 0 20vw var(--colors-pinky), 
+                0 0 35vw var(--colors-pinky), 
+                0 0 60vw var(--colors-pinky);
+  }
+  
+  /* Blue Group */
+  /* .box .groupb {
+    position: absolute;
+    width: 35vw;
+    height: 35vh;
+    top: 300%;
+    left: 0%;
+  }
+  
+  .box .ellipse-wrapperb {
+    position: absolute;
+    height: 35vh;
+    background-color: var(var(--colors-gold));
+    border-width: 15vw 14vh;
+    box-shadow: 0 0 3vw var(var(--colors-gold)), 
+                0 0 6vw var(var(--colors-gold)), 
+                0 0 10vw var(var(--colors-gold)),
+                0 0 20vw var(var(--colors-gold)), 
+                0 0 35vw var(var(--colors-gold)), 
+                0 0 60vw var(var(--colors-gold));
+  }
+  
+  .box .ellipseb {
+    position: absolute;
+    width: 35vw;
+    height: 35vh;
+    background-color: var(var(--colors-gold));
+    border-width: 15vw 14vh;
+    box-shadow: 0 0 3vw var(var(--colors-gold)), 
+                0 0 6vw var(var(--colors-gold)), 
+                0 0 10vw var(var(--colors-gold)),
+                0 0 20vw var(var(--colors-gold)), 
+                0 0 35vw var(var(--colors-gold)), 
+                0 0 60vw var(var(--colors-gold));
+  } */
+
+  .card {
+    background-color: rgba(255, 255, 255, 0.2) !important; /* Transparent white background */
+    opacity: 0.9 !important;
+}
+
+.list-group-item {
+    background-color: rgba(255, 255, 255, 0.5) !important; /* Transparent background for list items */
+    color: #fff !important; /* White text for better contrast */
+}
+
+/* Horizontal white line between rank number and player name */
+.line-horizontal {
+    width: 1px; /* Adjust width as needed */
+    height: 30px;
+    background-color: white;
+    margin-right: 10px; /* Space between the line and the avatar */
+}
+
+
+/* Add a vertical line between users */
+.list-group-item {
+    border-bottom: 2px solid rgba(90, 62, 187, 0.5); /* Transparent vertical line */
+    position: relative;
+    /* color: rgb(90, 62, 187); */
+}
+
+/*-------------------------------------------------------*/
+.users-container {
+  width: 100px !important;
+  height: 100px !important;
+  position: relative !important;
+  margin-bottom: 10px !important;
+}
+
+.users-border {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  z-index: 1;
+}
+
+.users {
+  width: 55.5% !important; /*AVATAR */
+  height: 55.5% !important;
+  object-fit: cover !important;
+  border-radius: 50% !important;
+  position: absolute !important;
+  top: 23% !important; /* Center the avatar */
+  left: 23% !important;
+  z-index: 0;
+}
+
+.level {
+  color: white;
+  font-weight: bold;
+  font-size: 10px;
+  position: inherit;
+  top: 73%;
+  z-index: 1;
+}
+/*-------------------------------------------------------*/

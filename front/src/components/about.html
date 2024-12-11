@@ -1,0 +1,70 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+  <!-- fluid to be added later on -->
+  <div class="container-fluid">
+    <!-- Logo -->
+    <a href="" class="home"
+      ><img class="image" src="src/assets/home/logo.svg" alt="logopng"
+    /></a>
+    <!-- SideBar -->
+    <div
+      class="sidebar offcanvas offcanvas-start shows"
+      tabindex="-1"
+      id="offcanvasNavbar"
+      aria-labelledby="offcanvasNavbarLabel"
+    >
+      <!-- SideBar Header -->
+      <div class="offcanvas-header border-bottom shadow-none">
+        <a href=""
+          ><img class="image" src="src/assets/home/logo.svg" alt="logopng"
+        /></a>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <!-- SideBar Body -->
+      <div class="offcanvas-body justify-content-center">
+        <ul class="navbar-nav">
+          <!-- justify-content-center fs-6 flex-grow-1 pe-3 gap-2 -->
+          <li class="nav-item p-3">
+            <a class="nav-link fonts" href="" id="home"><strong>Home</strong></a>
+          </li>
+          <li class="nav-item p-3">
+            <a class="nav-link fonts" href="" id="leaderboard"
+              ><strong>Leaderboard</strong></a
+            >
+          </li>
+          <li class="nav-item p-3">
+            <a class="nav-link fonts" href="" id="about"
+              ><strong>About Us</strong></a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Toggle Button -->
+    <button
+      class="navbar-toggler shadow-none border-0"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasNavbar"
+      aria-controls="offcanvasNavbar"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon" style="color: var(--colors-gold) !important;"></span>
+    </button>
+    <!-- USER PROFILE -->
+    <div id="user-container" class="profil"></div>
+  </div>
+</nav>
+
+<div class="d-flex align-items-center mt-5">
+  <div class="container">
+    <h1 class="text-center my-5 text-white">Meet Our Developers</h1>
+    <div class="row justify-content-center" id="developer-cards">
+    </div>
+  </div>
+</div>
