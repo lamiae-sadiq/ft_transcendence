@@ -417,7 +417,7 @@ export function initGamePage(mode) {
         rightPlayer.id = "rightPlayer";
 
         // Set player names and scores content
-        leftPlayerP.innerText = "ZAKARIAA";
+        leftPlayerP.innerText = "PLAYER 1";
         if (gameMode === "bot" && gametype === "local")
           rightPlayerP.innerText = "BOT";
         else if (gameMode === "player" && gametype === "local")
@@ -427,8 +427,8 @@ export function initGamePage(mode) {
           leftPlayerP.innerText = playerName[0].toUpperCase();
         }
         else if (gametype === "remote") {
-              rightPlayerP.innerText = data.player1_Name;
-              leftPlayerP.innerText = data.player2_Name
+          rightPlayerP.innerText = data.player2_Name;
+          leftPlayerP.innerText = data.player1_Name;
         }
         else rightPlayerP.innerText = "PLAYER 2";
         leftPlayerScore.innerText = "0";

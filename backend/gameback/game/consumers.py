@@ -201,8 +201,8 @@ class pingPongConsumer(AsyncWebsocketConsumer):
             player2Channel['self'].room_group_name = self.room_group_name
             rooms_game_logic[self.room_group_name].player1 = self.playerID
             rooms_game_logic[self.room_group_name].player2 = player2Channel['self'].playerID
-            rooms_game_logic[self.room_group_name].player1_name = self.nickname
-            rooms_game_logic[self.room_group_name].player2_name = player2Channel['self'].nickname
+            rooms_game_logic[self.room_group_name].player1_Name = self.nickname
+            rooms_game_logic[self.room_group_name].player2_Name = player2Channel['self'].nickname
             rooms_game_logic[self.room_group_name].player1_level = self.level
             rooms_game_logic[self.room_group_name].player2_level = player2Channel['self'].level
             rooms_game_logic[self.room_group_name].player1_total_wins = self.wins
@@ -227,13 +227,12 @@ class pingPongConsumer(AsyncWebsocketConsumer):
         # game = rooms_game_logic[game]
         while game.keepSending:
             game.calculation()
-            await game.sendResultDataBase(game.winner)
             json_data = game.toJson()
             await asyncio.sleep(0.006)
             await self.handle_remote(json_data)
             if(game.event == 'draw'):
                 game.event = ''
-        
+        # await game.sendResultDataBase(game.winner)
                 
     async def handle_remote(self, message):
         await self.channel_layer.group_send(

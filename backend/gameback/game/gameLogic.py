@@ -1,7 +1,7 @@
 import json
 import random
 import time
-import httpx
+import requests
 from channels.generic.websocket import AsyncWebsocketConsumer
 import asyncio
 
@@ -390,9 +390,9 @@ class remotGameLogic:
             'theCounter': int(self.theCounter),
             'winner': self.winner,
             'player1': self.player1,
-            'player1_Name': self.player1_name,
+            'player1_Name': self.player1_Name,
             'player2': self.player2,
-            'player2_Name': self.player2_name,
+            'player2_Name': self.player2_Name,
             
             
             
@@ -430,37 +430,48 @@ class remotGameLogic:
         return level
     def increaseLevelLoser(self, level, games_played):
         pass
-    async def post_result(self, result,token, level):
+    def post_result(self, result,token, level,id):
         url = f"http://web:8000/profile/update/{result}/"
         headers = {
             'Accept': 'application/json',
             'Authorization': 'Bearer ' + token
         }
         data = {
-            'level': level
+            'level': level,
+            'user_id': id
         }
-        async with httpx.AsyncClient() as client:
-            try:
-                response = await client.post(url, headers=headers, data=data)
+        response = requests.post(url, headers=headers, data=data)
+        try:
+            if(response.status_code == 200):
+                print('result sent to database')
                 print(response.json())
-            except (httpx.HTTPStatusError, httpx.RequestError) as exc:
-                print(exc)
-            except Exception as e:
-                print(e)
-    async def sendResultDataBase(self,winner):
+            else:
+                print('error sending result to database')
+                print(response.json())
+        except requests.exceptions.ConnectionError as e:
+            print(f"Connection error occurred: {e}")
+        except requests.exceptions.Timeout as e:
+            print(f"Timeout error occurred: {e}")
+        except requests.exceptions.RequestException as e:
+            print(f"An error occurred: {e}")
+    def sendResultDataBase(self,winner):
         print('sending result to database')
-        if(winner == "right"):
+        if(winner == "left"):
+            print("winner : ", self.player1_Name)
+            print("loser : ", self.player2_Name)
             self.player1_total_wins += 1
             winnerLevel = self.increaseLevelWiner(self.player1_level, self.player1_total_wins)
             loserLevel = self.increaseLevelLoser(self.player2_level, self.player2_total_wins)
-            await self.post_result('win', self.player1_token, winnerLevel)
-            await self.post_result('loss', self.player2_token, loserLevel)
+            self.post_result('win', self.player1_token, winnerLevel, self.player1)
+            self.post_result('lose', self.player2_token, loserLevel, self.player2)
         else:
+            print("winner : ", self.player2_Name)
+            print("loser : ", self.player1_Name)
             self.player2_total_wins += 1
             winnerLevel = self.increaseLevelWiner(self.player2_level, self.player2_total_wins)
             loserLevel = self.increaseLevelLoser(self.player1_level, self.player1_total_wins)
-            await self.post_result('win', self.player2_token, winnerLevel)
-            await self.post_result('loss', self.player1_token, loserLevel)
+            self.post_result('win', self.player2_token, winnerLevel, self.player2)
+            self.post_result('lose', self.player1_token, loserLevel, self.player1)
             
         
     
@@ -489,7 +500,7 @@ class remotGameLogic:
                 self.event = 'gameOver'
                 self.winner = 'left' if self.leftPlayerScore == 4 else 'right'
                 self.keepSending = False
-                # self.sendResultDataBase(self.winner)
+                self.sendResultDataBase(self.winner)
                 return
             if(self.timer):
                  self.startCountdown()
