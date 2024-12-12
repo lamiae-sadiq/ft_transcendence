@@ -30,7 +30,7 @@ DEBUG = True
 ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1"]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8080",  # Frontend
+    "http://localhost:8080",
     "http://127.0.0.1:8080",
 ]
 

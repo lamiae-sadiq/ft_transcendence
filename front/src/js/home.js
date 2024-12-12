@@ -44,7 +44,9 @@ export function initHomePage() {
   }
 
 function connectWebSocket(username, friendId) {
-  const roomId = `${username}_${friendId}`;
+  const roomId =  `${userData.id < friendId ? `${userData.id}_${friendId}` : `${friendId}_${userData.id}`}`;
+  console.log("Connecting to room:", roomId);
+
   if (socket && currentRoomId !== roomId) {
     disconnectWebSocket();
   }
@@ -65,7 +67,7 @@ function connectWebSocket(username, friendId) {
     const data = JSON.parse(event.data);
 
     if (data.message) {
-        console.log("Passing data to appendMessageToChat:", data);
+        // console.log("Passing data to appendMessageToChat:", data);
         appendMessageToChat(data.username, data.message, data.timestamp);
     } else {
         console.error("Invalid message structure:", data);
@@ -98,16 +100,18 @@ function disconnectWebSocket() {
             username: userData.nickname,
             timestamp: new Date().toISOString(),
         };
+
         console.log("Sending payload:", payload);
         socket.send(JSON.stringify(payload));
     } else {
         console.error("WebSocket connection is not open.");
     }
 }
+
   
   // Function to update the chat UI with the new message
   function appendMessageToChat(username, message, timestamp) {
-    console.log("appendMessageToChat called:", { username, message, timestamp });
+    // console.log("appendMessageToChat called:", { username, message, timestamp });
 
     const chatMessagesContainer = document.getElementById("chat-messages");
     if (!chatMessagesContainer) {
@@ -124,7 +128,7 @@ function disconnectWebSocket() {
     chatMessagesContainer.appendChild(messageElement);
     chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
 
-    console.log("Message appended to chat:", messageElement);
+    // console.log("Message appended to chat:", messageElement);
 }
 
   
