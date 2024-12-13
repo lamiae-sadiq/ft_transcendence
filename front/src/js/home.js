@@ -44,7 +44,7 @@ export function initHomePage() {
   }
 
 function connectWebSocket(username, friendId) {
-  const roomId =  `${userData.id < friendId ? `${userData.id}_${friendId}` : `${friendId}_${userData.id}`}`;
+  const roomId = `${Math.min(userData.id, friendId)}_${Math.max(userData.id, friendId)}`;
   console.log("Connecting to room:", roomId);
 
   if (socket && currentRoomId !== roomId) {
@@ -67,7 +67,6 @@ function connectWebSocket(username, friendId) {
     const data = JSON.parse(event.data);
 
     if (data.message) {
-        // console.log("Passing data to appendMessageToChat:", data);
         appendMessageToChat(data.username, data.message, data.timestamp);
     } else {
         console.error("Invalid message structure:", data);
@@ -179,7 +178,7 @@ function disconnectWebSocket() {
           console.log("waaaaaaal3adaw ", message);
           if (message !== "") {
               sendMessage(message);
-              appendMessageToChat(userData.nickname, message, new Date().toISOString());
+              // appendMessageToChat(userData.nickname, message, new Date().toISOString());
               chatInput.value = "";  // Clear the input field
           }
       }
