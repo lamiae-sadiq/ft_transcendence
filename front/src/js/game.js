@@ -214,6 +214,7 @@ export function initGamePage(mode) {
 
           creatloadingscreen();
         } else if (gametype === "local") {
+          const token = sessionStorage.getItem('jwtToken');
           if (gameMode === "bot") {
             socket.send(
               JSON.stringify({
@@ -222,6 +223,7 @@ export function initGamePage(mode) {
                 height: window.innerWidth,
                 mode: gameMode,
                 difficulty: difficulty,
+                token: token,
               })
             );
           } else {
@@ -231,6 +233,7 @@ export function initGamePage(mode) {
                 width: window.innerWidth,
                 height: window.innerWidth,
                 mode: gameMode,
+                token: token,
               })
             );
           }
@@ -274,8 +277,7 @@ export function initGamePage(mode) {
           }
         }
         if (data.event === "draw") {
-          console.log(data.player1," ",data.player2);
-          console.log(data.player1_Name," ",data.player2_Name);
+
           if (gametype === "remote") {
             document.getElementById("window").remove();
           } else if (gametype === "tournament") {
@@ -418,6 +420,13 @@ export function initGamePage(mode) {
 
         // Set player names and scores content
         leftPlayerP.innerText = "PLAYER 1";
+        if(gametype === "local")
+        {
+          if(data.name)
+          {
+            leftPlayerP.innerText = data.name.toUpperCase();
+          }
+        }
         if (gameMode === "bot" && gametype === "local")
           rightPlayerP.innerText = "BOT";
         else if (gameMode === "player" && gametype === "local")

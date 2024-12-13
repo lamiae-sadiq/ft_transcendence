@@ -109,6 +109,10 @@ class pingPongConsumer(AsyncWebsocketConsumer):
             #receive message from the client and send the first draw
             if(text_data_json.get('message')):
                 if(text_data_json['message'] == 'Hello, server!'):
+                    self.token = text_data_json.get('token')
+                    await self.sendRequestInfo()
+                    self.gameStatus.name = self.nickname
+                    print('name = ',self.nickname)
                     game.windowSize(text_data_json)
                     game.sendDraw(self.gameStatus)
                     self.keepSending = True

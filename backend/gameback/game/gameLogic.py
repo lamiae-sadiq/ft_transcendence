@@ -138,6 +138,7 @@ class gameData:
         self.firstInstructions = True
         self.winner = ''
         self.keepSending = True
+        self.name = ''
         #tournament
         self.groups = []
         self.tourHight = 0
@@ -168,7 +169,8 @@ class gameData:
             'startTheGame': self.startTheGame,
             'fontSize': self.l7sabat(self.fontsize),
             'firstInstructions': self.firstInstructions,
-            'winner': self.winner
+            'winner': self.winner,
+            'name': self.name,
             
         }
         return data
