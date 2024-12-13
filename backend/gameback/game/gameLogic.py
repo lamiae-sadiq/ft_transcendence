@@ -1,7 +1,7 @@
 import json
 import random
 import time
-
+import requests
 from channels.generic.websocket import AsyncWebsocketConsumer
 import asyncio
 
@@ -358,6 +358,14 @@ class remotGameLogic:
         self.start_time = 0
         self.theCounter = 0
         self.winner = ''
+        self.player1_Name = ''
+        self.player2_Name = ''
+        self.player1_level = ''
+        self.player2_level = ''
+        self.player1_total_wins = 0
+        self.player2_total_wins = 0
+        self.player1_token = ''
+        self.player2_token = ''
         
         
     def toJson(self):
@@ -382,6 +390,10 @@ class remotGameLogic:
             'theCounter': int(self.theCounter),
             'winner': self.winner,
             'player1': self.player1,
+            'player1_Name': self.player1_Name,
+            'player2': self.player2,
+            'player2_Name': self.player2_Name,
+            
             
             
         }
@@ -398,10 +410,8 @@ class remotGameLogic:
             
     def parsMove(self, jsonData ):
         if(jsonData.get('id') == self.player1):
-            # print('player1 move')
             self.player1Move = True
         if(jsonData.get('id') == self.player2):
-            # print('player2 move')
             self.player2Move = True
         if(jsonData.get('key')):
             self.key = jsonData['key']
@@ -412,15 +422,98 @@ class remotGameLogic:
             else:
                 self.keycontrol = True
     
+    
+    def increaseLevelWiner(self, level, games_played):
+        required_games = 2 ** level
+        if(games_played >= required_games):
+            level += 1
+        return level
+    def increaseLevelLoser(self, level, games_played):
+        pass
+    def post_result(self, result,token, level,id):
+        url = f"http://web:8000/profile/update/{result}/"
+        headers = {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + token
+        }
+        print("id1: ", id)
+        data = {
+            'level': level,
+            'user_id': id
+        }
+        response = requests.post(url, headers=headers, data=data)
+        try:
+            if(response.status_code == 200):
+                print('result sent to database')
+                print(response.json())
+            else:
+                print('error sending result to database')
+                print(response.json())
+        except requests.exceptions.ConnectionError as e:
+            print(f"Connection error occurred: {e}")
+        except requests.exceptions.Timeout as e:
+            print(f"Timeout error occurred: {e}")
+        except requests.exceptions.RequestException as e:
+            print(f"An error occurred: {e}")
+    def sendResultDataBase(self,winner):
+        print('sending result to database')
+        if(winner == "left"):
+            print("winner1 : ", self.player1_Name)
+            print("loser1 : ", self.player2_Name)
+            self.player1_total_wins += 1
+            winnerLevel = self.increaseLevelWiner(self.player1_level, self.player1_total_wins)
+            loserLevel = self.increaseLevelLoser(self.player2_level, self.player2_total_wins)
+            print("Token: ", self.player1_token)
+            print("Player1: ", self.player1)
+            print("name1: ", self.player1_Name)
+            self.post_result('win', self.player1_token, winnerLevel, self.player1)
+            print("Token: ", self.player2_token)
+            print("Player2: ", self.player2)
+            self.post_result('lose', self.player2_token, loserLevel, self.player2)
+        elif (winner == "right"):
+            print("winner2 : ", self.player2_Name)
+            print("loser2 : ", self.player1_Name)
+            self.player2_total_wins += 1
+            winnerLevel = self.increaseLevelWiner(self.player2_level, self.player2_total_wins)
+            loserLevel = self.increaseLevelLoser(self.player1_level, self.player1_total_wins)
+            print("Token2: ", self.player2_token)
+            print("Player2: ", self.player2)
+            print("name2: ", self.player2_Name)
+            
+            self.post_result('win', self.player2_token, winnerLevel, self.player2)
+            print("Token: ", self.player1_token)
+            print("Player1: ", self.player1)
+            self.post_result('lose', self.player1_token, loserLevel, self.player1)
+            
+        else:
+            if winner == self.player1_Name:
+                print("winner3 : ", self.player1_Name)
+                print("loser3 : ", self.player2_Name)
+                self.player1_total_wins += 1
+                winnerLevel = self.increaseLevelWiner(self.player1_level, self.player1_total_wins)
+                loserLevel = self.increaseLevelLoser(self.player2_level, self.player2_total_wins)
+                self.post_result('win', self.player1_token, winnerLevel, self.player1)
+                self.post_result('lose', self.player2_token, loserLevel, self.player2)
+            elif winner == self.player2_Name:
+                print("winner : ", self.player2_Name)
+                print("loser : ", self.player1_Name)
+                self.player2_total_wins += 1
+                winnerLevel = self.increaseLevelWiner(self.player2_level, self.player2_total_wins)
+                loserLevel = self.increaseLevelLoser(self.player1_level, self.player1_total_wins)
+                self.post_result('win', self.player2_token, winnerLevel, self.player2)
+                self.post_result('lose', self.player1_token, loserLevel, self.player1)
+    
     def calculation(self):
         if(self.begin):
             if(self.leftPlayerScore == 4 or self.rightPlayerScore == 4):
                 self.event = 'gameOver'
                 self.winner = 'left' if self.leftPlayerScore == 4 else 'right'
                 self.keepSending = False
+                self.sendResultDataBase(self.winner)
                 return
             if(self.timer):
                  self.startCountdown()
+            
             self.heightPaddleSize = self.canvasHeight / 6
             self.widthPaddleSize = self.canvasWidth * 0.02
             self.fontsize = self.canvasHeight * 0.06
