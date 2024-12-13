@@ -436,6 +436,7 @@ class remotGameLogic:
             'Accept': 'application/json',
             'Authorization': 'Bearer ' + token
         }
+        print("id1: ", id)
         data = {
             'level': level,
             'user_id': id
@@ -457,42 +458,50 @@ class remotGameLogic:
     def sendResultDataBase(self,winner):
         print('sending result to database')
         if(winner == "left"):
-            print("winner : ", self.player1_Name)
-            print("loser : ", self.player2_Name)
+            print("winner1 : ", self.player1_Name)
+            print("loser1 : ", self.player2_Name)
             self.player1_total_wins += 1
             winnerLevel = self.increaseLevelWiner(self.player1_level, self.player1_total_wins)
             loserLevel = self.increaseLevelLoser(self.player2_level, self.player2_total_wins)
+            print("Token: ", self.player1_token)
+            print("Player1: ", self.player1)
+            print("name1: ", self.player1_Name)
             self.post_result('win', self.player1_token, winnerLevel, self.player1)
+            print("Token: ", self.player2_token)
+            print("Player2: ", self.player2)
             self.post_result('lose', self.player2_token, loserLevel, self.player2)
-        else:
-            print("winner : ", self.player2_Name)
-            print("loser : ", self.player1_Name)
+        elif (winner == "right"):
+            print("winner2 : ", self.player2_Name)
+            print("loser2 : ", self.player1_Name)
             self.player2_total_wins += 1
             winnerLevel = self.increaseLevelWiner(self.player2_level, self.player2_total_wins)
             loserLevel = self.increaseLevelLoser(self.player1_level, self.player1_total_wins)
+            print("Token2: ", self.player2_token)
+            print("Player2: ", self.player2)
+            print("name2: ", self.player2_Name)
+            
             self.post_result('win', self.player2_token, winnerLevel, self.player2)
+            print("Token: ", self.player1_token)
+            print("Player1: ", self.player1)
             self.post_result('lose', self.player1_token, loserLevel, self.player1)
             
-        
-    
-        #profile/update/<str:result>
-        # storWinOrLoss{
-        #     'result':'win'
-        #     'result':'loss'
-        #     'level': 1,
-        #     url = "http://web:8000/profile/update/<result>/"
-        
-        # headers = {
-        #     'Accept': 'application/json',
-        #     'Authorization': 'Bearer ' + self.token
-        # }
-            
-        # }
-        # headers = {
-        #     'Accept': 'application/json',
-        #     'Authorization': 'Bearer ' + self.token
-        # }
-        pass
+        else:
+            if winner == self.player1_Name:
+                print("winner3 : ", self.player1_Name)
+                print("loser3 : ", self.player2_Name)
+                self.player1_total_wins += 1
+                winnerLevel = self.increaseLevelWiner(self.player1_level, self.player1_total_wins)
+                loserLevel = self.increaseLevelLoser(self.player2_level, self.player2_total_wins)
+                self.post_result('win', self.player1_token, winnerLevel, self.player1)
+                self.post_result('lose', self.player2_token, loserLevel, self.player2)
+            elif winner == self.player2_Name:
+                print("winner : ", self.player2_Name)
+                print("loser : ", self.player1_Name)
+                self.player2_total_wins += 1
+                winnerLevel = self.increaseLevelWiner(self.player2_level, self.player2_total_wins)
+                loserLevel = self.increaseLevelLoser(self.player1_level, self.player1_total_wins)
+                self.post_result('win', self.player2_token, winnerLevel, self.player2)
+                self.post_result('lose', self.player1_token, loserLevel, self.player1)
     
     def calculation(self):
         if(self.begin):

@@ -30,3 +30,7 @@ ZAKARIA:
     -check with ayoub that if someone is alreday in a game he can't join another one
     -block th player with the same id to join the same remote game
     -add name of players in remote game front: DONE:)
+    -add name to local player
+    -add time out to the tournament id  request
+    -modify pasue in the tournament game and local game
+    -check the routing of the game in gameover window and in esc exit

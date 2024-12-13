@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -a  # Automatically export all variables
 
 source SmartContract/.env

@@ -58,6 +58,7 @@ class pingPongConsumer(AsyncWebsocketConsumer):
                 
             # print('channale name = ',self.channel_name , 'channel name 2 ', player2Channel)
             print(self.room_group_name)
+            
             if self.room_group_name is not None:
                 print('room deleted')
                 #send a message to the other client that the game is over
@@ -71,6 +72,8 @@ class pingPongConsumer(AsyncWebsocketConsumer):
                         }
                     }
                 )
+                    
+                
                 await self.channel_layer.group_discard(
                     self.room_group_name,
                     self.channel_name
@@ -78,6 +81,12 @@ class pingPongConsumer(AsyncWebsocketConsumer):
                 
                 
                 if self.room_group_name in rooms_game_logic:
+                    if(rooms_game_logic[self.room_group_name].keepSending):
+                        if rooms_game_logic[self.room_group_name].player1 == self.playerID:
+                            rooms_game_logic[self.room_group_name].sendResultDataBase(rooms_game_logic[self.room_group_name].player2_Name)
+                        elif rooms_game_logic[self.room_group_name].player2 == self.playerID:
+                            rooms_game_logic[self.room_group_name].sendResultDataBase(rooms_game_logic[self.room_group_name].player1_Name)
+                    print('object deleted')
                     del rooms_game_logic[self.room_group_name]
                 if self.room_group_name in room_task:
                     print('task cancelled')
@@ -122,6 +131,7 @@ class pingPongConsumer(AsyncWebsocketConsumer):
             if(text_data_json.get('message') == 'Hello, server!'):
                 #send request with the token to get player id
                 self.token = text_data_json.get('token')
+                print('main token = ',self.token)
                 await self.sendRequestInfo()
                 await self.send(text_data=json.dumps({
                     'message': 'remote-id',
