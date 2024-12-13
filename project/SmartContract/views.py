@@ -20,7 +20,6 @@ CONTRACT_ADDRESS = '0x847320669a3e809097cEa3B52a6150C90dA98191'
 RPC_SEPOLIA = 'https://sepolia.infura.io/v3/6483579a38ee4626b9a67d15ca7fef2d'
 CHAIN_ID = 11155111
 
-
 # Load ABI and bytecode
 def load_contract_data():
     with open('/app/SmartContract/SM/abi.json', 'r') as abifile:
@@ -36,7 +35,6 @@ w3 = Web3(Web3.HTTPProvider(RPC_SEPOLIA))
 contract = w3.eth.contract(address=CONTRACT_ADDRESS, abi=abi)
 account = w3.eth.account.from_key(privateKey)
 gas_price = w3.eth.gas_price
-
 
 # @csrf_exempt
 # def send_transaction(func, *args):
