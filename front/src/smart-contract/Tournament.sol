@@ -2,45 +2,45 @@
 pragma solidity ^0.8.27;
 
 contract LocalTournament {
-    event tournamentCreated(uint tournamentId);
+    event tournamentCreated(uint256 indexed tournamentId);
     event matchRecorded();
-    uint8 MATCHPERTOURNAMENT = 3;
+    uint256 MATCHPERTOURNAMENT = 3;
     // Structure to represent each match
     struct Match {
         string player1; // name
         string player2; // name
-        uint player1Score;
-        uint player2Score;
+        uint256 player1Score;
+        uint256 player2Score;
         string winner; // Winner's name
     }
 
     // Structure to represent each tournament
     struct Tournament {
-        uint tournamentId;
+        uint256 tournamentId;
         Match[3] matches; // List of matches in the tournament
-        uint currentMatchCount; // Keep track of how many matches have been added
+        uint256 currentMatchCount; // Keep track of how many matches have been added
     }
 
     // Player cumulative stats across tournaments
     struct PlayerStats {
-        uint totalWins;
-        uint totalLosses;
-        uint totalScore;
+        uint256 totalWins;
+        uint256 totalLosses;
+        uint256 totalScore;
     }
 
     // Mapping of player's name to their cumulative stats
     mapping(string => PlayerStats) public playerStats;
 
     // Mapping of tournament ID to tournament details
-    mapping(uint => Tournament) public tournaments;
+    mapping(uint256 => Tournament) public tournaments;
 
     // Counter to track tournament IDs
-    uint8 public tournamentCounter;
+    uint256 public tournamentCounter;
 
     /**
      * @notice Creates a new tournament.
      */
-    function createTournament() public returns (uint) {
+    function createTournament() public returns (uint256) {
         Tournament storage tournament = tournaments[tournamentCounter]; // SLOAD once
         tournament.tournamentId = tournamentCounter++;
         tournament.currentMatchCount = 0;
@@ -58,11 +58,11 @@ contract LocalTournament {
      * @param _player2Score The score of player 2.
      */
     function recordMatch(
-        uint _tournamentId,
+        uint256 _tournamentId,
         string memory _player1,
         string memory _player2,
-        uint _player1Score,
-        uint _player2Score
+        uint256 _player1Score,
+        uint256 _player2Score
     ) public {
         Tournament storage tournament = tournaments[_tournamentId];
         PlayerStats storage playerStates1 = playerStats[_player1];
@@ -113,16 +113,16 @@ contract LocalTournament {
      * @return An array of matches.
      */
     function getTournamentMatches(
-        uint _tournamentId
+        uint256 _tournamentId
     ) public view returns (Match[] memory) {
         require(
             _tournamentId >= 0 && _tournamentId <= tournamentCounter,
             "Invalid tournament ID"
         );
-        uint matchCount = tournaments[_tournamentId].currentMatchCount;
+        uint256 matchCount = tournaments[_tournamentId].currentMatchCount;
         Tournament memory tournament = tournaments[_tournamentId];
         Match[] memory matchesPlayed = new Match[](matchCount);
-        for (uint i = 0; i <= matchCount; i++) {
+        for (uint256 i = 0; i <= matchCount; i++) {
             matchesPlayed[i] = tournament.matches[i];
         }
         return matchesPlayed;
@@ -135,7 +135,7 @@ contract LocalTournament {
      */
     function getPlayerStats(
         string memory _playerId
-    ) public view returns (uint, uint, uint) {
+    ) public view returns (uint256, uint256, uint256) {
         PlayerStats memory stats = playerStats[_playerId];
         return (stats.totalWins, stats.totalLosses, stats.totalScore);
     }
@@ -149,19 +149,19 @@ contract LocalTournament {
         string memory _name
     ) public view returns (Match[] memory) {
         // Calculate maximum possible matches
-        uint8 maxMatches = tournamentCounter * MATCHPERTOURNAMENT; // Maximum matches a player could play
+        uint256 maxMatches = tournamentCounter * MATCHPERTOURNAMENT; // Maximum matches a player could play
         Match[] memory allMatches = new Match[](maxMatches);
-        uint8 matchCount = 0; // Count of matches the player participated in
+        uint256 matchCount = 0; // Count of matches the player participated in
 
         // Cache the hash of the player's name to avoid recalculating it
         bytes32 playerHash = keccak256(abi.encodePacked(_name));
 
         // Loop through all tournaments
-        for (uint8 counter = 0; counter <= tournamentCounter; counter++) {
+        for (uint256 counter = 0; counter <= tournamentCounter; counter++) {
             Tournament storage tournament = tournaments[counter];
             // Loop through the 3 matches in each tournament
             for (
-                uint8 cMatches = 0;
+                uint256 cMatches = 0;
                 cMatches < MATCHPERTOURNAMENT;
                 cMatches++
             ) {
@@ -184,7 +184,7 @@ contract LocalTournament {
 
         // Create a new array to return only the relevant matches
         Match[] memory playerMatches = new Match[](matchCount);
-        for (uint8 i = 0; i < matchCount; i++) {
+        for (uint256 i = 0; i < matchCount; i++) {
             playerMatches[i] = allMatches[i];
         }
 

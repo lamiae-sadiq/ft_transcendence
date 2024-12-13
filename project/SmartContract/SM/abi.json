@@ -1,3 +1,256 @@
 {
-    "abi":[{"anonymous":false,"inputs":[],"name":"matchRecorded","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"tournamentId","type":"uint256"}],"name":"tournamentCreated","type":"event"},{"inputs":[],"name":"createTournament","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_name","type":"string"}],"name":"getAllMatchesPlayedByThePlayer","outputs":[{"components":[{"internalType":"string","name":"player1","type":"string"},{"internalType":"string","name":"player2","type":"string"},{"internalType":"uint256","name":"player1Score","type":"uint256"},{"internalType":"uint256","name":"player2Score","type":"uint256"},{"internalType":"string","name":"winner","type":"string"}],"internalType":"struct LocalTournament.Match[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_playerId","type":"string"}],"name":"getPlayerStats","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_tournamentId","type":"uint256"}],"name":"getTournamentMatches","outputs":[{"components":[{"internalType":"string","name":"player1","type":"string"},{"internalType":"string","name":"player2","type":"string"},{"internalType":"uint256","name":"player1Score","type":"uint256"},{"internalType":"uint256","name":"player2Score","type":"uint256"},{"internalType":"string","name":"winner","type":"string"}],"internalType":"struct LocalTournament.Match[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"","type":"string"}],"name":"playerStats","outputs":[{"internalType":"uint256","name":"totalWins","type":"uint256"},{"internalType":"uint256","name":"totalLosses","type":"uint256"},{"internalType":"uint256","name":"totalScore","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_tournamentId","type":"uint256"},{"internalType":"string","name":"_player1","type":"string"},{"internalType":"string","name":"_player2","type":"string"},{"internalType":"uint256","name":"_player1Score","type":"uint256"},{"internalType":"uint256","name":"_player2Score","type":"uint256"}],"name":"recordMatch","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"tournamentCounter","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"tournaments","outputs":[{"internalType":"uint256","name":"tournamentId","type":"uint256"},{"internalType":"uint256","name":"currentMatchCount","type":"uint256"}],"stateMutability":"view","type":"function"}]
+    "abi":[
+		{
+			"anonymous": false,
+			"inputs": [],
+			"name": "matchRecorded",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "uint256",
+					"name": "tournamentId",
+					"type": "uint256"
+				}
+			],
+			"name": "tournamentCreated",
+			"type": "event"
+		},
+		{
+			"inputs": [],
+			"name": "createTournament",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "string",
+					"name": "_name",
+					"type": "string"
+				}
+			],
+			"name": "getAllMatchesPlayedByThePlayer",
+			"outputs": [
+				{
+					"components": [
+						{
+							"internalType": "string",
+							"name": "player1",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "player2",
+							"type": "string"
+						},
+						{
+							"internalType": "uint256",
+							"name": "player1Score",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "player2Score",
+							"type": "uint256"
+						},
+						{
+							"internalType": "string",
+							"name": "winner",
+							"type": "string"
+						}
+					],
+					"internalType": "struct LocalTournament.Match[]",
+					"name": "",
+					"type": "tuple[]"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "string",
+					"name": "_playerId",
+					"type": "string"
+				}
+			],
+			"name": "getPlayerStats",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "_tournamentId",
+					"type": "uint256"
+				}
+			],
+			"name": "getTournamentMatches",
+			"outputs": [
+				{
+					"components": [
+						{
+							"internalType": "string",
+							"name": "player1",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "player2",
+							"type": "string"
+						},
+						{
+							"internalType": "uint256",
+							"name": "player1Score",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "player2Score",
+							"type": "uint256"
+						},
+						{
+							"internalType": "string",
+							"name": "winner",
+							"type": "string"
+						}
+					],
+					"internalType": "struct LocalTournament.Match[]",
+					"name": "",
+					"type": "tuple[]"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "string",
+					"name": "",
+					"type": "string"
+				}
+			],
+			"name": "playerStats",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "totalWins",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "totalLosses",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "totalScore",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "_tournamentId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "string",
+					"name": "_player1",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "_player2",
+					"type": "string"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_player1Score",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_player2Score",
+					"type": "uint256"
+				}
+			],
+			"name": "recordMatch",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "tournamentCounter",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"name": "tournaments",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "tournamentId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "currentMatchCount",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		}
+	]
 }

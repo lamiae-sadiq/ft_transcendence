@@ -2,25 +2,25 @@
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from django.http import JsonResponse
 from web3 import Web3
-from dotenv import load_dotenv
 import os
 import json
+import time
+from eth_account import Account
+from threading import Lock
 
 import logging
 
-logger = logging.getLogger('django')
+nonce_lock = Lock()
 
-# Load environment variables
-load_dotenv()
-privateKey = os.getenv('private_key')
-# print(privateKey)
+WEB3_PROVIDER_URL = "http://gethnode:8545/"
+web3 = Web3(Web3.HTTPProvider(WEB3_PROVIDER_URL))
 
-# Contract configuration
-CONTRACT_ADDRESS = '0x847320669a3e809097cEa3B52a6150C90dA98191'
-RPC_SEPOLIA = 'https://sepolia.infura.io/v3/6483579a38ee4626b9a67d15ca7fef2d'
-CHAIN_ID = 11155111
+if web3.is_connected():
+    print("Connected to Ethereum node")
 
-# Load ABI and bytecode
+else:
+    print("Failed to connect")
+
 def load_contract_data():
     with open('/app/SmartContract/SM/abi.json', 'r') as abifile:
         abi_data = json.load(abifile)
@@ -29,73 +29,88 @@ def load_contract_data():
     return abi_data["abi"], bytecode_data["byteCode"]
 
 abi, byteCode = load_contract_data()
-
-# Initialize Web3
-w3 = Web3(Web3.HTTPProvider(RPC_SEPOLIA))
-contract = w3.eth.contract(address=CONTRACT_ADDRESS, abi=abi)
-account = w3.eth.account.from_key(privateKey)
-gas_price = w3.eth.gas_price
-
-# @csrf_exempt
-# def send_transaction(func, *args):
-#     try:
-#         transaction = func(*args).build_transaction({
-#             'chainId': CHAIN_ID,
-#             'gasPrice': gas_price,
-#             'nonce': w3.eth.get_transaction_count(account.address),
-#         })
-#         signed_tx = w3.eth.account.sign_transaction(transaction, privateKey)
-#         hash_tx = w3.eth.send_raw_transaction(signed_tx.raw_transaction)
-#         w3.eth.wait_for_transaction_receipt(hash_tx, timeout=360)
-
-#         # Call the contract function to get the integer result (e.g., tournamentId)
-#         if func == contract.functions.createTournament:
-#             return func().call()  # Assuming this returns the integer
-#     except Exception as e:
-#         raise Exception(f"Transaction failed: {str(e)}")  # Rethrow the exception to be caught later
+private_key = "3dd77477bcd17e27e8926d4abcca30d7642e21caec18ec9b4a381dd108767ee0"
+account = Account.from_key(private_key)
+CHAIN_ID = 1337
+global_nonce = web3.eth.get_transaction_count(account.address, 'latest')
+contract_instance = web3.eth.contract(abi=abi, bytecode=byteCode)
+transaction = contract_instance.constructor().build_transaction({
+    'from': account.address,
+    'gas': 4700000,
+    'gasPrice': web3.to_wei('20', 'gwei'),
+    'nonce': global_nonce,
+})
+signed_txn = web3.eth.account.sign_transaction(transaction, private_key)
+txn_hash = web3.eth.send_raw_transaction(signed_txn.raw_transaction)
+txn_receipt = web3.eth.wait_for_transaction_receipt(txn_hash)
+contract = web3.eth.contract(address=txn_receipt.contractAddress, abi=abi)
+print("Smart contract address : ", contract.address)
+gas_price = web3.eth.gas_price
 
 @csrf_exempt
 def send_transaction(func, *args):
+    global global_nonce
     try:
-        # Get current gas price data
-        max_priority_fee = w3.to_wei(2, 'gwei')  # Reasonable tip for miners
-        logger.debug("---------------------------------------------------------------")
-        # Build the transaction with EIP-1559 parameters
+        max_priority_fee = web3.to_wei(20, 'gwei')
+        with nonce_lock:
+            current_nonce = global_nonce + 1
+            global_nonce += 1
+
         transaction = func(*args).build_transaction({
             'chainId': CHAIN_ID,
-            'nonce': w3.eth.get_transaction_count(account.address),
-            'maxFeePerGas': gas_price + max_priority_fee,  # Total max gas fee
-            'maxPriorityFeePerGas': max_priority_fee,  # Tip for miners
-            'gas': 3000000,  # Estimate or set manually
+            'nonce': current_nonce,
+            'maxFeePerGas': gas_price * 2 + max_priority_fee,
+            'maxPriorityFeePerGas': max_priority_fee,
+            'gas': 5000000,
         })
 
-        # Sign and send the transaction
-        signed_tx = w3.eth.account.sign_transaction(transaction, privateKey)
-        hash_tx = w3.eth.send_raw_transaction(signed_tx.raw_transaction)
-        w3.eth.wait_for_transaction_receipt(hash_tx, timeout=360)
+        signed_tx = web3.eth.account.sign_transaction(transaction, private_key)
+        hash_tx = web3.eth.send_raw_transaction(signed_tx.raw_transaction)
 
-        # Optional: Return the result of the contract function if applicable
+        receipt = None
+        while not receipt:
+            try:
+                receipt = web3.eth.get_transaction_receipt(hash_tx)
+            except:
+                pass
+            time.sleep(2)
+        if receipt['status'] == 1:
+            print(f"Transaction successful. Block number: {receipt['blockNumber']}")
+        else:
+            print(f"Transaction failed. Receipt: {receipt}")
+            return None
+        
         if func == contract.functions.createTournament:
-            return func().call()  # Assuming this returns the integer
+            try:
+                event_filter = contract.events.tournamentCreated.create_filter(from_block=receipt['blockNumber'])
+                logs = event_filter.get_all_entries()
+                
+                if logs:
+                    tournament_id = logs[0]['args']['tournamentId']
+                    return tournament_id
+                else:
+                    print("No event found for TournamentCreated")
+                    return None
+            except Exception as e:
+                print(f"Error while fetching logs: {e}")
+                return None
+        else:
+            return 1
     except Exception as e:
-        raise Exception(f"Transaction failed: {str(e)}")  # Rethrow the exception to be caught later
-
+        raise Exception(f"Transaction failed: {str(e)}")
 
 @csrf_exempt
 def create_tournament(request):
     if request.method == "POST":
         try:
-            # Get the integer result from the transaction
             tournament_id = send_transaction(contract.functions.createTournament)
             return JsonResponse({'status': "success", "tournamentId": tournament_id})
         except Exception as e:
-            # Catch and return any errors as JSON
             return JsonResponse({'status': "error", "message": str(e)})
     else:
         return JsonResponse({"status": "error", "message": "Invalid request method"})
 
 @csrf_exempt
-# @ensure_csrf_cookie
 def record_match(request):
     if request.method == "POST":
         try:
@@ -106,11 +121,14 @@ def record_match(request):
             player2_score = data.get('player2_score')
             tournament_id = data.get('tournament_id')
 
-            if not (player1 and player2 and player1_score is not None and player2_score is not None and tournament_id):
+            if not (player1 and player2 and player1_score is not None and player2_score is not None and tournament_id is not None):
                 return JsonResponse({"status": "error", "message": "All match details must be provided"})
 
-            send_transaction(contract.functions.recordMatch, tournament_id, player1, player2, player1_score, player2_score)
-            return JsonResponse({"status": "success", "message": "Match recorded."})
+            value = send_transaction(contract.functions.recordMatch, tournament_id, player1, player2, player1_score, player2_score)
+            if value:
+                return JsonResponse({"status": "success", "message": "Match recorded."})
+            else:
+                return JsonResponse({"status": "error", "message": "You can only record 3 Matches per tournament buddy !"})
         except json.JSONDecodeError:
             return JsonResponse({"status": "error", "message": "Invalid JSON format"})
         except Exception as e:
