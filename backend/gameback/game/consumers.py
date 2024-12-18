@@ -15,7 +15,8 @@ from . import gameLogic
 
 # rooms = {}
 rooms_game_logic = {}
-player_queue = [] 
+player_queue = []
+player_queueFriends = []
 room_task = {}
 player2Channel = {
     'channel_name':'',
@@ -36,6 +37,7 @@ class pingPongConsumer(AsyncWebsocketConsumer):
             self.level = 0
             self.wins = 0
             self.token = None
+            self.gameType = None
             # await self.channel_layer.group_add(
             #     self.room_group_name,
             #     self.channel_name
@@ -133,14 +135,23 @@ class pingPongConsumer(AsyncWebsocketConsumer):
                     self.gameStatus.pause = not self.gameStatus.pause
         if(self.game_type == 'remote'):
             if(text_data_json.get('message') == 'Hello, server!'):
+                if text_data_json.get('type') == 'playWithFriend':
+                    self.gameType = 'playWithFriend'
                 #send request with the token to get player id
                 self.token = text_data_json.get('token')
                 print('main token = ',self.token)
                 await self.sendRequestInfo()
+                print('player id = ',self.playerID)
+                print('game type = ',self.gameType)
                 await self.send(text_data=json.dumps({
                     'message': 'remote-id',
                     'id': self.playerID
                 }))
+                if self.gameType == 'playWithFriend':
+                    if self.playerID == 1:
+                        self.other_playerId = 3
+                    elif self.playerID == 3:
+                        self.other_playerId = 1
                 if not self.room_group_name:
                     await self.assign_player_to_room(self.playerID)
                 else:
@@ -186,56 +197,95 @@ class pingPongConsumer(AsyncWebsocketConsumer):
     #remote game
     async def assign_player_to_room(self,playerId):
         global player2Channel
-        # global player_queue
-        print('player id in assign = ',playerId)
-        player_queue.append(playerId)
-        # player_queue.append(self.channel_name)
-        if(len(player_queue) >= 2):
-            print('room created', player_queue)
-            player1 = player_queue.pop(0)
-            # player1channel = player_queue.pop(0)
-            player2 = player_queue.pop(0)
-            # player2channel = player_queue.pop(0)
-            
-            self.room_name = f'room_{player1}_{player2}'
-            
-            self.room_group_name = f'pingPong_{self.room_name}'
-            
-            await self.channel_layer.group_add(self.room_group_name, self.channel_name)
-            await self.channel_layer.group_add(self.room_group_name, player2Channel['channel_name'])
-            if(self.room_group_name not in  rooms_game_logic):
-                rooms_game_logic[self.room_group_name] = gameLogic.remotGameLogic()
-            rooms_game_logic[self.room_group_name].event = 'draw'
-            # rooms_game_logic[self.room_group_name].player1 = {
-            #     'channel_name':self.channel_name,
-            #     'height': self.height,
-            #     'width': self.width
-            # }
-            # rooms_game_logic[self.room_group_name].player2 = player2Channel
-            player2Channel['self'].room_group_name = self.room_group_name
-            rooms_game_logic[self.room_group_name].player1 = self.playerID
-            rooms_game_logic[self.room_group_name].player2 = player2Channel['self'].playerID
-            rooms_game_logic[self.room_group_name].player1_Name = self.nickname
-            rooms_game_logic[self.room_group_name].player2_Name = player2Channel['self'].nickname
-            rooms_game_logic[self.room_group_name].player1_level = self.level
-            rooms_game_logic[self.room_group_name].player2_level = player2Channel['self'].level
-            rooms_game_logic[self.room_group_name].player1_total_wins = self.wins
-            rooms_game_logic[self.room_group_name].player2_total_wins = player2Channel['self'].wins
-            rooms_game_logic[self.room_group_name].player1_token = self.token
-            rooms_game_logic[self.room_group_name].player2_token = player2Channel['self'].token
-            
-            
-            self.other_playerId = player2Channel['self'].nickname
-            player2Channel['self'].other_playerId = self.nickname
-            if(self.room_group_name not in room_task):
-                room_task[self.room_group_name] = asyncio.create_task(self.sendPingRemote(rooms_game_logic[self.room_group_name]))
-            # print('room length = ',len(rooms) , 'room game logic = ',len(rooms_game_logic) , 'room task = ',len(room_task) , 'player queue = ',len(player_queue))
+        if self.gameType == 'playWithFriend':
+            print('player id in assign = ',playerId)
+            player_queueFriends.append(self)
+            if len(player_queueFriends) >= 2:
+                for player in player_queueFriends:
+                    if player.playerID == self.other_playerId and player.other_playerId == self.playerID:
+                        player_queueFriends.remove(player)
+                        player_queueFriends.remove(self)
+                        self.room_name = f'room_{self.playerID}_{player.playerID}'
+                        self.room_group_name = f'pingPong_{self.room_name}'
+                        
+                        await self.channel_layer.group_add(self.room_group_name, self.channel_name)
+                        await self.channel_layer.group_add(self.room_group_name, player.channel_name)
+                        
+                        if self.room_group_name not in rooms_game_logic:
+                            rooms_game_logic[self.room_group_name] = gameLogic.remotGameLogic()
+                        
+                        rooms_game_logic[self.room_group_name].event = 'draw'
+                        player.room_group_name = self.room_group_name
+                        rooms_game_logic[self.room_group_name].player1 = self.playerID
+                        rooms_game_logic[self.room_group_name].player2 = player.playerID
+                        rooms_game_logic[self.room_group_name].player1_Name = self.nickname
+                        rooms_game_logic[self.room_group_name].player2_Name = player.nickname
+                        rooms_game_logic[self.room_group_name].player1_level = self.level
+                        rooms_game_logic[self.room_group_name].player2_level = player.level
+                        rooms_game_logic[self.room_group_name].player1_total_wins = self.wins
+                        rooms_game_logic[self.room_group_name].player2_total_wins = player.wins
+                        rooms_game_logic[self.room_group_name].player1_token = self.token
+                        rooms_game_logic[self.room_group_name].player2_token = player.token
+                        
+                        self.other_playerId = player.nickname
+                        player.other_playerId = self.nickname
+                        
+                        if self.room_group_name not in room_task:
+                            room_task[self.room_group_name] = asyncio.create_task(self.sendPingRemote(rooms_game_logic[self.room_group_name]))
+                        
+                        player_queueFriends.remove(player)
+                        break
         else:
-            # player2Channel = self.channel_name
-            player2Channel = {
-                'channel_name':self.channel_name,
-                'self': self
-            }
+            # global player_queue
+            print('player id in assign = ',playerId)
+            player_queue.append(playerId)
+            # player_queue.append(self.channel_name)
+            if(len(player_queue) >= 2):
+                print('room created', player_queue)
+                player1 = player_queue.pop(0)
+                # player1channel = player_queue.pop(0)
+                player2 = player_queue.pop(0)
+                # player2channel = player_queue.pop(0)
+                
+                self.room_name = f'room_{player1}_{player2}'
+                
+                self.room_group_name = f'pingPong_{self.room_name}'
+                
+                await self.channel_layer.group_add(self.room_group_name, self.channel_name)
+                await self.channel_layer.group_add(self.room_group_name, player2Channel['channel_name'])
+                if(self.room_group_name not in  rooms_game_logic):
+                    rooms_game_logic[self.room_group_name] = gameLogic.remotGameLogic()
+                rooms_game_logic[self.room_group_name].event = 'draw'
+                # rooms_game_logic[self.room_group_name].player1 = {
+                #     'channel_name':self.channel_name,
+                #     'height': self.height,
+                #     'width': self.width
+                # }
+                # rooms_game_logic[self.room_group_name].player2 = player2Channel
+                player2Channel['self'].room_group_name = self.room_group_name
+                rooms_game_logic[self.room_group_name].player1 = self.playerID
+                rooms_game_logic[self.room_group_name].player2 = player2Channel['self'].playerID
+                rooms_game_logic[self.room_group_name].player1_Name = self.nickname
+                rooms_game_logic[self.room_group_name].player2_Name = player2Channel['self'].nickname
+                rooms_game_logic[self.room_group_name].player1_level = self.level
+                rooms_game_logic[self.room_group_name].player2_level = player2Channel['self'].level
+                rooms_game_logic[self.room_group_name].player1_total_wins = self.wins
+                rooms_game_logic[self.room_group_name].player2_total_wins = player2Channel['self'].wins
+                rooms_game_logic[self.room_group_name].player1_token = self.token
+                rooms_game_logic[self.room_group_name].player2_token = player2Channel['self'].token
+                
+                
+                self.other_playerId = player2Channel['self'].nickname
+                player2Channel['self'].other_playerId = self.nickname
+                if(self.room_group_name not in room_task):
+                    room_task[self.room_group_name] = asyncio.create_task(self.sendPingRemote(rooms_game_logic[self.room_group_name]))
+                # print('room length = ',len(rooms) , 'room game logic = ',len(rooms_game_logic) , 'room task = ',len(room_task) , 'player queue = ',len(player_queue))
+            else:
+                # player2Channel = self.channel_name
+                player2Channel = {
+                    'channel_name':self.channel_name,
+                    'self': self
+                }
     async def sendPingRemote(self, game):
         
         # game = rooms_game_logic[game]
